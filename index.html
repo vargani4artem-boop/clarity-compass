@@ -1,0 +1,2177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Компас Ясности — Бесплатный AI-разбор за 2 минуты</title>
+  <meta name="description" content="Бесплатный интерактивный AI-опросник: выберите, что хотите улучшить в жизни, ответьте на 3 вопроса и получите персональный первый шаг." />
+  <meta property="og:title" content="Что вы хотели бы улучшить в своей жизни? — AI-разбор за 2 минуты" />
+  <meta property="og:description" content="Поставьте 1–3 галочки, ответьте на 3 коротких вопроса ИИ и получите конкретный первый шаг к результату." />
+  <style>
+    :root {
+      --bg: #faf8f4;
+      --surface: #ffffff;
+      --surface-soft: #f5f2ec;
+      --ink: #18181b;
+      --ink-soft: #52525b;
+      --ink-muted: #71717a;
+      --border: #e4dfd5;
+      --gold: #c28a2e;
+      --gold-dark: #9a6b1f;
+      --gold-bg: #fef9ee;
+      --gold-border: #f0d59b;
+      --emerald: #15803d;
+      --emerald-bg: #f0fdf4;
+      --emerald-border: #bbf7d0;
+      --blue: #1d4ed8;
+      --blue-bg: #eff6ff;
+      --blue-border: #bfdbfe;
+      --danger: #dc2626;
+      --shadow-sm: 0 2px 8px rgba(24, 24, 27, 0.04);
+      --shadow-md: 0 10px 30px rgba(24, 24, 27, 0.07);
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Inter, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top bar */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(250, 248, 244, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 16px;
+    }
+    .topbar-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--ink);
+      cursor: pointer;
+    }
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #1c1917 0%, #3a2d18 100%);
+      border: 1.5px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fde68a;
+      flex-shrink: 0;
+    }
+    .brand span small {
+      display: block;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--gold-dark);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .lang-toggle {
+      display: inline-flex;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 2px;
+    }
+    .lang-btn {
+      border: none;
+      background: transparent;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink-soft);
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+    .lang-btn.active {
+      background: #1c1917;
+      color: #fde68a;
+    }
+    .owner-pill {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--surface);
+      border: 1.5px solid var(--gold-border);
+      color: var(--gold-dark);
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+    @media (max-width: 460px) {
+      .brand { font-size: 13px; gap: 7px; }
+      .brand-icon { width: 28px; height: 28px; }
+      .brand span small { font-size: 9px; }
+      .owner-pill { font-size: 11px; padding: 4px 8px; }
+      .lang-btn { padding: 3.5px 7px; font-size: 11px; }
+    }
+    .owner-pill:hover { background: var(--gold-bg); }
+    .owner-pill.active {
+      background: #1c1917;
+      border-color: var(--gold);
+      color: #fde68a;
+    }
+    .badge-count {
+      background: var(--danger);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 800;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 5px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    @keyframes pulseBadge {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.25); }
+      100% { transform: scale(1); }
+    }
+    .badge-pulse { animation: pulseBadge 0.6s ease 2; }
+
+    /* Main container */
+    .main {
+      flex: 1;
+      max-width: 720px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 20px 16px 48px;
+    }
+
+    /* Progress bar */
+    .progress-wrap {
+      margin-bottom: 18px;
+    }
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink-muted);
+      margin-bottom: 6px;
+    }
+    .progress-track {
+      width: 100%;
+      height: 6px;
+      background: #e8e3d9;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold) 0%, #e0a83e 100%);
+      border-radius: 999px;
+      transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Cards & screens */
+    .screen {
+      display: none;
+      animation: fadeSlide 0.28s ease;
+    }
+    .screen.active { display: block; }
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-card {
+      background: linear-gradient(145deg, #19150f 0%, #2b2113 65%, #1c160e 100%);
+      color: #ffffff;
+      border: 1.5px solid var(--gold);
+      border-radius: 20px;
+      padding: 24px 22px;
+      margin-bottom: 18px;
+      box-shadow: var(--shadow-md);
+    }
+    .hero-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(245, 158, 11, 0.16);
+      border: 1px solid rgba(251, 191, 36, 0.45);
+      color: #fde68a;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 4px 11px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+    .hero-card h1 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 25px;
+      line-height: 1.22;
+      color: #fef3c7;
+      margin-bottom: 8px;
+    }
+    .hero-card p {
+      font-size: 14.5px;
+      color: #e4e4e7;
+      line-height: 1.48;
+    }
+
+    .sphere-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 560px) {
+      .sphere-grid { grid-template-columns: 1fr; }
+      .hero-card h1 { font-size: 21px; }
+    }
+    .sphere-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 16px;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      position: relative;
+    }
+    .sphere-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .sphere-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: var(--gold-bg);
+      border: 1px solid var(--gold-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+    .sphere-title {
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--ink);
+    }
+    .sphere-desc {
+      font-size: 13px;
+      color: var(--ink-soft);
+      line-height: 1.4;
+    }
+    .sphere-card.special {
+      background: linear-gradient(135deg, #fffdf7 0%, #fef6e4 100%);
+      border-color: var(--gold-border);
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 22px 20px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 14px;
+    }
+    .panel-title {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 21px;
+      line-height: 1.25;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+    .panel-sub {
+      font-size: 14px;
+      color: var(--ink-soft);
+      margin-bottom: 16px;
+    }
+
+    /* Checkboxes */
+    .check-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      font-size: 12.5px;
+      color: var(--ink-muted);
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .counter-pill {
+      background: var(--gold-bg);
+      color: var(--gold-dark);
+      border: 1px solid var(--gold-border);
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .check-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 13px;
+      cursor: pointer;
+      transition: all 0.16s ease;
+      user-select: none;
+    }
+    .check-item:hover { border-color: var(--gold); background: #fffcf5; }
+    .check-item.selected {
+      background: var(--gold-bg);
+      border-color: var(--gold);
+      box-shadow: 0 2px 8px rgba(194, 138, 46, 0.12);
+    }
+    .check-item.disabled {
+      opacity: 0.48;
+      cursor: not-allowed;
+    }
+    .check-box {
+      width: 22px;
+      height: 22px;
+      border-radius: 7px;
+      border: 2px solid #cbd5e1;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.16s ease;
+      font-size: 13px;
+      color: transparent;
+      font-weight: 800;
+    }
+    .check-item.selected .check-box {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: #fff;
+    }
+    .check-text {
+      font-size: 14.5px;
+      font-weight: 500;
+      color: var(--ink);
+      flex: 1;
+    }
+    .route-hint {
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: #eef2ff;
+      color: #4338ca;
+      display: none;
+    }
+
+    .show-all-btn {
+      margin-top: 10px;
+      background: transparent;
+      border: 1px dashed var(--border);
+      color: var(--ink-soft);
+      width: 100%;
+      padding: 9px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .show-all-btn:hover { border-color: var(--gold); color: var(--gold-dark); background: var(--gold-bg); }
+
+    .text-input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 14.5px;
+      color: var(--ink);
+      background: #fff;
+      outline: none;
+      transition: border-color 0.18s;
+    }
+    .text-input:focus { border-color: var(--gold); }
+    textarea.text-input { min-height: 76px; resize: vertical; }
+
+    /* Follow-up question chips */
+    .ai-bubble {
+      display: flex;
+      gap: 11px;
+      align-items: flex-start;
+      background: linear-gradient(135deg, #fffdf8 0%, #fef8ea 100%);
+      border: 1px solid var(--gold-border);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 16px;
+    }
+    .ai-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: #1c1917;
+      color: #fde68a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+    .ai-bubble-text { font-size: 14.5px; color: var(--ink); font-weight: 600; line-height: 1.4; }
+    .ai-bubble-sub { font-size: 12.5px; color: var(--ink-soft); font-weight: 400; margin-top: 3px; }
+
+    .choice-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .choice-btn {
+      text-align: left;
+      padding: 13px 15px;
+      border-radius: 13px;
+      border: 1.5px solid var(--border);
+      background: var(--bg);
+      font-family: inherit;
+      font-size: 14.2px;
+      font-weight: 500;
+      color: var(--ink);
+      cursor: pointer;
+      transition: all 0.16s ease;
+    }
+    .choice-btn:hover { border-color: var(--gold); background: #fffcf5; }
+    .choice-btn.selected {
+      background: var(--gold-bg);
+      border-color: var(--gold);
+      font-weight: 700;
+      color: #451a03;
+    }
+
+    /* Buttons */
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .btn {
+      border: none;
+      border-radius: 13px;
+      padding: 13px 18px;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #1c1917 0%, #312616 100%);
+      color: #fef3c7;
+      border: 1.5px solid var(--gold);
+      flex: 1;
+    }
+    .btn-primary:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(194, 138, 46, 0.25); }
+    .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; }
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--ink-soft);
+      border: 1.5px solid var(--border);
+    }
+    .btn-secondary:hover { background: var(--surface-soft); }
+    .btn-gold {
+      background: linear-gradient(135deg, #c28a2e 0%, #a5701d 100%);
+      color: #ffffff;
+      flex: 1;
+    }
+    .btn-gold:hover { filter: brightness(1.05); transform: translateY(-1px); }
+
+    /* Analyzing animation */
+    .analyzing-box {
+      text-align: center;
+      padding: 36px 20px;
+    }
+    .spinner {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 3.5px solid var(--gold-border);
+      border-top-color: var(--gold);
+      margin: 0 auto 18px;
+      animation: spin 0.85s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .analyze-steps {
+      max-width: 340px;
+      margin: 14px auto 0;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 13.5px;
+      color: var(--ink-muted);
+    }
+    .analyze-step.done { color: var(--emerald); font-weight: 600; }
+
+    /* Result screen */
+    .wow-header {
+      background: linear-gradient(135deg, #16120b 0%, #2c2111 100%);
+      color: #fff;
+      border: 1.5px solid var(--gold);
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 14px;
+    }
+    .wow-header h2 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 21px;
+      color: #fef3c7;
+      margin-bottom: 5px;
+    }
+    .wow-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .wow-tag {
+      background: rgba(254, 243, 199, 0.14);
+      border: 1px solid rgba(251, 191, 36, 0.45);
+      color: #fde68a;
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+
+    .insight-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      margin-bottom: 12px;
+      box-shadow: var(--shadow-sm);
+    }
+    .insight-label {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--gold-dark);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .insight-card h3 {
+      font-size: 16.5px;
+      margin-bottom: 7px;
+      color: var(--ink);
+    }
+    .insight-card p {
+      font-size: 14.2px;
+      color: var(--ink-soft);
+      line-height: 1.52;
+    }
+
+    .step72-card {
+      background: var(--emerald-bg);
+      border: 1.5px solid var(--emerald-border);
+      border-radius: 16px;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+    .step72-card .insight-label { color: var(--emerald); }
+
+    .pillars-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    @media (max-width: 520px) { .pillars-strip { grid-template-columns: 1fr; } }
+    .pillar {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 11px;
+      font-size: 12.2px;
+      color: var(--ink-soft);
+    }
+    .pillar strong { display: block; color: var(--ink); font-size: 13px; margin-bottom: 2px; }
+
+    /* Lead capture gate */
+    .gate-card {
+      background: linear-gradient(135deg, #fffdf7 0%, #fef6e3 100%);
+      border: 2px solid var(--gold);
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 14px;
+    }
+    .expert-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: #1c1917;
+      color: #fde68a;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+    .blurred-preview {
+      background: rgba(255,255,255,0.72);
+      border: 1px dashed var(--gold-border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin: 12px 0 14px;
+      position: relative;
+      overflow: hidden;
+    }
+    .blurred-lines {
+      filter: blur(4px);
+      user-select: none;
+      font-size: 13px;
+      color: var(--ink-soft);
+      line-height: 1.65;
+    }
+    .blurred-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 253, 247, 0.45);
+      font-weight: 700;
+      font-size: 13px;
+      color: #78350f;
+      text-align: center;
+      padding: 10px;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    @media (max-width: 520px) { .form-grid { grid-template-columns: 1fr; } }
+
+    .unlocked-plan {
+      background: var(--surface);
+      border: 1.5px solid var(--emerald);
+      border-radius: 16px;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+    .plan-step {
+      display: flex;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--surface-soft);
+    }
+    .plan-step:last-child { border-bottom: none; }
+    .plan-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #1c1917;
+      color: #fde68a;
+      font-weight: 800;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* Owner Dashboard ("Кнопочка на телефоне") */
+    .owner-banner {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #fff;
+      border-radius: 18px;
+      padding: 18px 20px;
+      margin-bottom: 14px;
+      border: 1.5px solid #38bdf8;
+    }
+    .owner-banner h2 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 19px;
+      color: #f8fafc;
+      margin-bottom: 4px;
+    }
+    .owner-banner p { font-size: 13px; color: #cbd5e1; }
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    @media (max-width: 560px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+    .kpi-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+    .kpi-val { font-size: 23px; font-weight: 800; color: var(--ink); line-height: 1.15; }
+    .kpi-val.warn { color: var(--danger); }
+    .kpi-val.good { color: var(--emerald); }
+    .kpi-lbl { font-size: 11.5px; color: var(--ink-muted); margin-top: 3px; font-weight: 600; }
+
+    .filter-tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .filter-tab {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--ink-soft);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .filter-tab.active { background: #1c1917; color: #fde68a; border-color: #1c1917; }
+
+    .lead-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 15px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      box-shadow: var(--shadow-sm);
+    }
+    .lead-card.fresh { border-color: var(--gold); background: #fffdf8; }
+    .lead-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+    .lead-name { font-weight: 800; font-size: 15px; color: var(--ink); }
+    .lead-contact { font-size: 12.5px; color: var(--ink-soft); }
+    .route-pill {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 9px;
+      border-radius: 999px;
+      display: inline-block;
+    }
+    .route-vaidile { background: var(--emerald-bg); color: var(--emerald); border: 1px solid var(--emerald-border); }
+    .route-tatiana { background: var(--gold-bg); color: var(--gold-dark); border: 1px solid var(--gold-border); }
+    .route-new { background: var(--danger); color: #fff; margin-right: 5px; }
+    .lead-body {
+      font-size: 13px;
+      color: var(--ink-soft);
+      background: var(--surface-soft);
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin: 8px 0;
+    }
+    .lead-body div { margin-bottom: 4px; }
+    .lead-body div:last-child { margin-bottom: 0; }
+    .lead-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .btn-mini {
+      padding: 6px 12px;
+      border-radius: 9px;
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--ink);
+      cursor: pointer;
+    }
+    .btn-mini.done { background: var(--emerald-bg); color: var(--emerald); border-color: var(--emerald-border); }
+
+    .demo-footnote {
+      text-align: center;
+      font-size: 12px;
+      color: var(--ink-muted);
+      margin-top: 18px;
+      padding: 10px 14px;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand" onclick="resetToStart()">
+        <div class="brand-icon">✦</div>
+        <span>
+          <span id="brandTitle">Компас Ясности</span>
+          <small id="brandSub">AI-диагностика • Демо</small>
+        </span>
+      </div>
+      <div class="top-actions">
+        <div class="lang-toggle" role="group" aria-label="Language">
+          <button class="lang-btn active" id="langRu" onclick="setLang('ru')">RU</button>
+          <button class="lang-btn" id="langEn" onclick="setLang('en')">EN</button>
+        </div>
+        <button class="owner-pill" id="ownerToggleBtn" onclick="toggleOwnerView()">
+          <span>📱</span>
+          <span id="ownerBtnLabel">Владелец</span>
+          <span class="badge-count" id="unreadBadge">1</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <!-- QUIZ FLOW -->
+    <div id="quizApp">
+      <div class="progress-wrap" id="progressWrap">
+        <div class="progress-meta">
+          <span id="progressLabel">Шаг 1 из 4</span>
+          <span id="progressTime">~ 2 минуты</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill" style="width: 20%"></div>
+        </div>
+      </div>
+
+      <!-- STEP 1: SPHERE SELECTION -->
+      <section class="screen active" id="screen1">
+        <div class="hero-card">
+          <div class="hero-chip" id="heroChip">✦ Бесплатный вводный AI-разбор • 2 минуты</div>
+          <h1 id="heroTitle">Что вы хотели бы улучшить в своей жизни?</h1>
+          <p id="heroSub">Не нужно долго формулировать проблему — просто выберите направление, поставьте 1–3 галочки и получите конкретный первый шаг от ИИ.</p>
+        </div>
+
+        <div class="sphere-grid" id="sphereGrid"></div>
+      </section>
+
+      <!-- STEP 2: PRIORITY CHECKBOXES -->
+      <section class="screen" id="screen2">
+        <div class="panel">
+          <h2 class="panel-title" id="step2Title">Отметьте, что для вас важнее всего сейчас</h2>
+          <p class="panel-sub" id="step2Sub">Выберите от 1 до 3 главных пунктов — так разбор будет максимально точным.</p>
+          <div class="check-meta">
+            <span id="step2SphereLabel"></span>
+            <span class="counter-pill" id="selectedCounter">Выбрано: 0 из 3</span>
+          </div>
+          <div class="check-list" id="checkList"></div>
+          <button class="show-all-btn" id="showAllBtn" onclick="toggleShowAll()"></button>
+
+          <div id="otherWrap" style="display:none; margin-top: 10px;">
+            <input type="text" id="otherInput" class="text-input" placeholder="Напишите своими словами, что хотите улучшить..." />
+          </div>
+
+          <div class="btn-row">
+            <button class="btn btn-secondary" onclick="goStep(1)" id="btnBack1">← Назад</button>
+            <button class="btn btn-primary" id="btnToQuestions" onclick="startQuestions()" disabled>Продолжить →</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 3: ADAPTIVE AI FOLLOW-UP QUESTIONS -->
+      <section class="screen" id="screen3">
+        <div class="panel">
+          <div class="ai-bubble">
+            <div class="ai-avatar">✦</div>
+            <div>
+              <div class="ai-bubble-text" id="qText"></div>
+              <div class="ai-bubble-sub" id="qHint"></div>
+            </div>
+          </div>
+
+          <div class="choice-grid" id="qChoices"></div>
+
+          <input type="text" id="qCustomInput" class="text-input" placeholder="Или напишите коротко свой вариант..." />
+
+          <div class="btn-row">
+            <button class="btn btn-secondary" onclick="prevQuestion()" id="btnBackQ">← Назад</button>
+            <button class="btn btn-primary" id="btnNextQ" onclick="nextQuestion()" disabled>Далее →</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 4: ANALYZING -->
+      <section class="screen" id="screen4">
+        <div class="panel analyzing-box">
+          <div class="spinner"></div>
+          <h2 class="panel-title" id="anTitle">ИИ собирает вашу картину...</h2>
+          <p class="panel-sub" id="anSub" style="margin-bottom:0;">Сопоставляем выбранные приоритеты и ответы</p>
+          <div class="analyze-steps">
+            <div class="analyze-step" id="anStep1">○ Определяем главную точку торможения</div>
+            <div class="analyze-step" id="anStep2">○ Подбираем конкретный первый шаг на 72 часа</div>
+            <div class="analyze-step" id="anStep3">○ Формируем персональный план на 90 дней</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 5: WOW RESULT + LEAD CAPTURE -->
+      <section class="screen" id="screen5">
+        <div class="wow-header">
+          <div class="hero-chip" style="margin-bottom:8px;" id="wowChip">✦ ВАУ! ТЕПЕРЬ ПОНЯТНО, ЧТО ДЕЛАТЬ</div>
+          <h2 id="wowHeadline">Ваш персональный экспресс-разбор готов</h2>
+          <div class="wow-tags" id="wowTags"></div>
+        </div>
+
+        <div class="insight-card">
+          <div class="insight-label" id="rootLabel">🎯 КОРЕHЬ СИТУАЦИИ (ЧТО РЕАЛЬНО ТОРМОЗИТ РОСТ)</div>
+          <h3 id="rootTitle"></h3>
+          <p id="rootBody"></p>
+        </div>
+
+        <div class="step72-card">
+          <div class="insight-label" id="step72Label">⚡ ВАШ КОНКРЕТНЫЙ «ПЕРВЫЙ ШАГ» НА БЛИЖАЙШИЕ 72 ЧАСА</div>
+          <h3 id="step72Title" style="font-size:16px; margin-bottom:6px; color:#14532d;"></h3>
+          <p id="step72Body" style="font-size:14px; color:#166534;"></p>
+        </div>
+
+        <div class="pillars-strip" id="pillarsStrip"></div>
+
+        <!-- Gate before unlock -->
+        <div class="gate-card" id="gateCard">
+          <div class="expert-chip" id="expertChip"></div>
+          <h3 id="gateTitle" style="font-size:17px; margin-bottom:5px; color:#1c1917;"></h3>
+          <p id="gateSub" style="font-size:13.5px; color:#52525b;"></p>
+
+          <div class="blurred-preview">
+            <div class="blurred-lines">
+              1. Неделя 1–2: точная диагностика и фиксация ключевой метрики старта...<br>
+              2. Неделя 3–6: устранение главного узкого места и внедрение простого ритма...<br>
+              3. Неделя 7–12: закрепление результата и масштабирование без выгорания...
+            </div>
+            <div class="blurred-overlay" id="blurOverlay">🔒 Оставьте контакт, чтобы мгновенно открыть 3-шаговый план + записаться на 15-мин разбор</div>
+          </div>
+
+          <div class="form-grid">
+            <input type="text" id="leadName" class="text-input" placeholder="Ваше имя" />
+            <input type="text" id="leadContact" class="text-input" placeholder="WhatsApp или Email" />
+          </div>
+          <button class="btn btn-gold" style="width:100%;" onclick="submitLead()" id="btnUnlock">Открыть полный план и получить разбор →</button>
+        </div>
+
+        <!-- Unlocked full 3-step plan -->
+        <div class="unlocked-plan" id="unlockedPlan" style="display:none;">
+          <div class="insight-label" style="color:var(--emerald);" id="unlockedLabel">✅ ПЛАН ОТКРЫТ И ЗАЯВКА ОТПРАВЛЕНА ЭКСПЕРТУ</div>
+          <h3 id="unlockedTitle" style="font-size:17px; margin-bottom:10px;"></h3>
+          <div id="unlockedSteps"></div>
+          <div class="btn-row" style="margin-top:14px; flex-wrap:wrap;">
+            <button class="btn btn-primary" onclick="toggleOwnerView(true)" id="btnSeeOwnerDemo">📱 Посмотреть, как заявка пришла в «Кнопочку владельца»</button>
+            <button class="btn btn-secondary" onclick="resetToStart()" id="btnRestart">Пройти заново</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- OWNER DASHBOARD ("КНОПОЧКА НА ТЕЛЕФОНЕ") -->
+    <section id="ownerApp" style="display:none;">
+      <div class="owner-banner">
+        <div class="hero-chip" style="border-color:rgba(56,189,248,0.5); color:#bae6fd; background:rgba(56,189,248,0.14); margin-bottom:8px;" id="ownerChip">📱 ДЕМО «КНОПОЧКИ НА ТЕЛЕФОНЕ» • ДЛЯ ТАТЬЯНЫ И ВАЙДИЛЕ</div>
+        <h2 id="ownerTitle">Пульт владельца и умная маршрутизация заявок</h2>
+        <p id="ownerSub">Каждая анкета автоматически сортируется по профилю (финансы → Вайдиле, цели/бизнес/жизнь → Татьяна) и приходит как готовое досье перед первым звонком.</p>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-val" id="kpiVisits">28</div>
+          <div class="kpi-lbl" id="kpiVisitsLbl">Визитов сегодня</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-val" id="kpiCompleted">9</div>
+          <div class="kpi-lbl" id="kpiCompletedLbl">Прошли опрос</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-val good" id="kpiLeads">3</div>
+          <div class="kpi-lbl" id="kpiLeadsLbl">Заявок с контактом</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-val warn" id="kpiPending">1</div>
+          <div class="kpi-lbl" id="kpiPendingLbl">Ждут звонка</div>
+        </div>
+      </div>
+
+      <div class="filter-tabs">
+        <button class="filter-tab active" id="fltAll" onclick="setFilter('all')">Все заявки</button>
+        <button class="filter-tab" id="fltVaidile" onclick="setFilter('vaidile')">🟢 Вайдиле (Финансы)</button>
+        <button class="filter-tab" id="fltTatiana" onclick="setFilter('tatiana')">🟡 Татьяна (Цели / Бизнес)</button>
+      </div>
+
+      <div id="leadsContainer"></div>
+
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="toggleOwnerView(false)" id="btnBackToQuiz">← Вернуться к опроснику клиента</button>
+      </div>
+
+      <div class="demo-footnote" id="ownerFootnote">
+        Интерактивный прототип экосистемы «Монетизация идей» (Артём и Максим). В боевой версии подключается живой LLM API (~$0.003 за диалог) и мгновенная отправка заявок в WhatsApp / Email / Google Таблицу.
+      </div>
+    </section>
+  </main>
+
+<script>
+const DATA = {
+  ru: {
+    brandTitle: 'Компас Ясности',
+    brandSub: 'AI-разбор • Демо',
+    ownerBtn: 'Владелец',
+    ownerBtnActive: 'К опроснику',
+    heroChip: '✦ Бесплатный вводный AI-разбор • 2 минуты',
+    heroTitle: 'Что вы хотели бы улучшить в своей жизни?',
+    heroSub: 'Не нужно долго формулировать проблему — просто выберите направление, поставьте 1–3 галочки и получите конкретный первый шаг от ИИ.',
+    stepOf: (a, b) => `Шаг ${a} из ${b}`,
+    estTime: '~ 2 минуты',
+    step2Title: 'Отметьте, что для вас важнее всего сейчас',
+    step2Sub: 'Выберите от 1 до 3 главных пунктов — так ИИ даст точный и практичный разбор.',
+    counter: (n) => `Выбрано: ${n} из 3`,
+    showMore: (n) => `Показать все пункты направления (+${n})`,
+    showLess: 'Скрыть дополнительные пункты',
+    otherPlaceholder: 'Напишите коротко своими словами, что хотите улучшить...',
+    customQPlaceholder: 'Или напишите коротко свой вариант...',
+    back: '← Назад',
+    next: 'Продолжить →',
+    nextQ: 'Далее →',
+    finishQ: 'Получить разбор ИИ ✦',
+    anTitle: 'ИИ анализирует ваши ответы...',
+    anSub: 'Сопоставляем приоритеты и готовим конкретный первый шаг',
+    anSteps: [
+      'Определяем главную точку торможения',
+      'Формируем конкретный первый шаг на 72 часа',
+      'Собираем персональный план на 90 дней'
+    ],
+    wowChip: '✦ ВАУ! ТЕПЕРЬ ПОНЯТНО, ЧТО ДЕЛАТЬ',
+    wowHeadline: 'Ваш персональный экспресс-разбор готов',
+    rootLabel: '🎯 КОРЕНЬ СИТУАЦИИ (ЧТО РЕАЛЬНО ТОРМОЗИТ РОСТ)',
+    step72Label: '⚡ ВАШ «ПЕРВЫЙ ШАГ» НА БЛИЖАЙШИЕ 72 ЧАСА',
+    pillars: [
+      ['Решение', 'Чёткое понимание, с чего начать без распыления'],
+      ['Удобство', 'Не нужно перебирать сотни часов чужих советов'],
+      ['Ясность', '«ВАУ! Теперь я точно знаю, что делать дальше»']
+    ],
+    blurOverlay: '🔒 Оставьте контакт, чтобы мгновенно открыть 3-шаговый план + получить 15-мин разбор',
+    namePh: 'Ваше имя',
+    contactPh: 'WhatsApp или Email',
+    btnUnlock: 'Открыть полный план и получить разбор →',
+    unlockedLabel: '✅ ПЛАН ОТКРЫТ • АНКЕТА ПЕРЕДАНА ЭКСПЕРТУ',
+    btnSeeOwner: '📱 Посмотреть, как заявка пришла в «Кнопочку владельца»',
+    btnRestart: 'Пройти ещё раз',
+    fillAlert: 'Пожалуйста, укажите имя и контакт (WhatsApp или Email).',
+    ownerChip: '📱 ДЕМО «КНОПОЧКИ НА ТЕЛЕФОНЕ» • ДЛЯ ТАТЬЯНЫ И ВАЙДИЛЕ',
+    ownerTitle: 'Пульт владельца и умная маршрутизация заявок',
+    ownerSub: 'Каждая анкета автоматически сортируется по профилю (финансы → Вайдиле, цели/бизнес/жизнь → Татьяна) и приходит как готовое досье перед первым звонком.',
+    kpis: ['Визитов сегодня', 'Прошли опрос', 'Заявок с контактом', 'Ждут звонка'],
+    filters: ['Все заявки', '🟢 Вайдиле (Финансы)', '🟡 Татьяна (Цели / Бизнес)'],
+    btnBackToQuiz: '← Вернуться к опроснику клиента',
+    ownerFootnote: 'Интерактивный прототип для группы «Монетизация идей» (Артём и Максим). В боевой версии подключается живой AI API (~$0.003 за диалог) + мгновенное уведомление в WhatsApp / Email.',
+    dossierLabels: {
+      priorities: 'Выбранные приоритеты',
+      bottleneck: 'Главная точка торможения',
+      goal90: 'Желаемый результат (90 дней)',
+      format: 'Удобный формат',
+      markDone: 'Отметить «Связались»',
+      doneText: '✓ Обработано',
+      newBadge: 'НОВАЯ'
+    },
+    spheres: [
+      {
+        id: 'personal',
+        icon: '🧭',
+        title: 'Личное развитие',
+        desc: 'Финансы, доход, цели в жизни, энергия, здоровье, время и способности.',
+        items: [
+          { id: 'p_fin_order', text: 'Навести порядок в финансах', route: 'vaidile', core: true },
+          { id: 'p_earn_more', text: 'Больше зарабатывать', route: 'vaidile', core: true },
+          { id: 'p_life_goal', text: 'Определить свою цель в жизни', route: 'tatiana', core: true },
+          { id: 'p_time', text: 'Научиться управлять своим временем', route: 'tatiana', core: true },
+          { id: 'p_health', text: 'Улучшить здоровье', route: 'tatiana', core: true },
+          { id: 'p_job', text: 'Найти или сменить работу / освоить новую профессию', route: 'tatiana', core: true },
+          { id: 'p_skills', text: 'Развить свои способности', route: 'tatiana', core: true },
+          { id: 'p_body', text: 'Улучшить физическую форму и внешний вид', route: 'tatiana', core: false },
+          { id: 'p_habits', text: 'Избавиться от вредных привычек', route: 'tatiana', core: false },
+          { id: 'p_learn', text: 'Начать обучаться', route: 'tatiana', core: false },
+          { id: 'p_home', text: 'Улучшить жилищные условия', route: 'vaidile', core: false },
+          { id: 'p_travel', text: 'Больше путешествовать', route: 'vaidile', core: false },
+          { id: 'p_other', text: 'Другое (написать свой вариант)', route: 'tatiana', core: true, isOther: true }
+        ]
+      },
+      {
+        id: 'family',
+        icon: '💛',
+        title: 'Любовь и семья',
+        desc: 'Отношения с партнёром, детьми, родителями или поиск любимого человека.',
+        items: [
+          { id: 'f_partner', text: 'Улучшить отношения с партнёром', route: 'tatiana', core: true },
+          { id: 'f_find', text: 'Найти любимого человека', route: 'tatiana', core: true },
+          { id: 'f_kids', text: 'Наладить отношения с детьми', route: 'tatiana', core: true, note: 'Потенциал 2-й очереди: консалтинг для родителей' },
+          { id: 'f_create', text: 'Создать семью / стать родителем', route: 'tatiana', core: true },
+          { id: 'f_parents', text: 'Наладить отношения с родителями и родственниками', route: 'tatiana', core: true },
+          { id: 'f_close', text: 'Завершить отношения экологично', route: 'tatiana', core: true },
+          { id: 'f_intimate', text: 'Улучшить интимные отношения', route: 'tatiana', core: false },
+          { id: 'f_other', text: 'Другое (написать свой вариант)', route: 'tatiana', core: true, isOther: true }
+        ]
+      },
+      {
+        id: 'business',
+        icon: '🚀',
+        title: 'Бизнес и общество',
+        desc: 'Создание и рост бизнеса, команда, управление людьми, партнёры и масштаб.',
+        items: [
+          { id: 'b_grow', text: 'Развить существующий бизнес', route: 'tatiana', core: true, b2b: true },
+          { id: 'b_start', text: 'Создать свой бизнес', route: 'tatiana', core: true, b2b: true },
+          { id: 'b_team', text: 'Создать команду и научиться управлять людьми', route: 'tatiana', core: true, b2b: true },
+          { id: 'b_partners', text: 'Найти деловых партнёров', route: 'tatiana', core: true, b2b: true },
+          { id: 'b_colleagues', text: 'Улучшить отношения с коллегами', route: 'tatiana', core: true },
+          { id: 'b_social', text: 'Реализовать общественный проект', route: 'tatiana', core: true },
+          { id: 'b_friends', text: 'Найти друзей, единомышленников и расширить круг общения', route: 'tatiana', core: false },
+          { id: 'b_other', text: 'Другое (написать свой вариант)', route: 'tatiana', core: true, isOther: true }
+        ]
+      },
+      {
+        id: 'unsure',
+        icon: '✨',
+        title: 'Хочу перемен, но пока не знаю каких',
+        desc: 'Чувствую, что застрял(а) или нет энергии — помогите за 3 вопроса понять, с чего начать.',
+        special: true,
+        items: []
+      }
+    ],
+    questionsByTrack: {
+      vaidile: [
+        {
+          q: 'Что сейчас сильнее всего мешает навести порядок в деньгах и вырасти в доходе?',
+          hint: 'Выберите ближайший вариант — это поможет определить корень ситуации.',
+          options: [
+            'Деньги приходят, но быстро утекают — нет ясной картины и контроля',
+            'Упёрся(лась) в потолок дохода, работаю много, а прорыва нет',
+            'Доход уже хороший, но непонятно, как выстроить потоки и финансовую подушку',
+            'Есть долги или постоянное напряжение из-за денег'
+          ]
+        },
+        {
+          q: 'Какой конкретный результат через 90 дней даст вам реальное облегчение?',
+          hint: 'Представьте точку, где вы скажете: «Да, теперь я управляю своими финансами».',
+          options: [
+            'Полная прозрачность: вижу каждую цифру, убрал(а) утечки, есть запас',
+            'Устойчивый рост личного/бизнес-дохода на 30–50% по понятному плану',
+            'Чёткая система денежных потоков и финансового будущего без тревоги',
+            'Избавиться от финансового хаоса и выстроить дисциплину шаг за шагом'
+          ]
+        },
+        {
+          q: 'В каком формате вам комфортнее всего двигаться к этому результату?',
+          hint: 'Мы подстроим рекомендацию именно под ваш ритм.',
+          options: [
+            'Короткий бесплатный созвон-диагностика (15–30 мин), чтобы увидеть план',
+            'Личная работа с финансовым консультантом (4–6 недель с поддержкой)',
+            'Самостоятельный пошаговый онлайн-курс и готовые трекеры',
+            'Пока просто хочу получить первый понятный шаг'
+          ]
+        }
+      ],
+      business: [
+        {
+          q: 'Где сейчас главная точка торможения в вашем бизнесе или проекте?',
+          hint: 'Обычно 80% результата упирается в 1 ключевое узкое место.',
+          options: [
+            'Много идей и задач, но нет чёткой системы приоритетов и плана',
+            'Всё держится на мне — не хватает сильной команды и делегирования',
+            'Есть продукт, но нет стабильного потока платежеспособных клиентов',
+            'Потерял(а) фокус и энергию: много усилий, а прибыль не радует'
+          ]
+        },
+        {
+          q: 'Какой главный результат вы хотите зафиксировать через 3–6 месяцев?',
+          hint: 'Чем конкретнее ориентир, тем быстрее появляется энергия.',
+          options: [
+            'Выстроить чёткую стратегию и пошаговый план роста бизнеса',
+            'Выйти из операционной рутины и наладить управляемую команду',
+            'Запустить новый проект/продукт с предсказуемой прибылью',
+            'Упорядочить цели, время и финансы бизнеса в одну систему'
+          ]
+        },
+        {
+          q: 'Какой формат работы вам ближе сейчас?',
+          hint: 'Это поможет предложить наиболее удобный следующий шаг.',
+          options: [
+            'Индивидуальная VIP-работа по стратегии бизнеса с экспертом',
+            'Онлайн-курс пошагово с проверкой моих заданий и обратной связью',
+            'Быстрый групповой практикум — собрать свой план за короткий срок',
+            'Начать с бесплатного 15-минутного разбора моей ситуации'
+          ]
+        }
+      ],
+      tatiana: [
+        {
+          q: 'Что сейчас сильнее всего забирает вашу энергию или мешает сдвинуться с места?',
+          hint: 'Ответьте честно — это ключ к точному первому шагу.',
+          options: [
+            'Разброс внимания: много мыслей и дел, непонятно, за что хвататься первым',
+            'Нет ясной вдохновляющей цели — от этого мало сил и мотивации',
+            'Постоянно откладываю важное из-за рутины и нехватки времени',
+            'Эмоциональное напряжение в отношениях / окружении тормозит всё остальное'
+          ]
+        },
+        {
+          q: 'Какое изменение через 3 месяца порадовало бы вас больше всего?',
+          hint: 'Фокус на одном ясном результате всегда побеждает хаос.',
+          options: [
+            'Чётко понимать свою главную цель на год и пошаговый план на 3–6 месяцев',
+            'Почувствовать прилив энергии, порядок во времени и уверенность в каждом дне',
+            'Восстановить гармонию, теплоту и ясность в важных отношениях',
+            'Начать системно действовать и увидеть первые ощутимые победы'
+          ]
+        },
+        {
+          q: 'Как вам комфортнее всего делать первые шаги?',
+          hint: 'Подберём формат под ваш темп.',
+          options: [
+            'Быстрый групповой практикум — шаг за шагом составить свой план',
+            'Онлайн-курс в своём темпе с проверкой заданий',
+            'Личное сопровождение со «вторым человеком», который поможет не свернуть',
+            'Сначала короткий бесплатный разбор моей ситуации'
+          ]
+        }
+      ]
+    },
+    seedLeads: [
+      {
+        id: 'seed-1',
+        name: 'Елена М.',
+        contact: '+41 79 *** 42 18 (WhatsApp)',
+        lang: 'RU',
+        route: 'tatiana',
+        routeLabel: 'Татьяна • Админ-шкала (Бизнес / 3-я дин.)',
+        priorities: ['Развить существующий бизнес', 'Создать команду и научиться управлять людьми'],
+        bottleneck: 'Всё держится на мне — не хватает сильной команды и делегирования',
+        goal90: 'Выйти из операционной рутины и наладить управляемую команду',
+        format: 'Индивидуальная VIP-работа по стратегии бизнеса с экспертом',
+        time: 'Сегодня, 14:12',
+        done: false,
+        fresh: false
+      },
+      {
+        id: 'seed-2',
+        name: 'Michael R.',
+        contact: 'michael.r***@gmail.com',
+        lang: 'EN',
+        route: 'vaidile',
+        routeLabel: 'Vaidilė • Financial Consulting (US)',
+        priorities: ['Get my finances organized', 'Earn more income'],
+        bottleneck: 'Money comes in but leaks out fast — no clear system or control',
+        goal90: 'Full clarity: track every dollar, cut leaks, build a safety cushion',
+        format: 'Free 15–30 min diagnostic call to see a clear plan',
+        time: 'Today, 12:45',
+        done: true,
+        fresh: false
+      }
+    ]
+  },
+
+  en: {
+    brandTitle: 'Clarity Compass',
+    brandSub: 'AI Diagnostic • Demo',
+    ownerBtn: 'Owner View',
+    ownerBtnActive: 'Back to Quiz',
+    heroChip: '✦ Free AI Express Clarity Check • 2 Minutes',
+    heroTitle: 'What would you like to improve in your life?',
+    heroSub: 'No need to overthink or write long essays — pick your focus area, check 1–3 priorities, and get an actionable first step from AI.',
+    stepOf: (a, b) => `Step ${a} of ${b}`,
+    estTime: '~ 2 minutes',
+    step2Title: 'Check what matters most to you right now',
+    step2Sub: 'Select 1 to 3 top priorities so AI can give you a laser-focused action step.',
+    counter: (n) => `Selected: ${n} of 3`,
+    showMore: (n) => `Show all options in this area (+${n})`,
+    showLess: 'Show fewer options',
+    otherPlaceholder: 'Briefly describe in your own words what you want to improve...',
+    customQPlaceholder: 'Or type your own short answer...',
+    back: '← Back',
+    next: 'Continue →',
+    nextQ: 'Next →',
+    finishQ: 'Get My AI Breakdown ✦',
+    anTitle: 'AI is analyzing your answers...',
+    anSub: 'Identifying your #1 leverage point and crafting your first step',
+    anSteps: [
+      'Pinpointing the real root bottleneck',
+      'Designing your 72-hour quick-win action',
+      'Building your personalized 90-day roadmap'
+    ],
+    wowChip: '✦ WOW! NOW I KNOW EXACTLY WHAT TO DO',
+    wowHeadline: 'Your Personalized Clarity Breakdown is Ready',
+    rootLabel: '🎯 ROOT BOTTLENECK (WHAT ACTUALLY HOLDS YOU BACK)',
+    step72Label: '⚡ YOUR CONCRETE "FIRST STEP" FOR THE NEXT 72 HOURS',
+    pillars: [
+      ['Solution', 'Clear direction on where to start without overwhelm'],
+      ['Convenience', 'Skip hundreds of hours of conflicting advice'],
+      ['Clarity', '"WOW! Now I actually know my exact next move"']
+    ],
+    blurOverlay: '🔒 Enter your contact to unlock your full 3-step 90-day roadmap + optional free 15-min call',
+    namePh: 'Your name',
+    contactPh: 'Email or WhatsApp / Phone',
+    btnUnlock: 'Unlock Full Plan & Request Call →',
+    unlockedLabel: '✅ PLAN UNLOCKED • SENT TO MATCHED SPECIALIST',
+    btnSeeOwner: '📱 See how this lead arrived in the "Owner Phone Button"',
+    btnRestart: 'Start Over',
+    fillAlert: 'Please enter your name and email or WhatsApp/phone.',
+    ownerChip: '📱 DEMO "PHONE BUTTON" DASHBOARD • FOR VAIDILĖ & TATIANA',
+    ownerTitle: 'Owner Dashboard & Smart Lead Routing',
+    ownerSub: 'Every submission is automatically routed by topic (Finances → Vaidilė, Goals/Business/Life → Tatiana) and arrives as a ready-to-use pre-call dossier.',
+    kpis: ['Visits Today', 'Completed Quiz', 'Leads Captured', 'Awaiting Call'],
+    filters: ['All Leads', '🟢 Vaidilė (Finances)', '🟡 Tatiana (Goals / Business)'],
+    btnBackToQuiz: '← Back to Client Quiz',
+    ownerFootnote: 'Interactive prototype for "Monetization of Ideas" (Artem & Maxim). Production version connects live AI API (~$0.003/session) + instant WhatsApp / Email / Sheet alerts.',
+    dossierLabels: {
+      priorities: 'Selected Priorities',
+      bottleneck: 'Root Bottleneck',
+      goal90: 'Desired 90-Day Result',
+      format: 'Preferred Format',
+      markDone: 'Mark as Contacted',
+      doneText: '✓ Contacted',
+      newBadge: 'NEW'
+    },
+    spheres: [
+      {
+        id: 'personal',
+        icon: '🧭',
+        title: 'Personal Growth',
+        desc: 'Finances, income, life purpose, time management, energy, health & skills.',
+        items: [
+          { id: 'p_fin_order', text: 'Get my finances organized & under control', route: 'vaidile', core: true },
+          { id: 'p_earn_more', text: 'Earn more income', route: 'vaidile', core: true },
+          { id: 'p_life_goal', text: 'Define my true goal & direction in life', route: 'tatiana', core: true },
+          { id: 'p_time', text: 'Master my time & daily focus', route: 'tatiana', core: true },
+          { id: 'p_health', text: 'Improve my health & energy', route: 'tatiana', core: true },
+          { id: 'p_job', text: 'Find a better job or learn a new profession', route: 'tatiana', core: true },
+          { id: 'p_skills', text: 'Develop my abilities & confidence', route: 'tatiana', core: true },
+          { id: 'p_body', text: 'Improve physical fitness & appearance', route: 'tatiana', core: false },
+          { id: 'p_habits', text: 'Break unproductive habits', route: 'tatiana', core: false },
+          { id: 'p_learn', text: 'Start learning something meaningful', route: 'tatiana', core: false },
+          { id: 'p_home', text: 'Upgrade my living conditions', route: 'vaidile', core: false },
+          { id: 'p_travel', text: 'Travel more freely', route: 'vaidile', core: false },
+          { id: 'p_other', text: 'Other (write your own)', route: 'vaidile', core: true, isOther: true }
+        ]
+      },
+      {
+        id: 'family',
+        icon: '💛',
+        title: 'Love & Family',
+        desc: 'Partner relationships, kids, parents, or finding the right life partner.',
+        items: [
+          { id: 'f_partner', text: 'Strengthen relationship with my partner', route: 'tatiana', core: true },
+          { id: 'f_find', text: 'Find a loving life partner', route: 'tatiana', core: true },
+          { id: 'f_kids', text: 'Improve relationship with my children', route: 'tatiana', core: true, note: 'Phase-2 cross-route: Parent Consulting' },
+          { id: 'f_create', text: 'Start a family / become a parent', route: 'tatiana', core: true },
+          { id: 'f_parents', text: 'Improve harmony with parents & relatives', route: 'tatiana', core: true },
+          { id: 'f_close', text: 'Close an old relationship cleanly', route: 'tatiana', core: true },
+          { id: 'f_intimate', text: 'Deepen intimacy & connection', route: 'tatiana', core: false },
+          { id: 'f_other', text: 'Other (write your own)', route: 'tatiana', core: true, isOther: true }
+        ]
+      },
+      {
+        id: 'business',
+        icon: '🚀',
+        title: 'Business & Society',
+        desc: 'Launch or scale a business, build a team, lead people, find partners.',
+        items: [
+          { id: 'b_grow', text: 'Grow & scale my existing business', route: 'tatiana', core: true, b2b: true },
+          { id: 'b_start', text: 'Start my own business', route: 'tatiana', core: true, b2b: true },
+          { id: 'b_team', text: 'Build a team & lead people effectively', route: 'tatiana', core: true, b2b: true },
+          { id: 'b_partners', text: 'Find strong business partners', route: 'tatiana', core: true, b2b: true },
+          { id: 'b_colleagues', text: 'Improve communication with colleagues', route: 'tatiana', core: true },
+          { id: 'b_social', text: 'Launch a meaningful community project', route: 'tatiana', core: true },
+          { id: 'b_friends', text: 'Find like-minded friends & expand my circle', route: 'tatiana', core: false },
+          { id: 'b_other', text: 'Other (write your own)', route: 'tatiana', core: true, isOther: true }
+        ]
+      },
+      {
+        id: 'unsure',
+        icon: '✨',
+        title: 'I want change, not sure where to start',
+        desc: 'Feeling stuck or low on energy — let AI ask 3 simple questions to uncover your next move.',
+        special: true,
+        items: []
+      }
+    ],
+    questionsByTrack: {
+      vaidile: [
+        {
+          q: 'What is currently holding you back most from full financial clarity and growth?',
+          hint: 'Pick the closest match — this pinpoints your real starting point.',
+          options: [
+            'Money comes in but leaks out fast — no clear system or control',
+            'I hit an income ceiling — working hard without real breakthrough',
+            'My income is good, but I feel unsure how to structure cashflows & safety cushion',
+            'Debt or ongoing money stress keeps draining my peace of mind'
+          ]
+        },
+        {
+          q: 'What 90-day result would make you say: "Yes, I finally own my finances"?',
+          hint: 'One concrete win beats 10 vague wishes.',
+          options: [
+            'Full visibility: track every dollar, plug leaks, build a growing cushion',
+            'Increase personal or business income by 30–50% with a structured plan',
+            'Clear cashflow system and confidence about my financial future',
+            'Eliminate money chaos step by step with simple weekly habits'
+          ]
+        },
+        {
+          q: 'How do you prefer to move forward?',
+          hint: 'We will tailor the recommendation to your style.',
+          options: [
+            'A free 15–30 min diagnostic call to map out my exact plan',
+            '1-on-1 financial consulting (4–6 week structured program)',
+            'A self-paced step-by-step online course + plug-and-play trackers',
+            'Just give me my clear first step for now'
+          ]
+        }
+      ],
+      business: [
+        {
+          q: 'Where is the #1 bottleneck in your business or project right now?',
+          hint: 'Usually 80% of growth unlocks once you fix a single bottleneck.',
+          options: [
+            'Too many ideas and tasks — no clear strategic priority order',
+            'Everything depends on me — need a reliable team and delegation',
+            'Strong product, but no predictable system bringing paying clients',
+            'Lost clarity and momentum: high effort, flat profit'
+          ]
+        },
+        {
+          q: 'What concrete milestone do you want to reach in the next 3–6 months?',
+          hint: 'A vivid target immediately restores drive and energy.',
+          options: [
+            'A crystal-clear business strategy and step-by-step execution roadmap',
+            'Step out of daily firefighting with an organized team',
+            'Launch a new offer or business that generates real profit',
+            'Align goals, time, and cashflow into one coherent system'
+          ]
+        },
+        {
+          q: 'Which format fits you best right now?',
+          hint: 'So we can recommend the smoothest next step.',
+          options: [
+            'VIP 1-on-1 business strategy & goal alignment session',
+            'Step-by-step online course with guided feedback',
+            'Fast group workshop to map my roadmap quickly',
+            'Start with a free 15-min diagnostic conversation'
+          ]
+        }
+      ],
+      tatiana: [
+        {
+          q: 'What is draining your energy or slowing your progress most right now?',
+          hint: 'Honesty here unlocks the sharpest first step.',
+          options: [
+            'Scattered focus: too many ideas, unsure what to tackle first',
+            'No clear inspiring goal — so energy and motivation stay low',
+            'Daily routine swallows my time and I postpone what matters',
+            'Tension in key relationships or environment blocks everything else'
+          ]
+        },
+        {
+          q: 'Which 90-day shift would excite you most?',
+          hint: 'Focusing on one clear outcome creates immediate momentum.',
+          options: [
+            'Total clarity on my 1-year direction and 3–6 month action plan',
+            'High energy, structured time, and daily confidence',
+            'Warmth, clarity, and harmony in my closest relationships',
+            'Consistent action with visible, measurable wins every week'
+          ]
+        },
+        {
+          q: 'How do you feel most comfortable taking the first step?',
+          hint: 'We will match the format to your pace.',
+          options: [
+            'Fast step-by-step group workshop to build my plan',
+            'Self-paced online course with AI-guided check-ins',
+            '1-on-1 personal guidance to stay focused and accountable',
+            'Start with a short free diagnostic conversation'
+          ]
+        }
+      ]
+    },
+    seedLeads: [
+      {
+        id: 'seed-1',
+        name: 'Elena M.',
+        contact: '+41 79 *** 42 18 (WhatsApp)',
+        lang: 'RU',
+        route: 'tatiana',
+        routeLabel: 'Tatiana • Admin Scale (Business / 3rd Dyn.)',
+        priorities: ['Grow existing business', 'Build a team & lead people'],
+        bottleneck: 'Everything depends on me — need delegation & structure',
+        goal90: 'Step out of daily firefighting with an organized team',
+        format: 'VIP 1-on-1 business strategy session',
+        time: 'Today, 2:12 PM',
+        done: false,
+        fresh: false
+      },
+      {
+        id: 'seed-2',
+        name: 'Michael R.',
+        contact: 'michael.r***@gmail.com',
+        lang: 'EN',
+        route: 'vaidile',
+        routeLabel: 'Vaidilė • Financial Consulting (US)',
+        priorities: ['Get my finances organized', 'Earn more income'],
+        bottleneck: 'Money comes in but leaks out fast — no clear system or control',
+        goal90: 'Full clarity: track every dollar, cut leaks, build a safety cushion',
+        format: 'Free 15–30 min diagnostic call',
+        time: 'Today, 12:45 PM',
+        done: true,
+        fresh: false
+      }
+    ]
+  }
+};
+
+// App state
+const state = {
+  lang: new URLSearchParams(location.search).get('lang') === 'en' ? 'en' : 'ru',
+  step: 1,
+  sphereId: null,
+  selectedIds: [],
+  showAllItems: false,
+  otherText: '',
+  qIdx: 0,
+  answers: ['', '', ''],
+  route: 'tatiana',
+  ownerOpen: false,
+  filter: 'all',
+  unlocked: false,
+  visits: 28,
+  completed: 9,
+  leads: []
+};
+
+function loadLeads() {
+  try {
+    const saved = localStorage.getItem('clarity_demo_leads_v1');
+    if (saved) {
+      state.leads = JSON.parse(saved);
+      return;
+    }
+  } catch (e) {}
+  state.leads = JSON.parse(JSON.stringify(DATA[state.lang].seedLeads));
+}
+function saveLeads() {
+  try { localStorage.setItem('clarity_demo_leads_v1', JSON.stringify(state.leads)); } catch (e) {}
+}
+
+function t() { return DATA[state.lang]; }
+
+function setLang(l) {
+  state.lang = l;
+  document.documentElement.lang = l;
+  document.getElementById('langRu').classList.toggle('active', l === 'ru');
+  document.getElementById('langEn').classList.toggle('active', l === 'en');
+  renderAll();
+}
+
+function getSphere() {
+  return t().spheres.find(s => s.id === state.sphereId);
+}
+
+function computeRoute() {
+  if (state.sphereId === 'unsure') return 'tatiana';
+  const sp = getSphere();
+  if (!sp) return 'tatiana';
+  const chosen = sp.items.filter(it => state.selectedIds.includes(it.id));
+  if (chosen.some(it => it.route === 'vaidile')) return 'vaidile';
+  if (state.sphereId === 'business') return 'business';
+  return 'tatiana';
+}
+
+function getQuestions() {
+  const tr = computeRoute();
+  return t().questionsByTrack[tr] || t().questionsByTrack.tatiana;
+}
+
+function renderSpheres() {
+  const d = t();
+  const grid = document.getElementById('sphereGrid');
+  grid.innerHTML = d.spheres.map(sp => `
+    <button class="sphere-card ${sp.special ? 'special' : ''}" onclick="selectSphere('${sp.id}')">
+      <div class="sphere-icon">${sp.icon}</div>
+      <div class="sphere-title">${sp.title}</div>
+      <div class="sphere-desc">${sp.desc}</div>
+    </button>
+  `).join('');
+}
+
+function selectSphere(id) {
+  state.sphereId = id;
+  state.selectedIds = [];
+  state.showAllItems = false;
+  state.otherText = '';
+  state.answers = ['', '', ''];
+  state.qIdx = 0;
+  state.unlocked = false;
+
+  if (id === 'unsure') {
+    goStep(3);
+  } else {
+    goStep(2);
+  }
+}
+
+function renderCheckboxes() {
+  const d = t();
+  const sp = getSphere();
+  if (!sp) return;
+  document.getElementById('step2SphereLabel').textContent = `${sp.icon} ${sp.title}`;
+  document.getElementById('selectedCounter').textContent = d.counter(state.selectedIds.length);
+
+  const visibleItems = state.showAllItems ? sp.items : sp.items.filter(it => it.core);
+  const hiddenCount = sp.items.length - sp.items.filter(it => it.core).length;
+  const maxReached = state.selectedIds.length >= 3;
+
+  const list = document.getElementById('checkList');
+  list.innerHTML = visibleItems.map(it => {
+    const sel = state.selectedIds.includes(it.id);
+    const dis = !sel && maxReached;
+    return `
+      <div class="check-item ${sel ? 'selected' : ''} ${dis ? 'disabled' : ''}" onclick="toggleCheck('${it.id}')">
+        <div class="check-box">✓</div>
+        <div class="check-text">${it.text}</div>
+      </div>
+    `;
+  }).join('');
+
+  const showBtn = document.getElementById('showAllBtn');
+  if (hiddenCount > 0) {
+    showBtn.style.display = 'block';
+    showBtn.textContent = state.showAllItems ? d.showLess : d.showMore(hiddenCount);
+  } else {
+    showBtn.style.display = 'none';
+  }
+
+  const hasOther = sp.items.some(it => it.isOther && state.selectedIds.includes(it.id));
+  document.getElementById('otherWrap').style.display = hasOther ? 'block' : 'none';
+  document.getElementById('otherInput').placeholder = d.otherPlaceholder;
+  document.getElementById('otherInput').value = state.otherText;
+  document.getElementById('btnToQuestions').disabled = state.selectedIds.length === 0;
+}
+
+function toggleCheck(id) {
+  const idx = state.selectedIds.indexOf(id);
+  if (idx >= 0) {
+    state.selectedIds.splice(idx, 1);
+  } else {
+    if (state.selectedIds.length >= 3) return;
+    state.selectedIds.push(id);
+  }
+  renderCheckboxes();
+}
+
+function toggleShowAll() {
+  state.showAllItems = !state.showAllItems;
+  renderCheckboxes();
+}
+
+function startQuestions() {
+  state.otherText = document.getElementById('otherInput').value.trim();
+  state.qIdx = 0;
+  goStep(3);
+}
+
+function renderQuestion() {
+  const d = t();
+  const qs = getQuestions();
+  const cur = qs[state.qIdx];
+  document.getElementById('qText').textContent = `${state.qIdx + 1}/3. ${cur.q}`;
+  document.getElementById('qHint').textContent = cur.hint;
+
+  const ans = state.answers[state.qIdx] || '';
+  const choices = document.getElementById('qChoices');
+  choices.innerHTML = cur.options.map((opt, idx) => `
+    <button class="choice-btn ${ans === opt ? 'selected' : ''}" onclick="pickChoice(${idx})">${opt}</button>
+  `).join('');
+
+  const customInp = document.getElementById('qCustomInput');
+  customInp.placeholder = d.customQPlaceholder;
+  customInp.value = cur.options.includes(ans) ? '' : ans;
+
+  const nextBtn = document.getElementById('btnNextQ');
+  nextBtn.textContent = state.qIdx === 2 ? d.finishQ : d.nextQ;
+  nextBtn.disabled = !ans.trim();
+}
+
+function pickChoice(idx) {
+  const qs = getQuestions();
+  state.answers[state.qIdx] = qs[state.qIdx].options[idx];
+  renderQuestion();
+}
+
+document.getElementById('qCustomInput').addEventListener('input', (e) => {
+  state.answers[state.qIdx] = e.target.value.trim();
+  const qs = getQuestions();
+  const cur = qs[state.qIdx];
+  document.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('selected'));
+  document.getElementById('btnNextQ').disabled = !state.answers[state.qIdx];
+});
+document.getElementById('otherInput').addEventListener('input', (e) => {
+  state.otherText = e.target.value;
+});
+
+function prevQuestion() {
+  if (state.qIdx > 0) {
+    state.qIdx--;
+    updateProgress();
+    renderQuestion();
+  } else {
+    goStep(state.sphereId === 'unsure' ? 1 : 2);
+  }
+}
+
+function nextQuestion() {
+  if (state.qIdx < 2) {
+    state.qIdx++;
+    updateProgress();
+    renderQuestion();
+  } else {
+    runAnalysis();
+  }
+}
+
+function runAnalysis() {
+  goStep(4);
+  const steps = [1, 2, 3].map(i => document.getElementById('anStep' + i));
+  steps.forEach((el, i) => {
+    el.classList.remove('done');
+    el.textContent = '○ ' + t().anSteps[i];
+  });
+  setTimeout(() => { steps[0].classList.add('done'); steps[0].textContent = '✓ ' + t().anSteps[0]; }, 380);
+  setTimeout(() => { steps[1].classList.add('done'); steps[1].textContent = '✓ ' + t().anSteps[1]; }, 880);
+  setTimeout(() => { steps[2].classList.add('done'); steps[2].textContent = '✓ ' + t().anSteps[2]; }, 1350);
+  setTimeout(() => {
+    state.completed++;
+    renderResult();
+    goStep(5);
+  }, 1700);
+}
+
+function getSelectedTexts() {
+  const sp = getSphere();
+  if (!sp || state.sphereId === 'unsure') {
+    return [state.lang === 'ru' ? 'Хочу перемен, ищу фокус' : 'Ready for change, seeking clarity'];
+  }
+  return sp.items
+    .filter(it => state.selectedIds.includes(it.id))
+    .map(it => (it.isOther && state.otherText) ? state.otherText : it.text);
+}
+
+function buildDiagnosis() {
+  const tr = computeRoute();
+  const isRu = state.lang === 'ru';
+  const priorities = getSelectedTexts();
+  const mainP = priorities[0];
+  const bottleneck = state.answers[0];
+  const goal90 = state.answers[1];
+
+  if (tr === 'vaidile') {
+    return {
+      ownerKey: 'vaidile',
+      expertChip: isRu ? '🟢 Профильный трек: Финансовое планирование (Вайдиле)' : '🟢 Matched Track: Financial Planning (Vaidilė)',
+      rootTitle: isRu
+        ? `Деньги сейчас работают хаотично, а не как управляемый поток`
+        : `Money is currently moving reactively instead of as a controlled flow`,
+      rootBody: isRu
+        ? `Вы отметили «${mainP}», и главное препятствие сейчас — «${bottleneck}». В 9 из 10 случаев проблема не в том, что человек мало старается, а в отсутствии прозрачной системы потоков: когда не видна точная картина расходов, доходов и целей, любые заработанные деньги растворяются без ощущения опоры.`
+        : `You chose "${mainP}", and your main bottleneck is "${bottleneck}". In 9 out of 10 cases, the issue isn't lack of effort — it's missing a clear cashflow structure. Without full visibility over inflows, leaks, and targets, higher income rarely creates peace of mind.`,
+      step72Title: isRu
+        ? `Сделайте «рентген денежного потока» за 3 дня`
+        : `Run a 72-Hour Cashflow X-Ray`,
+      step72Body: isRu
+        ? `В ближайшие 72 часа запишите абсолютно все траты (включая кофе, подписки и мелкие покупки) и отдельно — все источники дохода и ресурсы, которыми вы уже владеете. Уже на этом простом шаге люди обычно находят $150–$400/мес скрытых утечек и впервые возвращают ощущение реального контроля.`
+        : `For the next 72 hours, log 100% of every expense (even coffee and subscriptions) alongside your active income streams and assets. Most people immediately uncover $150–$400/month in hidden leaks and feel an instant wave of relief and control.`,
+      gateTitle: isRu
+        ? `Откройте ваш 3-шаговый финансовый план на 90 дней`
+        : `Unlock Your 3-Step 90-Day Financial Clarity Plan`,
+      gateSub: isRu
+        ? `Плюс получите бесплатный шаблон трекера расходов и возможность записаться на 15-минутный разбор вашей ситуации.`
+        : `Plus receive a free Expense Tracker template and an optional free 15-min diagnostic call.`,
+      steps: isRu ? [
+        ['Недели 1–2: Полный контроль и стоп-утечки', `Фиксируем реальную картину доходов/расходов и убираем скрытые дыры, чтобы запустить движение к цели «${goal90}».`],
+        ['Недели 3–6: Архитектура потоков и подушка', 'Разделяем деньги по целевым корзинам (обязательства, резерв, рост, свободные средства) — уходит финансовая тревога.'],
+        ['Недели 7–12: Масштабирование дохода', 'Переводим свободные ресурсы в предсказуемый рост дохода и закрепляем еженедельный 15-минутный финансовый ритуал.']
+      ] : [
+        ['Weeks 1–2: Full Visibility & Leak Stop', `Establish exact inflow/outflow tracking to move directly toward "${goal90}".`],
+        ['Weeks 3–6: Cashflow Buckets & Cushion', 'Structure dedicated allocations (essentials, safety cushion, growth) so money anxiety drops immediately.'],
+        ['Weeks 7–12: Income Expansion Rhythm', 'Direct surplus cashflow into predictable income growth backed by a simple 15-min weekly check-in.']
+      ]
+    };
+  }
+
+  if (tr === 'business') {
+    return {
+      ownerKey: 'tatiana',
+      expertChip: isRu ? '🟡 Профильный трек: Стратегия и цели бизнеса (Татьяна)' : '🟡 Matched Track: Business Strategy & Goals (Tatiana)',
+      rootTitle: isRu
+        ? `Усилия распыляются — бизнесу не хватает единой выстроенной шкалы приоритетов`
+        : `Effort is scattered — your business lacks one aligned priority ladder`,
+      rootBody: isRu
+        ? `Ваш главный фокус — «${mainP}», при этом сейчас тормозит: «${bottleneck}». Когда цели, планы, задачи команды и ежедневные действия не связаны в одну понятную последовательность, владелец тащит всё на себе, а прибыль не успевает за усталостью.`
+        : `Your top focus is "${mainP}", blocked right now by "${bottleneck}". When business goals, plans, team roles, and daily actions aren't connected into one clear sequence, the owner carries everything alone while profit lags behind effort.`,
+      step72Title: isRu
+        ? `Зафиксируйте ОДНУ измеримую цель бизнеса на 90 дней`
+        : `Lock One Measurable 90-Day Business Target`,
+      step72Body: isRu
+        ? `Возьмите один лист бумаги и запишите: (1) идеальный результат бизнеса через 90 дней в цифрах, (2) 3 действия, которые прямо влияют на прибыль, и (3) всё лишнее, что вы осознанно ставите на паузу на ближайший месяц. Как только убирается распыление, мгновенно возвращается энергия.`
+        : `Take a single sheet of paper and write: (1) one measurable 90-day revenue/team target, (2) the top 3 needle-moving actions, and (3) what you will deliberately pause for 30 days. Eliminating scattered priorities immediately restores momentum.`,
+      gateTitle: isRu
+        ? `Откройте пошаговый 3-этапный план роста бизнеса`
+        : `Unlock Your 3-Stage Business Growth Roadmap`,
+      gateSub: isRu
+        ? `Получите структуру стратегического плана и приглашение на короткий разбор с экспертом (плюс опцию AI-автоматизации продвижения).`
+        : `Receive your structured 90-day strategic roadmap plus an optional 15-min expert strategy check.`,
+      steps: isRu ? [
+        ['Этап 1 (Недели 1–2): Выравнивание цели и узкого места', `Убираем хаос и собираем чёткий пошаговый план под ваш результат: «${goal90}».`],
+        ['Этап 2 (Недели 3–6): Делегирование и система привлечения', 'Распределяем ответственность по функциям и подключаем автоматизацию ключевых процессов.'],
+        ['Этап 3 (Недели 7–12): Измеримый рост прибыли', 'Переходим на еженедельный контроль 3–4 ключевых цифр, чтобы бизнес рос без ручного тушения пожаров.']
+      ] : [
+        ['Stage 1 (Weeks 1–2): Strategic Alignment', `Clear the noise and lock a step-by-step plan directly targeting "${goal90}".`],
+        ['Stage 2 (Weeks 3–6): Delegation & Client Flow', 'Clarify team ownership and streamline client acquisition with smart automation.'],
+        ['Stage 3 (Weeks 7–12): Profitable Scale', 'Switch to a simple weekly KPI rhythm so profit grows without founder burnout.']
+      ]
+    };
+  }
+
+  return {
+    ownerKey: 'tatiana',
+    expertChip: isRu ? '🟡 Профильный трек: Постановка целей и ясность (Татьяна)' : '🟡 Matched Track: Goal Clarity & Life Strategy (Tatiana)',
+    rootTitle: isRu
+      ? `Энергия уходит туда, где нет чётко сформулированной цели и первого шага`
+      : `Energy drains wherever there isn't a clear, chosen target and first step`,
+    rootBody: isRu
+      ? `Вы выбрали «${mainP}», и сейчас сильнее всего мешает: «${bottleneck}». Когда в голове крутятся десятки неструктурированных желаний, мозг тратит силы на сомнения вместо движения. Стоит превратить расплывчатое желание в ясную цель на 3–6 месяцев — и энергия возвращается почти сразу.`
+      : `You selected "${mainP}", and right now the key friction is "${bottleneck}". When dozens of unstructured wishes compete for attention, you burn energy on doubt instead of action. Turning a vague wish into one vivid 3–6 month target immediately restores drive.`,
+    step72Title: isRu
+      ? `Техника «1 лист ясности» за 20 минут`
+      : `The 20-Minute "One-Page Clarity" Reset`,
+    step72Body: isRu
+      ? `Сегодня вечером выделите 20 минут без телефона: (1) выпишите всё, что сейчас забирает ваше внимание, (2) выберите ровно ОДНУ сферу («${mainP}») и сформулируйте, как выглядит успех через 90 дней, (3) сделайте один маленький физический шаг уже завтра до 12:00. Маленькая завершённая победа запускает восходящий поток.`
+      : `Take 20 phone-free minutes tonight: (1) list everything competing for your attention, (2) pick ONE focus ("${mainP}") and describe what success looks like in 90 days, and (3) complete one tiny physical step before noon tomorrow. One finished win ignites momentum.`,
+    gateTitle: isRu
+      ? `Откройте ваш персональный план из 3 шагов на 90 дней`
+      : `Unlock Your Personalized 3-Step 90-Day Plan`,
+    gateSub: isRu
+      ? `Получите пошаговую дорожную карту достижения вашей цели и возможность пройти короткую бесплатную встречу-знакомство с экспертом.`
+      : `Get your tailored step-by-step roadmap and optional free 15-min clarity call.`,
+    steps: isRu ? [
+      ['Шаг 1 (Недели 1–2): Найти «настоящее почему» и цель', `Убираем лишний шум и формулируем вдохновляющую цель под ваш запрос: «${goal90}».`],
+      ['Шаг 2 (Недели 3–6): Простой пошаговый план на 3–6 месяцев', 'Разбиваем большую цель на понятные еженедельные действия («раз, два, три») без перегруза.'],
+      ['Шаг 3 (Недели 7–12): Поддержка и закрепление побед', 'Фиксируем еженедельный прогресс (в группе, онлайн или со «вторым человеком»), чтобы дойти до устойчивого результата.']
+    ] : [
+      ['Step 1 (Weeks 1–2): Uncover the True Priority', `Clear mental clutter and craft an inspiring target around "${goal90}".`],
+      ['Step 2 (Weeks 3–6): Simple 3–6 Month Roadmap', 'Break the big goal into crisp weekly steps ("1, 2, 3") without overwhelm.'],
+      ['Step 3 (Weeks 7–12): Momentum & Accountability', 'Track weekly wins (in a group, online course, or 1-on-1) until the new level becomes your normal.']
+    ]
+  };
+}
+
+function renderResult() {
+  const d = t();
+  const diag = buildDiagnosis();
+  const priorities = getSelectedTexts();
+
+  document.getElementById('wowChip').textContent = d.wowChip;
+  document.getElementById('wowHeadline').textContent = d.wowHeadline;
+  document.getElementById('wowTags').innerHTML = priorities.map(p => `<span class="wow-tag">✓ ${p}</span>`).join('');
+
+  document.getElementById('rootLabel').textContent = d.rootLabel;
+  document.getElementById('rootTitle').textContent = diag.rootTitle;
+  document.getElementById('rootBody').textContent = diag.rootBody;
+
+  document.getElementById('step72Label').textContent = d.step72Label;
+  document.getElementById('step72Title').textContent = diag.step72Title;
+  document.getElementById('step72Body').textContent = diag.step72Body;
+
+  document.getElementById('pillarsStrip').innerHTML = d.pillars.map(([title, desc]) => `
+    <div class="pillar"><strong>✦ ${title}</strong>${desc}</div>
+  `).join('');
+
+  document.getElementById('expertChip').textContent = diag.expertChip;
+  document.getElementById('gateTitle').textContent = diag.gateTitle;
+  document.getElementById('gateSub').textContent = diag.gateSub;
+  document.getElementById('blurOverlay').textContent = d.blurOverlay;
+  document.getElementById('leadName').placeholder = d.namePh;
+  document.getElementById('leadContact').placeholder = d.contactPh;
+  document.getElementById('btnUnlock').textContent = d.btnUnlock;
+
+  document.getElementById('gateCard').style.display = state.unlocked ? 'none' : 'block';
+  document.getElementById('unlockedPlan').style.display = state.unlocked ? 'block' : 'none';
+
+  document.getElementById('unlockedLabel').textContent = d.unlockedLabel;
+  document.getElementById('unlockedTitle').textContent = diag.gateTitle;
+  document.getElementById('unlockedSteps').innerHTML = diag.steps.map(([stTitle, stBody], i) => `
+    <div class="plan-step">
+      <div class="plan-num">${i + 1}</div>
+      <div>
+        <strong style="display:block; font-size:14.2px; color:#18181b; margin-bottom:2px;">${stTitle}</strong>
+        <span style="font-size:13.5px; color:#52525b;">${stBody}</span>
+      </div>
+    </div>
+  `).join('');
+  document.getElementById('btnSeeOwnerDemo').textContent = d.btnSeeOwner;
+  document.getElementById('btnRestart').textContent = d.btnRestart;
+}
+
+function submitLead() {
+  const name = document.getElementById('leadName').value.trim();
+  const contact = document.getElementById('leadContact').value.trim();
+  if (!name || !contact) {
+    alert(t().fillAlert);
+    return;
+  }
+  const diag = buildDiagnosis();
+  const now = new Date();
+  const hh = String(now.getHours()).padStart(2, '0');
+  const mm = String(now.getMinutes()).padStart(2, '0');
+  const sp = getSphere();
+  const kidsNote = sp && sp.items.some(it => it.id === 'f_kids' && state.selectedIds.includes(it.id));
+
+  let routeLabel = diag.ownerKey === 'vaidile'
+    ? (state.lang === 'ru' ? 'Вайдиле • Финансовое консультирование' : 'Vaidilė • Financial Consulting')
+    : (computeRoute() === 'business'
+      ? (state.lang === 'ru' ? 'Татьяна • Админ-шкала (Бизнес / 3-я дин.)' : 'Tatiana • Admin Scale (Business / 3rd Dyn.)')
+      : (state.lang === 'ru' ? 'Татьяна • Админ-шкала (Личное / Семья)' : 'Tatiana • Admin Scale (Personal / Family)'));
+
+  if (kidsNote) {
+    routeLabel += state.lang === 'ru' ? ' + 2-я очередь: Школа/Скотт' : ' + Phase 2: Parent School';
+  }
+
+  state.leads.unshift({
+    id: 'lead-' + Date.now(),
+    name,
+    contact,
+    lang: state.lang.toUpperCase(),
+    route: diag.ownerKey,
+    routeLabel,
+    priorities: getSelectedTexts(),
+    bottleneck: state.answers[0],
+    goal90: state.answers[1],
+    format: state.answers[2],
+    time: (state.lang === 'ru' ? 'Только что, ' : 'Just now, ') + `${hh}:${mm}`,
+    done: false,
+    fresh: true
+  });
+  saveLeads();
+  state.unlocked = true;
+  renderResult();
+  updateOwnerBadge(true);
+}
+
+function updateOwnerBadge(pulse) {
+  const pending = state.leads.filter(l => !l.done).length;
+  const badge = document.getElementById('unreadBadge');
+  badge.textContent = pending;
+  badge.style.display = pending > 0 ? 'inline-flex' : 'none';
+  if (pulse) {
+    badge.classList.remove('badge-pulse');
+    void badge.offsetWidth;
+    badge.classList.add('badge-pulse');
+  }
+}
+
+function toggleOwnerView(force) {
+  state.ownerOpen = typeof force === 'boolean' ? force : !state.ownerOpen;
+  document.getElementById('quizApp').style.display = state.ownerOpen ? 'none' : 'block';
+  document.getElementById('ownerApp').style.display = state.ownerOpen ? 'block' : 'none';
+  document.getElementById('ownerToggleBtn').classList.toggle('active', state.ownerOpen);
+  renderOwnerDashboard();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function setFilter(f) {
+  state.filter = f;
+  renderOwnerDashboard();
+}
+
+function markLeadDone(id) {
+  const ld = state.leads.find(x => x.id === id);
+  if (ld) {
+    ld.done = !ld.done;
+    ld.fresh = false;
+    saveLeads();
+    updateOwnerBadge(false);
+    renderOwnerDashboard();
+  }
+}
+
+function renderOwnerDashboard() {
+  const d = t();
+  document.getElementById('ownerBtnLabel').textContent = state.ownerOpen ? d.ownerBtnActive : d.ownerBtn;
+  document.getElementById('ownerChip').textContent = d.ownerChip;
+  document.getElementById('ownerTitle').textContent = d.ownerTitle;
+  document.getElementById('ownerSub').textContent = d.ownerSub;
+  document.getElementById('kpiVisits').textContent = state.visits;
+  document.getElementById('kpiCompleted').textContent = state.completed;
+  document.getElementById('kpiLeads').textContent = state.leads.length;
+  document.getElementById('kpiPending').textContent = state.leads.filter(l => !l.done).length;
+  document.getElementById('kpiVisitsLbl').textContent = d.kpis[0];
+  document.getElementById('kpiCompletedLbl').textContent = d.kpis[1];
+  document.getElementById('kpiLeadsLbl').textContent = d.kpis[2];
+  document.getElementById('kpiPendingLbl').textContent = d.kpis[3];
+
+  document.getElementById('fltAll').textContent = d.filters[0];
+  document.getElementById('fltVaidile').textContent = d.filters[1];
+  document.getElementById('fltTatiana').textContent = d.filters[2];
+  document.getElementById('fltAll').classList.toggle('active', state.filter === 'all');
+  document.getElementById('fltVaidile').classList.toggle('active', state.filter === 'vaidile');
+  document.getElementById('fltTatiana').classList.toggle('active', state.filter === 'tatiana');
+  document.getElementById('btnBackToQuiz').textContent = d.btnBackToQuiz;
+  document.getElementById('ownerFootnote').textContent = d.ownerFootnote;
+
+  const filtered = state.filter === 'all' ? state.leads : state.leads.filter(l => l.route === state.filter);
+  const dl = d.dossierLabels;
+  document.getElementById('leadsContainer').innerHTML = filtered.map(ld => `
+    <div class="lead-card ${ld.fresh ? 'fresh' : ''}">
+      <div class="lead-head">
+        <div>
+          <div class="lead-name">${ld.fresh ? `<span class="route-pill route-new">${dl.newBadge}</span>` : ''}${escapeHtml(ld.name)}</div>
+          <div class="lead-contact">${escapeHtml(ld.contact)} • ${escapeHtml(ld.time)} • [${ld.lang}]</div>
+        </div>
+        <span class="route-pill ${ld.route === 'vaidile' ? 'route-vaidile' : 'route-tatiana'}">${escapeHtml(ld.routeLabel)}</span>
+      </div>
+      <div class="lead-body">
+        <div><strong>${dl.priorities}:</strong> ${ld.priorities.map(escapeHtml).join(' • ')}</div>
+        <div><strong>${dl.bottleneck}:</strong> ${escapeHtml(ld.bottleneck)}</div>
+        <div><strong>${dl.goal90}:</strong> ${escapeHtml(ld.goal90)}</div>
+        <div><strong>${dl.format}:</strong> ${escapeHtml(ld.format)}</div>
+      </div>
+      <div class="lead-actions">
+        <button class="btn-mini ${ld.done ? 'done' : ''}" onclick="markLeadDone('${ld.id}')">${ld.done ? dl.doneText : dl.markDone}</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function escapeHtml(s) {
+  return String(s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function updateProgress() {
+  const d = t();
+  const wrap = document.getElementById('progressWrap');
+  if (state.step === 5) {
+    wrap.style.display = 'none';
+    return;
+  }
+  wrap.style.display = 'block';
+  let pct = 20;
+  let label = d.stepOf(1, 4);
+  if (state.step === 2) { pct = 42; label = d.stepOf(2, 4); }
+  else if (state.step === 3) { pct = 58 + state.qIdx * 12; label = d.stepOf(3, 4); }
+  else if (state.step === 4) { pct = 95; label = d.stepOf(4, 4); }
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = label;
+  document.getElementById('progressTime').textContent = d.estTime;
+}
+
+function goStep(n) {
+  state.step = n;
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen' + n).classList.add('active');
+  updateProgress();
+  if (n === 2) renderCheckboxes();
+  if (n === 3) renderQuestion();
+  if (n === 5) renderResult();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function resetToStart() {
+  state.ownerOpen = false;
+  document.getElementById('quizApp').style.display = 'block';
+  document.getElementById('ownerApp').style.display = 'none';
+  document.getElementById('ownerToggleBtn').classList.remove('active');
+  state.sphereId = null;
+  state.selectedIds = [];
+  state.answers = ['', '', ''];
+  state.qIdx = 0;
+  state.unlocked = false;
+  renderAll();
+  goStep(1);
+}
+
+function renderAll() {
+  const d = t();
+  document.getElementById('brandTitle').textContent = d.brandTitle;
+  document.getElementById('brandSub').textContent = d.brandSub;
+  document.getElementById('ownerBtnLabel').textContent = state.ownerOpen ? d.ownerBtnActive : d.ownerBtn;
+  document.getElementById('heroChip').textContent = d.heroChip;
+  document.getElementById('heroTitle').textContent = d.heroTitle;
+  document.getElementById('heroSub').textContent = d.heroSub;
+  document.getElementById('step2Title').textContent = d.step2Title;
+  document.getElementById('step2Sub').textContent = d.step2Sub;
+  document.getElementById('btnBack1').textContent = d.back;
+  document.getElementById('btnToQuestions').textContent = d.next;
+  document.getElementById('btnBackQ').textContent = d.back;
+  document.getElementById('anTitle').textContent = d.anTitle;
+  document.getElementById('anSub').textContent = d.anSub;
+  renderSpheres();
+  updateProgress();
+  if (state.step === 2) renderCheckboxes();
+  if (state.step === 3) renderQuestion();
+  if (state.step === 5) renderResult();
+  renderOwnerDashboard();
+  updateOwnerBadge(false);
+}
+
+loadLeads();
+setLang(state.lang);
+</script>
+</body>
+</html>
