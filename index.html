@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <title>Компас Ясности — Бесплатный AI-разбор за 2 минуты</title>
-  <meta name="description" content="Бесплатный интерактивный AI-опросник: выберите, что хотите улучшить в жизни, ответьте на 3 вопроса и получите персональный первый шаг." />
-  <meta property="og:title" content="Что вы хотели бы улучшить в своей жизни? — AI-разбор за 2 минуты" />
-  <meta property="og:description" content="Поставьте 1–3 галочки, ответьте на 3 коротких вопроса ИИ и получите конкретный первый шаг к результату." />
+  <title>Компас Ясности — AI-экосистема: Опросник • AI-супервайзер курса • Пульт владельца</title>
+  <meta name="description" content="Интерактивная AI-экосистема для коучей и консультантов: бесплатный AI-опросник, заочный курс с AI-супервайзером проверки заданий и мобильный пульт владельца." />
+  <meta property="og:title" content="Компас Ясности — Интерактивная AI-экосистема (Демо)" />
+  <meta property="og:description" content="3 модуля в одном приложении: 1) AI-опросник клиента, 2) AI-супервайзер проверки заданий курса с автодопродажей, 3) Кнопочка владельца на телефоне." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
@@ -58,32 +58,36 @@
       flex-direction: column;
     }
 
-    /* Top bar */
+    /* Sticky Topbar + 3-Module Ecosystem Tabs */
     .topbar {
       position: sticky;
       top: 0;
-      z-index: 40;
-      background: rgba(255, 255, 255, 0.86);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(226, 232, 240, 0.9);
-      padding: 10px 16px;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.90);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.92);
+      padding: 10px 14px 10px;
     }
     .topbar-inner {
-      max-width: 740px;
+      max-width: 760px;
       margin: 0 auto;
+    }
+    .topbar-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 10px;
+      margin-bottom: 10px;
     }
     .brand {
       display: flex;
       align-items: center;
       gap: 9px;
       font-weight: 800;
-      font-size: 15px;
+      font-size: 15.5px;
       color: var(--ink);
       cursor: pointer;
+      white-space: nowrap;
     }
     .brand-icon {
       width: 34px;
@@ -107,25 +111,21 @@
       text-transform: uppercase;
       line-height: 1.1;
     }
-    .top-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
     .lang-toggle {
       display: inline-flex;
       background: var(--surface-soft);
       border: 1px solid var(--border);
       border-radius: 999px;
       padding: 2px;
+      flex-shrink: 0;
     }
     .lang-btn {
       border: none;
       background: transparent;
-      padding: 4px 10px;
+      padding: 4.5px 11px;
       border-radius: 999px;
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 800;
       color: var(--ink-soft);
       cursor: pointer;
       transition: all 0.18s ease;
@@ -135,34 +135,44 @@
       color: #ffffff;
       box-shadow: 0 2px 8px rgba(14, 165, 233, 0.25);
     }
-    .owner-pill {
-      position: relative;
+
+    /* Unified 3-Module Switcher */
+    .mode-nav {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      background: var(--surface-soft);
+      padding: 4px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+    }
+    .mode-tab {
+      border: none;
+      background: transparent;
+      border-radius: 11px;
+      padding: 8px 6px;
+      font-family: inherit;
+      font-size: 12.6px;
+      font-weight: 800;
+      color: var(--ink-soft);
+      cursor: pointer;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 5px;
-      background: var(--primary-bg);
-      border: 1.5px solid var(--primary-border);
-      color: var(--primary-dark);
-      padding: 5px 11px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
       white-space: nowrap;
-      transition: all 0.2s ease;
+      transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    .owner-pill:hover { background: #e0f2fe; transform: translateY(-1px); }
-    .owner-pill.active {
+    .mode-tab:hover { color: var(--ink); background: rgba(255, 255, 255, 0.65); }
+    .mode-tab.active {
+      background: var(--surface);
+      color: var(--primary-dark);
+      box-shadow: 0 3px 10px rgba(15, 23, 42, 0.08);
+    }
+    .mode-tab.active[data-mode="course"] { color: var(--violet); }
+    .mode-tab.active[data-mode="owner"] {
       background: linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%);
-      border-color: transparent;
       color: #ffffff;
-    }
-    @media (max-width: 460px) {
-      .brand { font-size: 13px; gap: 7px; }
-      .brand-icon { width: 29px; height: 29px; font-size: 14px; }
-      .brand span small { font-size: 9px; }
-      .owner-pill { font-size: 11px; padding: 4px 8px; }
-      .lang-btn { padding: 3.5px 7px; font-size: 11px; }
     }
     .badge-count {
       background: var(--danger);
@@ -177,24 +187,35 @@
       align-items: center;
       justify-content: center;
     }
+    .mode-tab.active[data-mode="owner"] .badge-count {
+      background: #fef08a;
+      color: #9a3412;
+    }
     @keyframes pulseBadge {
       0% { transform: scale(1); }
-      50% { transform: scale(1.25); }
+      50% { transform: scale(1.28); }
       100% { transform: scale(1); }
     }
-    .badge-pulse { animation: pulseBadge 0.6s ease 2; }
+    .badge-pulse { animation: pulseBadge 0.55s ease 2; }
+
+    @media (max-width: 460px) {
+      .brand { font-size: 14px; gap: 7px; }
+      .brand-icon { width: 30px; height: 30px; font-size: 14px; }
+      .brand span small { font-size: 9px; }
+      .mode-tab { font-size: 11.4px; padding: 7.5px 4px; gap: 3px; }
+    }
 
     /* Main container */
     .main {
       flex: 1;
-      max-width: 740px;
+      max-width: 760px;
       width: 100%;
       margin: 0 auto;
-      padding: 20px 16px 48px;
+      padding: 18px 14px 52px;
     }
 
     /* Progress bar */
-    .progress-wrap { margin-bottom: 18px; }
+    .progress-wrap { margin-bottom: 16px; }
     .progress-meta {
       display: flex;
       justify-content: space-between;
@@ -220,8 +241,10 @@
     /* Screens */
     .screen { display: none; animation: fadeSlide 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
     .screen.active { display: block; }
+    .app-view { display: none; animation: fadeSlide 0.28s cubic-bezier(0.22, 1, 0.36, 1); }
+    .app-view.active { display: block; }
     @keyframes fadeSlide {
-      from { opacity: 0; transform: translateY(10px); }
+      from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
@@ -232,9 +255,9 @@
       background: linear-gradient(135deg, #0284c7 0%, #0ea5e9 46%, #10b981 100%);
       color: #ffffff;
       border-radius: 24px;
-      padding: 28px 24px;
-      margin-bottom: 18px;
-      box-shadow: 0 18px 40px rgba(14, 165, 233, 0.24);
+      padding: 26px 22px;
+      margin-bottom: 16px;
+      box-shadow: 0 18px 40px rgba(14, 165, 233, 0.22);
     }
     .hero-card::before {
       content: '';
@@ -273,39 +296,39 @@
       text-transform: uppercase;
       padding: 5px 12px;
       border-radius: 999px;
-      margin-bottom: 12px;
+      margin-bottom: 11px;
     }
-    .hero-card h1 {
+    .hero-card h1, .course-hero h1 {
       position: relative;
-      font-size: 26px;
+      font-size: 25px;
       font-weight: 800;
       line-height: 1.18;
       letter-spacing: -0.02em;
       color: #ffffff;
       margin-bottom: 8px;
     }
-    .hero-card p {
+    .hero-card p, .course-hero p {
       position: relative;
-      font-size: 14.8px;
+      font-size: 14.5px;
       color: rgba(255, 255, 255, 0.94);
       line-height: 1.5;
     }
 
-    /* Sphere grid with uplifting color accents */
+    /* Sphere grid */
     .sphere-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 13px;
+      gap: 12px;
     }
     @media (max-width: 560px) {
       .sphere-grid { grid-template-columns: 1fr; }
-      .hero-card h1 { font-size: 22px; }
+      .hero-card h1, .course-hero h1 { font-size: 21.5px; }
     }
     .sphere-card {
       background: var(--surface);
       border: 1.5px solid var(--border);
       border-radius: var(--radius);
-      padding: 19px 18px;
+      padding: 18px;
       text-align: left;
       cursor: pointer;
       transition: all 0.22s cubic-bezier(0.22, 1, 0.36, 1);
@@ -313,7 +336,6 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
-      position: relative;
     }
     .sphere-card:hover {
       border-color: var(--primary);
@@ -338,39 +360,26 @@
       border-color: var(--amber-border);
     }
     .sphere-card.special:hover { border-color: #f59e0b; box-shadow: 0 14px 32px rgba(245, 158, 11, 0.16); }
-    .sphere-title {
-      font-weight: 800;
-      font-size: 16px;
-      color: var(--ink);
-      letter-spacing: -0.01em;
-    }
-    .sphere-desc {
-      font-size: 13.2px;
-      color: var(--ink-soft);
-      line-height: 1.44;
-    }
+    .sphere-title { font-weight: 800; font-size: 16px; color: var(--ink); letter-spacing: -0.01em; }
+    .sphere-desc { font-size: 13.2px; color: var(--ink-soft); line-height: 1.44; }
 
     .panel {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 22px;
-      padding: 24px 20px;
+      padding: 22px 19px;
       box-shadow: var(--shadow-sm);
       margin-bottom: 14px;
     }
     .panel-title {
-      font-size: 21px;
+      font-size: 20px;
       font-weight: 800;
       letter-spacing: -0.02em;
       line-height: 1.24;
       color: var(--ink);
       margin-bottom: 6px;
     }
-    .panel-sub {
-      font-size: 14px;
-      color: var(--ink-soft);
-      margin-bottom: 16px;
-    }
+    .panel-sub { font-size: 13.8px; color: var(--ink-soft); margin-bottom: 15px; }
 
     /* Checkboxes */
     .check-meta {
@@ -450,19 +459,23 @@
     }
     .show-all-btn:hover { border-color: var(--primary); color: var(--primary-dark); background: var(--primary-bg); }
 
-    .text-input {
+    .text-input, .text-area {
       width: 100%;
       padding: 13px 15px;
       border: 1.5px solid var(--border);
       border-radius: 13px;
       font-family: inherit;
-      font-size: 14.5px;
+      font-size: 14.4px;
       color: var(--ink);
       background: #fff;
       outline: none;
       transition: border-color 0.18s, box-shadow 0.18s;
     }
-    .text-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.14); }
+    .text-area { min-height: 112px; resize: vertical; line-height: 1.5; }
+    .text-input:focus, .text-area:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.14);
+    }
 
     /* AI follow-up bubble */
     .ai-bubble {
@@ -515,29 +528,37 @@
     }
 
     /* Vibrant Modern Buttons */
-    .btn-row { display: flex; gap: 10px; margin-top: 18px; }
+    .btn-row { display: flex; gap: 10px; margin-top: 16px; }
     .btn {
       border: none;
       border-radius: 14px;
-      padding: 14px 20px;
+      padding: 13.5px 18px;
       font-family: inherit;
-      font-size: 15px;
+      font-size: 14.6px;
       font-weight: 800;
       cursor: pointer;
       transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 7px;
+      text-align: center;
     }
     .btn-primary {
       background: linear-gradient(135deg, #0ea5e9 0%, #10b981 100%);
       color: #ffffff;
       flex: 1;
-      box-shadow: 0 8px 22px rgba(14, 165, 233, 0.28);
+      box-shadow: 0 8px 22px rgba(14, 165, 233, 0.26);
     }
     .btn-primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(16, 185, 129, 0.34); }
     .btn-primary:disabled { opacity: 0.42; cursor: not-allowed; box-shadow: none; }
+    .btn-violet {
+      background: linear-gradient(135deg, #7c3aed 0%, #0ea5e9 100%);
+      color: #ffffff;
+      flex: 1;
+      box-shadow: 0 8px 22px rgba(124, 58, 237, 0.26);
+    }
+    .btn-violet:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(124, 58, 237, 0.34); }
     .btn-secondary {
       background: var(--surface);
       color: var(--ink-soft);
@@ -551,6 +572,8 @@
       box-shadow: 0 8px 22px rgba(249, 115, 22, 0.30);
     }
     .btn-gold:hover { filter: brightness(1.04); transform: translateY(-2px); box-shadow: 0 12px 26px rgba(249, 115, 22, 0.36); }
+    .stack-actions { flex-direction: column; }
+    .stack-actions .btn { width: 100%; }
 
     /* Analyzing animation */
     .analyzing-box { text-align: center; padding: 38px 20px; }
@@ -583,7 +606,7 @@
       background: linear-gradient(135deg, #059669 0%, #10b981 48%, #0ea5e9 100%);
       color: #fff;
       border-radius: 22px;
-      padding: 24px 22px;
+      padding: 23px 21px;
       margin-bottom: 14px;
       box-shadow: 0 16px 36px rgba(16, 185, 129, 0.24);
     }
@@ -621,7 +644,7 @@
       border: 1px solid var(--border);
       border-left: 4px solid var(--primary);
       border-radius: 18px;
-      padding: 19px;
+      padding: 18px;
       margin-bottom: 12px;
       box-shadow: var(--shadow-sm);
     }
@@ -644,7 +667,7 @@
       border: 1.5px solid var(--emerald-border);
       border-left: 4px solid var(--emerald-bright);
       border-radius: 18px;
-      padding: 19px;
+      padding: 18px;
       margin-bottom: 14px;
     }
     .step72-card .insight-label { color: var(--emerald); }
@@ -672,7 +695,7 @@
       background: linear-gradient(135deg, #ffffff 0%, #fffbeb 100%);
       border: 2px solid #fbbf24;
       border-radius: 20px;
-      padding: 21px;
+      padding: 20px;
       margin-bottom: 14px;
       box-shadow: 0 12px 30px rgba(245, 158, 11, 0.12);
     }
@@ -710,7 +733,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(255, 251, 235, 0.55);
+      background: rgba(255, 251, 235, 0.58);
       font-weight: 800;
       font-size: 13px;
       color: #92400e;
@@ -728,8 +751,6 @@
       margin-bottom: 14px;
       box-shadow: 0 12px 30px rgba(16, 185, 129, 0.12);
     }
-    .unlocked-actions { flex-direction: column; }
-    .unlocked-actions .btn { width: 100%; }
     .plan-step {
       display: flex;
       gap: 12px;
@@ -751,12 +772,288 @@
       flex-shrink: 0;
     }
 
-    /* Owner Dashboard ("Кнопочка на телефоне") */
+    /* ============================================================
+       MODULE 2: AI COURSE SUPERVISOR (LMS)
+       ============================================================ */
+    .course-hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #6d28d9 0%, #4f46e5 48%, #0ea5e9 100%);
+      color: #ffffff;
+      border-radius: 24px;
+      padding: 24px 22px;
+      margin-bottom: 14px;
+      box-shadow: 0 16px 38px rgba(79, 70, 229, 0.24);
+    }
+    .course-hero::before {
+      content: '';
+      position: absolute;
+      width: 210px;
+      height: 210px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(167, 243, 208, 0.34), transparent 70%);
+      top: -70px;
+      right: -40px;
+      pointer-events: none;
+    }
+    .track-switcher {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+      margin-bottom: 14px;
+    }
+    @media (max-width: 520px) { .track-switcher { grid-template-columns: 1fr; } }
+    .track-btn {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 12px 14px;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-sm);
+      font-family: inherit;
+    }
+    .track-btn:hover { border-color: var(--primary); transform: translateY(-1px); }
+    .track-btn.active.tatiana {
+      background: linear-gradient(135deg, #fffbeb 0%, #ffffff 100%);
+      border-color: #f59e0b;
+      box-shadow: 0 8px 20px rgba(245, 158, 11, 0.14);
+    }
+    .track-btn.active.vaidile {
+      background: linear-gradient(135deg, #ecfdf5 0%, #ffffff 100%);
+      border-color: var(--emerald-bright);
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.14);
+    }
+    .track-btn-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 3px;
+    }
+    .track-btn.tatiana .track-btn-top { color: var(--amber); }
+    .track-btn.vaidile .track-btn-top { color: var(--emerald); }
+    .track-btn-title { font-size: 14.4px; font-weight: 800; color: var(--ink); }
+    .track-btn-sub { font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
+
+    /* Checksheet Stepper */
+    .checksheet-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    @media (max-width: 560px) { .checksheet-bar { grid-template-columns: 1fr; } }
+    .cs-step {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 15px;
+      padding: 11px 13px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12.6px;
+      font-weight: 700;
+      color: var(--ink-soft);
+      transition: all 0.25s ease;
+    }
+    .cs-step.done {
+      background: var(--emerald-bg);
+      border-color: var(--emerald-border);
+      color: #065f46;
+    }
+    .cs-step.current {
+      background: var(--violet-bg);
+      border-color: #a78bfa;
+      color: #4c1d95;
+      box-shadow: 0 6px 16px rgba(124, 58, 237, 0.12);
+    }
+    .cs-step.unlocked {
+      background: linear-gradient(135deg, #ecfdf5 0%, #f0f9ff 100%);
+      border-color: var(--emerald-bright);
+      color: #065f46;
+      animation: fadeSlide 0.35s ease;
+    }
+    .cs-badge {
+      width: 28px;
+      height: 28px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+      flex-shrink: 0;
+      background: var(--surface-soft);
+      color: var(--ink-muted);
+    }
+    .cs-step.done .cs-badge, .cs-step.unlocked .cs-badge { background: var(--emerald-bright); color: #fff; }
+    .cs-step.current .cs-badge { background: var(--violet); color: #fff; }
+
+    /* Visual 1-2-3 Micro-Diagram inside lesson */
+    .visual-flow {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 14px 0 16px;
+    }
+    @media (max-width: 520px) { .visual-flow { grid-template-columns: 1fr; } }
+    .vf-box {
+      background: linear-gradient(135deg, #f8fafc 0%, #f0f9ff 100%);
+      border: 1px solid var(--primary-border);
+      border-radius: 14px;
+      padding: 12px;
+    }
+    .vf-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 7px;
+      background: linear-gradient(135deg, #0ea5e9, #10b981);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+    .vf-box strong { display: block; font-size: 13px; color: var(--ink); margin-bottom: 2px; }
+    .vf-box span { font-size: 12px; color: var(--ink-soft); line-height: 1.35; display: block; }
+
+    /* Rubric Accordion (secret supervisor key) */
+    .rubric-toggle {
+      width: 100%;
+      background: var(--violet-bg);
+      border: 1.5px dashed #c4b5fd;
+      color: #5b21b6;
+      border-radius: 13px;
+      padding: 10px 14px;
+      font-family: inherit;
+      font-size: 12.8px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      transition: all 0.16s;
+    }
+    .rubric-toggle:hover { background: #ede9fe; }
+    .rubric-box {
+      display: none;
+      background: #faf5ff;
+      border: 1px solid var(--violet-border);
+      border-radius: 14px;
+      padding: 13px 15px;
+      margin-bottom: 14px;
+      font-size: 13px;
+      color: var(--ink-soft);
+    }
+    .rubric-box.open { display: block; animation: fadeSlide 0.25s ease; }
+    .rubric-box ul { margin-left: 18px; margin-top: 6px; }
+    .rubric-box li { margin-bottom: 4px; }
+
+    /* Quick-test scenario chips */
+    .scenario-label {
+      font-size: 11.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--ink-muted);
+      margin-bottom: 7px;
+    }
+    .scenario-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 11px;
+    }
+    .scen-chip {
+      border: 1.5px solid var(--border);
+      background: var(--surface);
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-family: inherit;
+      font-size: 12.2px;
+      font-weight: 700;
+      color: var(--ink);
+      cursor: pointer;
+      transition: all 0.16s ease;
+    }
+    .scen-chip.good:hover { background: var(--emerald-bg); border-color: var(--emerald-bright); color: var(--emerald); }
+    .scen-chip.weak:hover { background: var(--amber-bg); border-color: #f59e0b; color: var(--amber); }
+    .scen-chip.stuck:hover { background: var(--coral-bg); border-color: var(--coral); color: var(--coral); }
+
+    /* AI Supervisor Feedback Cards */
+    .sup-feedback {
+      margin-top: 16px;
+      border-radius: 18px;
+      padding: 18px;
+      animation: fadeSlide 0.3s ease;
+    }
+    .sup-feedback.pass {
+      background: linear-gradient(135deg, #ecfdf5 0%, #f0f9ff 100%);
+      border: 2px solid var(--emerald-bright);
+    }
+    .sup-feedback.revise {
+      background: linear-gradient(135deg, #fffbeb 0%, #ffffff 100%);
+      border: 2px solid #f59e0b;
+    }
+    .sup-feedback.stuck {
+      background: linear-gradient(135deg, #fff1f2 0%, #fffbeb 100%);
+      border: 2px solid #fb7185;
+    }
+    .sup-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 4px 11px;
+      border-radius: 999px;
+      margin-bottom: 9px;
+    }
+    .sup-feedback.pass .sup-badge { background: var(--emerald-bright); color: #fff; }
+    .sup-feedback.revise .sup-badge { background: #f59e0b; color: #fff; }
+    .sup-feedback.stuck .sup-badge { background: linear-gradient(135deg, #e11d48, #f97316); color: #fff; }
+    .sup-feedback h4 { font-size: 16.5px; font-weight: 800; color: var(--ink); margin-bottom: 6px; }
+    .sup-feedback p { font-size: 13.8px; color: var(--ink-soft); line-height: 1.52; margin-bottom: 10px; }
+    .rubric-checks {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin: 10px 0 12px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .rc-ok { color: var(--emerald); }
+    .rc-miss { color: var(--amber); }
+
+    .upsell-offer {
+      background: var(--surface);
+      border: 1.5px solid #fdba74;
+      border-radius: 15px;
+      padding: 15px;
+      margin-top: 10px;
+      box-shadow: 0 8px 22px rgba(249, 115, 22, 0.12);
+    }
+    .upsell-offer strong { display: block; font-size: 14.8px; color: var(--ink); margin-bottom: 4px; }
+    .upsell-offer span { display: block; font-size: 13px; color: var(--ink-soft); margin-bottom: 11px; }
+
+    /* ============================================================
+       MODULE 3: ENHANCED OWNER DASHBOARD ("КНОПОЧКА НА ТЕЛЕФОНЕ")
+       ============================================================ */
     .owner-banner {
-      background: linear-gradient(135deg, #2563eb 0%, #0ea5e9 60%, #14b8a6 100%);
+      background: linear-gradient(135deg, #2563eb 0%, #0ea5e9 58%, #14b8a6 100%);
       color: #fff;
       border-radius: 22px;
-      padding: 22px 22px;
+      padding: 22px;
       margin-bottom: 14px;
       box-shadow: 0 14px 34px rgba(37, 99, 235, 0.22);
     }
@@ -768,6 +1065,7 @@
       margin-bottom: 5px;
     }
     .owner-banner p { font-size: 13.5px; color: rgba(255, 255, 255, 0.92); }
+
     .kpi-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -779,23 +1077,76 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 13px;
+      padding: 13px 10px;
       text-align: center;
       box-shadow: var(--shadow-sm);
     }
     .kpi-val { font-size: 24px; font-weight: 800; color: var(--primary-dark); line-height: 1.15; }
+    .kpi-val.violet { color: var(--violet); }
     .kpi-val.warn { color: #f97316; }
     .kpi-val.good { color: var(--emerald); }
-    .kpi-lbl { font-size: 11.5px; color: var(--ink-muted); margin-top: 3px; font-weight: 700; }
+    .kpi-lbl { font-size: 11.4px; color: var(--ink-muted); margin-top: 3px; font-weight: 700; }
 
+    /* Live Funnel Card */
+    .funnel-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px 18px;
+      margin-bottom: 14px;
+      box-shadow: var(--shadow-sm);
+    }
+    .funnel-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .funnel-head strong { font-size: 14.5px; color: var(--ink); }
+    .rev-pill {
+      background: var(--emerald-bg);
+      border: 1px solid var(--emerald-border);
+      color: var(--emerald);
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+    .f-row { margin-bottom: 9px; }
+    .f-row:last-child { margin-bottom: 0; }
+    .f-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12.4px;
+      font-weight: 700;
+      color: var(--ink-soft);
+      margin-bottom: 4px;
+    }
+    .f-bar-bg {
+      height: 8px;
+      background: var(--surface-soft);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .f-bar-fill { height: 100%; border-radius: 999px; transition: width 0.45s ease; }
+
+    .owner-subtabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
     .filter-tabs { display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
     .filter-tab {
       border: 1.5px solid var(--border);
       background: var(--surface);
       color: var(--ink-soft);
-      padding: 6px 13px;
+      padding: 6.5px 12px;
       border-radius: 999px;
-      font-size: 12.5px;
+      font-family: inherit;
+      font-size: 12.2px;
       font-weight: 700;
       cursor: pointer;
       transition: all 0.16s;
@@ -804,6 +1155,10 @@
       background: linear-gradient(135deg, #0ea5e9 0%, #10b981 100%);
       color: #ffffff;
       border-color: transparent;
+    }
+    .filter-tab.sub.active {
+      background: var(--ink);
+      color: #ffffff;
     }
 
     .lead-card {
@@ -815,6 +1170,7 @@
       box-shadow: var(--shadow-sm);
     }
     .lead-card.fresh { border-color: var(--emerald-bright); background: #f7fefb; }
+    .lead-card.hot { border-color: #fb7185; background: linear-gradient(135deg, #fff1f2 0%, #ffffff 42%); }
     .lead-head {
       display: flex;
       justify-content: space-between;
@@ -823,8 +1179,8 @@
       margin-bottom: 8px;
       flex-wrap: wrap;
     }
-    .lead-name { font-weight: 800; font-size: 15.5px; color: var(--ink); }
-    .lead-contact { font-size: 12.5px; color: var(--ink-soft); }
+    .lead-name { font-weight: 800; font-size: 15.2px; color: var(--ink); display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .lead-contact { font-size: 12.4px; color: var(--ink-soft); margin-top: 2px; }
     .route-pill {
       font-size: 11px;
       font-weight: 800;
@@ -834,9 +1190,12 @@
     }
     .route-vaidile { background: var(--emerald-bg); color: var(--emerald); border: 1px solid var(--emerald-border); }
     .route-tatiana { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-border); }
-    .route-new { background: linear-gradient(135deg, #f97316, #ef4444); color: #fff; margin-right: 6px; }
+    .route-new { background: linear-gradient(135deg, #0ea5e9, #10b981); color: #fff; }
+    .route-hot { background: linear-gradient(135deg, #e11d48, #f97316); color: #fff; }
+    .route-course { background: var(--violet-bg); color: var(--violet); border: 1px solid var(--violet-border); }
+
     .lead-body {
-      font-size: 13.2px;
+      font-size: 13.1px;
       color: var(--ink-soft);
       background: #f8fafc;
       border: 1px solid #eef2f6;
@@ -846,10 +1205,35 @@
     }
     .lead-body div { margin-bottom: 4px; }
     .lead-body div:last-child { margin-bottom: 0; }
+    .stud-prog-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 8px;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--ink-soft);
+    }
+    .stud-prog-track {
+      flex: 1;
+      height: 7px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .stud-prog-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #7c3aed, #0ea5e9);
+    }
+    .stud-prog-fill.stuck { background: linear-gradient(90deg, #e11d48, #f97316); }
+    .stud-prog-fill.ok { background: linear-gradient(90deg, #10b981, #0ea5e9); }
+
     .lead-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 9px; }
     .btn-mini {
       padding: 7px 13px;
       border-radius: 10px;
+      font-family: inherit;
       font-size: 12.2px;
       font-weight: 700;
       border: 1.5px solid var(--border);
@@ -864,7 +1248,7 @@
       font-size: 12px;
       color: var(--ink-muted);
       margin-top: 18px;
-      padding: 10px 14px;
+      padding: 12px 14px;
       border-top: 1px solid var(--border);
     }
   </style>
@@ -872,30 +1256,40 @@
 <body>
   <header class="topbar">
     <div class="topbar-inner">
-      <div class="brand" onclick="resetToStart()">
-        <div class="brand-icon">✦</div>
-        <span>
-          <span id="brandTitle">Компас Ясности</span>
-          <small id="brandSub">AI-диагностика • Демо</small>
-        </span>
-      </div>
-      <div class="top-actions">
+      <div class="topbar-row">
+        <div class="brand" onclick="switchMode('quiz')">
+          <div class="brand-icon">✦</div>
+          <span>
+            <span id="brandTitle">Компас Ясности</span>
+            <small id="brandSub">AI-экосистема • Демо</small>
+          </span>
+        </div>
         <div class="lang-toggle" role="group" aria-label="Language">
           <button class="lang-btn active" id="langRu" onclick="setLang('ru')">RU</button>
           <button class="lang-btn" id="langEn" onclick="setLang('en')">EN</button>
         </div>
-        <button class="owner-pill" id="ownerToggleBtn" onclick="toggleOwnerView()">
-          <span>📱</span>
-          <span id="ownerBtnLabel">Владелец</span>
-          <span class="badge-count" id="unreadBadge">1</span>
-        </button>
       </div>
+
+      <nav class="mode-nav" aria-label="Ecosystem Modules">
+        <button class="mode-tab active" data-mode="quiz" id="tabQuiz" onclick="switchMode('quiz')">
+          <span>🧭</span><span id="tabQuizLbl">1. Опросник</span>
+        </button>
+        <button class="mode-tab" data-mode="course" id="tabCourse" onclick="switchMode('course')">
+          <span>🎓</span><span id="tabCourseLbl">2. AI-курс</span>
+        </button>
+        <button class="mode-tab" data-mode="owner" id="tabOwner" onclick="switchMode('owner')">
+          <span>📱</span><span id="tabOwnerLbl">3. Владелец</span>
+          <span class="badge-count" id="unreadBadge">2</span>
+        </button>
+      </nav>
     </div>
   </header>
 
   <main class="main">
-    <!-- QUIZ FLOW -->
-    <div id="quizApp">
+    <!-- ============================================================
+         MODULE 1: CLIENT AI LEAD-MAGNET QUIZ
+         ============================================================ -->
+    <div id="quizApp" class="app-view active">
       <div class="progress-wrap" id="progressWrap">
         <div class="progress-meta">
           <span id="progressLabel">Шаг 1 из 4</span>
@@ -913,7 +1307,6 @@
           <h1 id="heroTitle">Что вы хотели бы улучшить в своей жизни?</h1>
           <p id="heroSub">Не нужно долго формулировать проблему — просто выберите направление, поставьте 1–3 галочки и получите конкретный первый шаг от ИИ.</p>
         </div>
-
         <div class="sphere-grid" id="sphereGrid"></div>
       </section>
 
@@ -952,7 +1345,6 @@
           </div>
 
           <div class="choice-grid" id="qChoices"></div>
-
           <input type="text" id="qCustomInput" class="text-input" placeholder="Или напишите коротко свой вариант..." />
 
           <div class="btn-row">
@@ -1010,82 +1402,180 @@
               2. Неделя 3–6: устранение главного узкого места и внедрение простого ритма...<br>
               3. Неделя 7–12: закрепление результата и масштабирование без выгорания...
             </div>
-            <div class="blurred-overlay" id="blurOverlay">🔒 Оставьте контакт, чтобы мгновенно открыть 3-шаговый план + записаться на 15-мин разбор</div>
+            <div class="blurred-overlay" id="blurOverlay">🔒 Оставьте контакт, чтобы мгновенно открыть 3-шаговый план + получить 15-мин разбор</div>
           </div>
 
           <div class="form-grid">
             <input type="text" id="leadName" class="text-input" placeholder="Ваше имя" />
             <input type="text" id="leadContact" class="text-input" placeholder="WhatsApp или Email" />
           </div>
-          <button class="btn btn-gold" style="width:100%;" onclick="submitLead()" id="btnUnlock">Получить полный разбор →</button>
+          <button class="btn btn-gold" style="width:100%;" onclick="submitLead()" id="btnUnlock">Открыть полный план и получить разбор →</button>
         </div>
 
         <!-- Unlocked full 3-step plan -->
         <div class="unlocked-plan" id="unlockedPlan" style="display:none;">
-          <div class="insight-label" style="color:var(--emerald);" id="unlockedLabel">✅ ПЛАН ОТКРЫТ И ЗАЯВКА ОТПРАВЛЕНА ЭКСПЕРТУ</div>
+          <div class="insight-label" style="color:var(--emerald);" id="unlockedLabel">✅ ПЛАН ОТКРЫТ • АНКЕТА ПЕРЕДАНА ЭКСПЕРТУ</div>
           <h3 id="unlockedTitle" style="font-size:17.5px; font-weight:800; margin-bottom:10px; color:var(--ink);"></h3>
           <div id="unlockedSteps"></div>
           <div id="unlockedConfirm" style="margin-top:14px; padding:12px 14px; border-radius:14px; background:var(--primary-bg); border:1px solid var(--primary-border); font-size:13.2px; color:var(--ink-soft);"></div>
-          <div class="btn-row unlocked-actions" style="margin-top:14px;">
-            <button class="btn btn-primary" onclick="toggleOwnerView(true)" id="btnSeeOwnerDemo">📱 Посмотреть, как заявка пришла в «Кнопочку владельца»</button>
-            <button class="btn btn-secondary" onclick="resetToStart()" id="btnRestart">Пройти заново</button>
+          <div class="btn-row stack-actions" style="margin-top:14px;">
+            <button class="btn btn-violet" onclick="jumpToMatchedCourse()" id="btnGoCourse">🎓 Протестировать AI-супервайзера курса →</button>
+            <button class="btn btn-primary" onclick="switchMode('owner')" id="btnSeeOwnerDemo">📱 Посмотреть, как заявка пришла в «Кнопочку владельца»</button>
+            <button class="btn btn-secondary" onclick="resetToStart()" id="btnRestart">Пройти ещё раз</button>
           </div>
         </div>
       </section>
     </div>
 
-    <!-- OWNER DASHBOARD ("КНОПОЧКА НА ТЕЛЕФОНЕ") -->
-    <section id="ownerApp" style="display:none;">
+    <!-- ============================================================
+         MODULE 2: AI COURSE SUPERVISOR (LMS DEMO FOR BOTH EXPERTS)
+         ============================================================ -->
+    <div id="courseApp" class="app-view">
+      <div class="course-hero">
+        <div class="hero-chip" id="courseChip">🎓 МОДУЛЬ 2 • AI-СУПЕРВАЙЗЕР ЗАОЧНОГО КУРСА (LMS)</div>
+        <h1 id="courseHeroTitle">Обучение с AI-проверкой и автодопродажей личных сессий</h1>
+        <p id="courseHeroSub">Один движок для обеих: ИИ проверяет ответы по эталонному ключу эксперта, открывает следующий урок — а если ученик застрял, мягко переводит его на платную личную сессию и шлёт сигнал вам в телефон.</p>
+      </div>
+
+      <!-- Expert Track Switcher (Tatiana vs Vaidilė) -->
+      <div class="track-switcher">
+        <button class="track-btn tatiana active" id="trackTatiana" onclick="setCourseTrack('tatiana')">
+          <div class="track-btn-top">
+            <span id="trTatBadge">🟡 ПРОЕКТ ТАТЬЯНЫ</span>
+            <span id="trTatTag">Цели • 3 шага</span>
+          </div>
+          <div class="track-btn-title" id="trTatTitle">Система личных и бизнес-целей</div>
+          <div class="track-btn-sub" id="trTatSub">Простым языком • схемы + контрольный лист</div>
+        </button>
+
+        <button class="track-btn vaidile" id="trackVaidile" onclick="setCourseTrack('vaidile')">
+          <div class="track-btn-top">
+            <span id="trVaiBadge">🟢 ПРОЕКТ ВАЙДИЛЕ</span>
+            <span id="trVaiTag">Текстовый курс</span>
+          </div>
+          <div class="track-btn-title" id="trVaiTitle">Финансовый порядок и потоки</div>
+          <div class="track-btn-sub" id="trVaiSub">Заочный формат без видео • США / EN</div>
+        </button>
+      </div>
+
+      <!-- 3-Lesson Checksheet Progress -->
+      <div class="checksheet-bar" id="checksheetBar"></div>
+
+      <!-- Active Lesson + Visual 1-2-3 Scheme + Assignment -->
+      <div class="panel">
+        <div class="insight-label" style="color:var(--violet);" id="lessonBadge">📘 УРОК 2 ИЗ 3 • КОНТРОЛЬНЫЙ ЛИСТ</div>
+        <h2 class="panel-title" id="lessonTitle"></h2>
+        <p class="panel-sub" id="lessonIntro" style="margin-bottom:10px;"></p>
+
+        <div class="visual-flow" id="visualFlow"></div>
+
+        <!-- Secret Expert Rubric Accordion -->
+        <button class="rubric-toggle" id="rubricToggleBtn" onclick="toggleRubric()">
+          <span id="rubricToggleLbl">🔑 Посмотреть эталонный ключ супервайзера (скрыт от ученика)</span>
+          <span id="rubricArrow">▼</span>
+        </button>
+        <div class="rubric-box" id="rubricBox"></div>
+
+        <!-- Assignment Box -->
+        <div class="ai-bubble" style="margin-bottom:13px;">
+          <div class="ai-avatar">✦</div>
+          <div>
+            <div class="ai-bubble-text" id="assignTitle"></div>
+            <div class="ai-bubble-sub" id="assignPrompt"></div>
+          </div>
+        </div>
+
+        <div class="scenario-label" id="scenLabel">⚡ БЫСТРЫЙ ТЕСТ 3 РЕАКЦИЙ ИИ (НАЖМИТЕ ИЛИ ВВЕДИТЕ СВОЙ ТЕКСТ):</div>
+        <div class="scenario-chips" id="scenarioChips"></div>
+
+        <textarea id="courseAnswerInput" class="text-area" placeholder=""></textarea>
+
+        <div class="btn-row">
+          <button class="btn btn-violet" id="btnCheckAnswer" onclick="evaluateCourseAnswer()">✨ Проверить ответ через AI-супервайзера</button>
+        </div>
+
+        <!-- Checking Spinner -->
+        <div id="courseChecking" style="display:none; text-align:center; padding:18px 10px;">
+          <div class="spinner" style="width:36px; height:36px; border-width:3px; margin-bottom:10px;"></div>
+          <div style="font-size:13.5px; font-weight:700; color:var(--violet);" id="checkingLbl">AI-супервайзер сверяет ответ с эталонным ключом эксперта...</div>
+        </div>
+
+        <!-- Dynamic AI Feedback Output -->
+        <div id="supervisorOutput"></div>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         MODULE 3: ENHANCED OWNER DASHBOARD ("КНОПОЧКА НА ТЕЛЕФОНЕ")
+         ============================================================ -->
+    <div id="ownerApp" class="app-view">
       <div class="owner-banner">
-        <div class="hero-chip" style="margin-bottom:8px;" id="ownerChip">📱 ДЕМО «КНОПОЧКИ НА ТЕЛЕФОНЕ» • ДЛЯ ТАТЬЯНЫ И ВАЙДИЛЕ</div>
-        <h2 id="ownerTitle">Пульт владельца и умная маршрутизация заявок</h2>
-        <p id="ownerSub">Каждая анкета автоматически сортируется по профилю (финансы → Вайдиле, цели/бизнес/жизнь → Татьяна) и приходит как готовое досье перед первым звонком.</p>
+        <div class="hero-chip" style="margin-bottom:8px;" id="ownerChip">📱 МОДУЛЬ 3 • «КНОПОЧКА НА ТЕЛЕФОНЕ» ДЛЯ ТАТЬЯНЫ И ВАЙДИЛЕ</div>
+        <h2 id="ownerTitle">Пульт владельца: заявки, студенты и горячие допродажи</h2>
+        <p id="ownerSub">В одном экране видно всё: откуда пришли люди, кто прошёл опрос, как студенты идут по курсу и кто прямо сейчас «застрял» и готов купить личную сессию.</p>
       </div>
 
       <div class="kpi-grid">
         <div class="kpi-card">
-          <div class="kpi-val" id="kpiVisits">28</div>
+          <div class="kpi-val" id="kpiVisits">42</div>
           <div class="kpi-lbl" id="kpiVisitsLbl">Визитов сегодня</div>
         </div>
         <div class="kpi-card">
-          <div class="kpi-val" id="kpiCompleted">9</div>
-          <div class="kpi-lbl" id="kpiCompletedLbl">Прошли опрос</div>
-        </div>
-        <div class="kpi-card">
           <div class="kpi-val good" id="kpiLeads">3</div>
-          <div class="kpi-lbl" id="kpiLeadsLbl">Заявок с контактом</div>
+          <div class="kpi-lbl" id="kpiLeadsLbl">Заявок с опроса</div>
         </div>
         <div class="kpi-card">
-          <div class="kpi-val warn" id="kpiPending">1</div>
-          <div class="kpi-lbl" id="kpiPendingLbl">Ждут звонка</div>
+          <div class="kpi-val violet" id="kpiStudents">4</div>
+          <div class="kpi-lbl" id="kpiStudentsLbl">Учатся на курсе</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-val warn" id="kpiHot">2</div>
+          <div class="kpi-lbl" id="kpiHotLbl">🔥 Ждут контакта</div>
         </div>
       </div>
 
+      <!-- Live Conversion Funnel Card -->
+      <div class="funnel-card">
+        <div class="funnel-head">
+          <strong id="funnelTitle">📊 Воронка и точки роста за 7 дней</strong>
+          <span class="rev-pill" id="funnelRevPill">Потенциал VIP: $6 000–$9 000</span>
+        </div>
+        <div id="funnelBars"></div>
+      </div>
+
+      <!-- Owner Sub-View Switcher -->
+      <div class="owner-subtabs">
+        <button class="filter-tab sub active" id="subAll" onclick="setOwnerSub('all')">🔥 Все события</button>
+        <button class="filter-tab sub" id="subLeads" onclick="setOwnerSub('leads')">🧭 Заявки с опросника</button>
+        <button class="filter-tab sub" id="subStudents" onclick="setOwnerSub('students')">🎓 Студенты и отвалы</button>
+      </div>
+
+      <!-- Expert Filter -->
       <div class="filter-tabs">
-        <button class="filter-tab active" id="fltAll" onclick="setFilter('all')">Все заявки</button>
+        <button class="filter-tab active" id="fltAll" onclick="setFilter('all')">Все эксперты</button>
         <button class="filter-tab" id="fltVaidile" onclick="setFilter('vaidile')">🟢 Вайдиле (Финансы)</button>
         <button class="filter-tab" id="fltTatiana" onclick="setFilter('tatiana')">🟡 Татьяна (Цели / Бизнес)</button>
       </div>
 
-      <div id="leadsContainer"></div>
+      <div id="ownerFeedContainer"></div>
 
-      <div class="btn-row">
-        <button class="btn btn-primary" onclick="toggleOwnerView(false)" id="btnBackToQuiz">← Вернуться к опроснику клиента</button>
+      <div class="btn-row stack-actions">
+        <button class="btn btn-violet" onclick="switchMode('course')" id="btnOwnerToCourse">🎓 Протестировать AI-супервайзера курса</button>
+        <button class="btn btn-secondary" onclick="switchMode('quiz')" id="btnBackToQuiz">← Вернуться к опроснику клиента</button>
       </div>
 
       <div class="demo-footnote" id="ownerFootnote">
-        Интерактивный прототип экосистемы «Монетизация идей» (Артём и Максим). В боевой версии подключается живой LLM API (~$0.003 за диалог) и мгновенная отправка заявок в WhatsApp / Email / Google Таблицу.
+        Интерактивный прототип экосистемы «Монетизация идей» (Артём и Максим). Один AI-движок на оба проекта: себестоимость проверки ответа/диалога ~$0.003, мгновенные алерты в WhatsApp / Email / Telegram.
       </div>
-    </section>
+    </div>
   </main>
 
 <script>
 const DATA = {
   ru: {
     brandTitle: 'Компас Ясности',
-    brandSub: 'AI-разбор • Демо',
-    ownerBtn: 'Владелец',
-    ownerBtnActive: 'К опроснику',
+    brandSub: 'AI-экосистема • Демо',
+    tabs: ['1. Опросник', '2. AI-курс', '3. Владелец'],
     heroChip: '✦ Бесплатный вводный AI-разбор • 2 минуты',
     heroTitle: 'Что вы хотели бы улучшить в своей жизни?',
     heroSub: 'Не нужно долго формулировать проблему — просто выберите направление, поставьте 1–3 галочки и получите конкретный первый шаг от ИИ.',
@@ -1123,24 +1613,161 @@ const DATA = {
     contactPh: 'WhatsApp или Email',
     btnUnlock: 'Открыть полный план и получить разбор →',
     unlockedLabel: '✅ ПЛАН ОТКРЫТ • АНКЕТА ПЕРЕДАНА ЭКСПЕРТУ',
+    btnGoCourse: '🎓 Протестировать AI-супервайзера курса →',
     btnSeeOwner: '📱 Посмотреть, как заявка пришла в «Кнопочку владельца»',
     btnRestart: 'Пройти ещё раз',
     fillAlert: 'Пожалуйста, укажите имя и контакт (WhatsApp или Email).',
-    ownerChip: '📱 ДЕМО «КНОПОЧКИ НА ТЕЛЕФОНЕ» • ДЛЯ ТАТЬЯНЫ И ВАЙДИЛЕ',
-    ownerTitle: 'Пульт владельца и умная маршрутизация заявок',
-    ownerSub: 'Каждая анкета автоматически сортируется по профилю (финансы → Вайдиле, цели/бизнес/жизнь → Татьяна) и приходит как готовое досье перед первым звонком.',
-    kpis: ['Визитов сегодня', 'Прошли опрос', 'Заявок с контактом', 'Ждут звонка'],
-    filters: ['Все заявки', '🟢 Вайдиле (Финансы)', '🟡 Татьяна (Цели / Бизнес)'],
+
+    /* Module 2: Course Supervisor RU */
+    courseChip: '🎓 МОДУЛЬ 2 • AI-СУПЕРВАЙЗЕР ЗАОЧНОГО КУРСА (LMS)',
+    courseHeroTitle: 'Обучение с AI-проверкой и автодопродажей личных сессий',
+    courseHeroSub: 'Один движок для обеих: ИИ проверяет ответы по эталонному ключу эксперта, открывает следующий шаг — а если ученик застрял, мягко предлагает личную консультацию и шлёт горячий сигнал в телефон владельца.',
+    tracks: {
+      tatiana: {
+        badge: '🟡 ПРОЕКТ ТАТЬЯНЫ',
+        tag: 'Цели • 3 шага',
+        title: 'Система личных и бизнес-целей',
+        sub: 'Простым языком • наглядные схемы + контрольный лист',
+        lessons: ['Урок 1: От хаоса к цели', 'Урок 2: Цель на 90 дней', 'Урок 3: Недельный ритм'],
+        lessonBadge: '📘 УРОК 2 ИЗ 3 • КОНТРОЛЬНЫЙ ЛИСТ (АДМИН-ШКАЛА ПРОСТЫМИ СЛОВАМИ)',
+        lessonTitle: 'Как превратить расплывчатое желание в работающую цель на 90 дней',
+        lessonIntro: 'Без сложной теории — в понятном формате «раз, два, три». Как только вы сформулируете конкретный измеримый результат и первый шаг, возвращается энергия и исчезает распыление.',
+        flow: [
+          ['Точный ориентир', 'Одна главная цель в цифрах или фактах, а не «хочу лучше»'],
+          ['Срок 90 дней', 'Понятная дата проверки, чтобы мозг видел финиш'],
+          ['Первый шаг за 48 ч', 'Одно физическое действие, которое вы сделаете уже на этой неделе']
+        ],
+        rubricTitle: 'Эталонный ключ супервайзера Татьяны (настроен под вашу методологию):',
+        rubricItems: [
+          'Есть конкретная, измеримая цель (цифра, событие или ясный факт, а не общие слова).',
+          'Указан конкретный срок (например, 90 дней / дата / месяц).',
+          'Назван первый практический шаг, который ученик сделает в ближайшие 2–7 дней.',
+          'Если ученик путается или проявляет сопротивление («не знаю с чего начать / застрял») — не давить, а предложить личную сессию со «вторым человеком» (VIP-разбор Татьяны).'
+        ],
+        assignTitle: 'Задание контрольного листа (Урок 2):',
+        assignPrompt: 'Напишите вашу главную цель на 90 дней с измеримым результатом и назовите 1 конкретное действие, которое вы сделаете на этой неделе.',
+        answerPh: 'Например: За 90 дней выстроить команду из 3 человек и увеличить выручку на 30%. На этой неделе до четверга пропишу зоны ответственности...',
+        scenarios: {
+          good: {
+            label: '✅ Сильный ответ',
+            text: 'Моя цель на 90 дней (до 1 марта) — вывести бизнес на стабильный доход $12 000/мес и передать рутину ассистенту. Первый шаг на этой неделе: до пятницы выпишу 10 повторяющихся задач и размещу вакансию.'
+          },
+          weak: {
+            label: '🔄 Неполный ответ',
+            text: 'Хочу просто развиваться, чувствовать больше спокойствия и чтобы в делах наконец стало лучше.'
+          },
+          stuck: {
+            label: '🆘 Ученик застрял',
+            text: 'Честно, я застрял и не понимаю, за что хвататься — в голове каша из десяти дел, тяжело даже представить, что будет через 3 месяца.'
+          }
+        },
+        upsellTitle: '💡 ИИ определил точку прорыва: нужен «второй человек»',
+        upsellBody: 'Когда при взгляде в будущее возникает туман или перегруз — самостоятельно сдвинуться в 5 раз сложнее. Татьяна лично проведёт с вами 90-минутную стратегическую сессию и за 1 встречу соберёт вашу пошаговую шкалу целей без хаоса.',
+        upsellBtn: '📅 Запросить личную сессию с Татьяной (VIP-разбор)',
+        upsellSent: '✅ Запрос отправлен Татьяне! В «Кнопочке владельца» уже загорелся горячий сигнал с текстом вашего ответа.',
+        expertShort: 'Татьяна • Стратегия целей (VIP)'
+      },
+      vaidile: {
+        badge: '🟢 ПРОЕКТ ВАЙДИЛЕ',
+        tag: 'Текстовый курс',
+        title: 'Финансовый порядок и потоки',
+        sub: 'Заочный формат без видео • трекеры + AI-проверка',
+        lessons: ['Урок 1: Картина денег', 'Урок 2: Стоп-утечки', 'Урок 3: Подушка 90 дней'],
+        lessonBadge: '📘 УРОК 2 ИЗ 3 • ЗАОЧНЫЙ ТЕКСТОВЫЙ КУРС (БЕЗ ВИДЕО)',
+        lessonTitle: 'Аудит утечек и правило 3 денежных корзин',
+        lessonIntro: 'Рост дохода сам по себе редко даёт спокойствие — деньги растворяются, пока не разделены по потокам. Выполните короткий текстовый аудит и направьте найденные утечки в финансовую подушку.',
+        flow: [
+          ['Найти утечки', 'Выписать 2 регулярные мелкие траты (кофе, подписки, импульсы)'],
+          ['Посчитать в месяц', 'Увидеть реальную сумму: обычно $150–$400/мес на ровном месте'],
+          ['Перенаправить поток', 'Отправить сумму в целевую корзину: Резерв или Рост']
+        ],
+        rubricTitle: 'Эталонный ключ супервайзера Вайдиле (финансовый аудит):',
+        rubricItems: [
+          'Названы минимум 2 конкретные повторяющиеся статьи утечек/трат.',
+          'Посчитана реальная сумма в деньгах ($ или € в месяц).',
+          'Указано, в какую корзину (Обязательства / Резерв / Рост) перенаправляется эта сумма.',
+          'Если ученик пишет про тревогу, долги или ступор — мягко предложить 1-on-1 диагностику и пакет финансового сопровождения Вайдиле ($2 000–$3 000).'
+        ],
+        assignTitle: 'Задание контрольного листа (Урок 2):',
+        assignPrompt: 'Назовите 2 регулярные траты-утечки за неделю, укажите их сумму в месяц и напишите, в какую корзину (Резерв / Рост) вы переведёте эти деньги.',
+        answerPh: 'Например: 1) Ежедневный кофе и перекусы ($180/мес), 2) 4 неиспользуемые подписки ($65/мес). Итого $245/мес перевожу автоматически в корзину Резерв...',
+        scenarios: {
+          good: {
+            label: '✅ Сильный ответ',
+            text: 'Нашёл две утечки: 1) кофе и перекусы по пути на работу — $190/мес; 2) старые подписки на приложения и сервисы — $75/мес. Итого $265/мес с понедельника автоматически перевожу в корзину финансовой подушки.'
+          },
+          weak: {
+            label: '🔄 Неполный ответ',
+            text: 'Я вроде трачу много на ерунду и еду, постараюсь экономить со следующего месяца.'
+          },
+          stuck: {
+            label: '🆘 Ученик застрял',
+            text: 'Мне страшно открывать выписку банка — я застряла, есть долги и полное ощущение финансового хаоса, не понимаю с чего начать.'
+          }
+        },
+        upsellTitle: '💡 ИИ распознал финансовый стресс — не оставайтесь с этим один на один',
+        upsellBody: 'Когда страшно смотреть в цифры и есть долги, текстовых уроков недостаточно — нужен спокойный, безоценочный разбор с живым экспертом. Вайдиле поможет за 1 звонок навести ясность в потоках и собрать план выхода в плюс.',
+        upsellBtn: '📅 Записаться на 1-on-1 разбор с Вайдиле (пакет $2 000–$3 000)',
+        upsellSent: '✅ Заявка на личный финансовый разбор отправлена Вайдиле! В «Кнопочке владельца» уже загорелся горячий алерт.',
+        expertShort: 'Вайдиле • Финансовый консалтинг'
+      }
+    },
+    rubricToggle: '🔑 Посмотреть эталонный ключ супервайзера (скрыт от ученика)',
+    scenLabel: '⚡ БЫСТРЫЙ ТЕСТ 3 РЕАКЦИЙ ИИ (НАЖМИТЕ ИЛИ ВВЕДИТЕ СВОЙ ТЕКСТ):',
+    btnCheck: '✨ Проверить ответ через AI-супервайзера',
+    checkingLbl: 'AI-супервайзер сверяет ответ с эталонным ключом эксперта...',
+    emptyAnsAlert: 'Введите ответ или нажмите одну из 3 кнопок-примеров выше.',
+    supPassBadge: '✅ ШАГ ЗАЧТЁН • УРОК 3 АВТОМАТИЧЕСКИ ОТКРЫТ',
+    supPassTitle: 'Отличная работа! Ответ полностью соответствует эталонному ключу',
+    supPassNote: 'Система зафиксировала ваш прогресс (67% → 100% по Шагу 2), открыла доступ к Уроку 3 и обновила статистику в телефоне владельца.',
+    supRevBadge: '🔄 ТРЕБУЕТСЯ ДОРАБОТКА (ПОПЫТКА {n} ИЗ 2)',
+    supRevTitle: 'Хорошее начало, но ответ пока слишком общий — давайте усилим!',
+    supRevHint: 'Уточните недостающие пункты ниже и нажмите «Проверить» ещё раз. (Подсказка для демо: если отправить слабый ответ второй раз, ИИ сам заметит, что ученик забуксовал, и предложит личную сессию!)',
+    supStuckBadge: '🔥 AI-ТРИГГЕР: УЧЕНИК ЗАСТРЯЛ → АВТОПРЕДЛОЖЕНИЕ VIP-СЕССИИ',
+    supStuckTitle: 'Вы молодец, что честно это написали — именно здесь рождается настоящий сдвиг',
+    supGoOwnerBtn: '📱 Посмотреть, как сигнал прилетел в «Кнопочку владельца» →',
+    rubricChecksPass: [
+      '✓ Конкретика и измеримость (цифры / чёткие факты)',
+      '✓ Срок или понятный денежный/временной горизонт',
+      '✓ Назван конкретный практический шаг'
+    ],
+    rubricChecksMiss: [
+      '○ Не хватает конкретной цифры, суммы или измеримого факта',
+      '○ Не указан чёткий срок или конкретная точка контроля',
+      '○ Не назван первый практический шаг на ближайшие дни'
+    ],
+
+    /* Module 3: Enhanced Owner Dashboard RU */
+    ownerChip: '📱 МОДУЛЬ 3 • «КНОПОЧКА НА ТЕЛЕФОНЕ» ДЛЯ ТАТЬЯНЫ И ВАЙДИЛЕ',
+    ownerTitle: 'Пульт владельца: заявки, студенты и горячие допродажи',
+    ownerSub: 'В одном экране видно всё: поток заявок с опросника, прогресс учеников на курсе, точки отвала и автоматические сигналы «ученик застрял → готов к личной сессии».',
+    kpis: ['Визитов за 7 дн.', 'Заявок с опроса', 'Учатся на курсе', '🔥 Горячие сигналы'],
+    funnelTitle: '📊 Живая воронка экосистемы (7 дней)',
+    funnelRev: (hotCount) => `Потенциал VIP: $${(hotCount * 2500).toLocaleString('ru-RU')}–$${(hotCount * 3500).toLocaleString('ru-RU')}`,
+    funnelSteps: [
+      '1. Зашли по ссылке (Instagram / FB / Reels)',
+      '2. Прошли AI-опросник и оставили контакт',
+      '3. Начали заочный курс с AI-супервайзером',
+      '4. 🔥 Застряли / запросили VIP-сессию ($2 000–$3 000+)'
+    ],
+    subTabs: ['🔥 Все события', '🧭 Заявки с опроса', '🎓 Студенты и отвалы'],
+    filters: ['Все эксперты', '🟢 Вайдиле (Финансы)', '🟡 Татьяна (Цели / Бизнес)'],
+    btnOwnerToCourse: '🎓 Протестировать AI-супервайзера курса',
     btnBackToQuiz: '← Вернуться к опроснику клиента',
-    ownerFootnote: 'Интерактивный прототип для группы «Монетизация идей» (Артём и Максим). В боевой версии подключается живой AI API (~$0.003 за диалог) + мгновенное уведомление в WhatsApp / Email.',
+    ownerFootnote: 'Интерактивный прототип экосистемы «Монетизация идей» (Артём и Максим). Один AI-движок заменяет команду из 5–6 человек: себестоимость проверки ответа ~$0.003 + мгновенные уведомления в WhatsApp / Email.',
     dossierLabels: {
       priorities: 'Выбранные приоритеты',
       bottleneck: 'Главная точка торможения',
       goal90: 'Желаемый результат (90 дней)',
       format: 'Удобный формат',
+      courseName: 'Курс и текущий шаг',
+      aiAlert: 'Сигнал AI-супервайзера',
+      studentQuote: 'Последний ответ студента',
       markDone: 'Отметить «Связались»',
       doneText: '✓ Обработано',
-      newBadge: 'НОВАЯ'
+      newBadge: 'НОВАЯ',
+      hotBadge: '🔥 ГОТОВ К VIP',
+      courseBadge: '🎓 КУРС'
     },
     spheres: [
       {
@@ -1172,7 +1799,7 @@ const DATA = {
         items: [
           { id: 'f_partner', text: 'Улучшить отношения с партнёром', route: 'tatiana', core: true },
           { id: 'f_find', text: 'Найти любимого человека', route: 'tatiana', core: true },
-          { id: 'f_kids', text: 'Наладить отношения с детьми', route: 'tatiana', core: true, note: 'Потенциал 2-й очереди: консалтинг для родителей' },
+          { id: 'f_kids', text: 'Наладить отношения с детьми', route: 'tatiana', core: true },
           { id: 'f_create', text: 'Создать семью / стать родителем', route: 'tatiana', core: true },
           { id: 'f_parents', text: 'Наладить отношения с родителями и родственниками', route: 'tatiana', core: true },
           { id: 'f_close', text: 'Завершить отношения экологично', route: 'tatiana', core: true },
@@ -1302,46 +1929,13 @@ const DATA = {
           ]
         }
       ]
-    },
-    seedLeads: [
-      {
-        id: 'seed-1',
-        name: 'Елена М.',
-        contact: '+41 79 *** 42 18 (WhatsApp)',
-        lang: 'RU',
-        route: 'tatiana',
-        routeLabel: 'Татьяна • Админ-шкала (Бизнес / 3-я дин.)',
-        priorities: ['Развить существующий бизнес', 'Создать команду и научиться управлять людьми'],
-        bottleneck: 'Всё держится на мне — не хватает сильной команды и делегирования',
-        goal90: 'Выйти из операционной рутины и наладить управляемую команду',
-        format: 'Индивидуальная VIP-работа по стратегии бизнеса с экспертом',
-        time: 'Сегодня, 14:12',
-        done: false,
-        fresh: false
-      },
-      {
-        id: 'seed-2',
-        name: 'Michael R.',
-        contact: 'michael.r***@gmail.com',
-        lang: 'EN',
-        route: 'vaidile',
-        routeLabel: 'Vaidilė • Financial Consulting (US)',
-        priorities: ['Get my finances organized', 'Earn more income'],
-        bottleneck: 'Money comes in but leaks out fast — no clear system or control',
-        goal90: 'Full clarity: track every dollar, cut leaks, build a safety cushion',
-        format: 'Free 15–30 min diagnostic call to see a clear plan',
-        time: 'Today, 12:45',
-        done: true,
-        fresh: false
-      }
-    ]
+    }
   },
 
   en: {
     brandTitle: 'Clarity Compass',
-    brandSub: 'AI Diagnostic • Demo',
-    ownerBtn: 'Owner View',
-    ownerBtnActive: 'Back to Quiz',
+    brandSub: 'AI Ecosystem • Demo',
+    tabs: ['1. AI Quiz', '2. AI Course', '3. Owner'],
     heroChip: '✦ Free AI Express Clarity Check • 2 Minutes',
     heroTitle: 'What would you like to improve in your life?',
     heroSub: 'No need to overthink or write long essays — pick your focus area, check 1–3 priorities, and get an actionable first step from AI.',
@@ -1379,24 +1973,161 @@ const DATA = {
     contactPh: 'Email or WhatsApp / Phone',
     btnUnlock: 'Unlock Full Plan & Request Call →',
     unlockedLabel: '✅ PLAN UNLOCKED • SENT TO MATCHED SPECIALIST',
+    btnGoCourse: '🎓 Test the AI Course Supervisor Next →',
     btnSeeOwner: '📱 See how this lead arrived in the "Owner Phone Button"',
     btnRestart: 'Start Over',
     fillAlert: 'Please enter your name and email or WhatsApp/phone.',
-    ownerChip: '📱 DEMO "PHONE BUTTON" DASHBOARD • FOR VAIDILĖ & TATIANA',
-    ownerTitle: 'Owner Dashboard & Smart Lead Routing',
-    ownerSub: 'Every submission is automatically routed by topic (Finances → Vaidilė, Goals/Business/Life → Tatiana) and arrives as a ready-to-use pre-call dossier.',
-    kpis: ['Visits Today', 'Completed Quiz', 'Leads Captured', 'Awaiting Call'],
-    filters: ['All Leads', '🟢 Vaidilė (Finances)', '🟡 Tatiana (Goals / Business)'],
+
+    /* Module 2: Course Supervisor EN */
+    courseChip: '🎓 MODULE 2 • AI COURSE SUPERVISOR (LMS)',
+    courseHeroTitle: 'Self-Paced Course with AI Grading & Automatic VIP Upsells',
+    courseHeroSub: 'One engine for both businesses: AI checks each student’s answer against the expert’s exact rubric, unlocks the next step — and when a student gets stuck, gently invites them to book a paid 1-on-1 session while pinging your phone.',
+    tracks: {
+      tatiana: {
+        badge: '🟡 TATIANA’S TRACK',
+        tag: 'Goals • 3 Steps',
+        title: 'Personal & Business Goal System',
+        sub: 'Plain language • visual diagrams + checksheet grading',
+        lessons: ['Lesson 1: Cut the Noise', 'Lesson 2: 90-Day Target', 'Lesson 3: Weekly Rhythm'],
+        lessonBadge: '📘 LESSON 2 OF 3 • CHECKSHEET ASSIGNMENT',
+        lessonTitle: 'Turn a Vague Wish Into a Clear 90-Day Target',
+        lessonIntro: 'Zero jargon — crisp "1, 2, 3" visual structure. Once a vague wish becomes one measurable target with a clear first action, energy and momentum return immediately.',
+        flow: [
+          ['Measurable Target', 'One clear outcome in numbers or facts — not "do better"'],
+          ['90-Day Horizon', 'A real date so your mind locks onto a concrete finish line'],
+          ['48-Hour Action', 'One tangible physical step you will complete this week']
+        ],
+        rubricTitle: 'Tatiana’s Supervisor Answer Key (hidden from student):',
+        rubricItems: [
+          'Includes a specific, measurable goal (number, milestone, or tangible outcome).',
+          'Includes a clear deadline or 90-day timeframe.',
+          'Names one immediate physical step to complete this week.',
+          'If the student feels overwhelmed or stuck — never push; offer a 1-on-1 VIP Strategy Session with Tatiana ("second terminal") and alert the Owner Dashboard.'
+        ],
+        assignTitle: 'Checksheet Assignment (Lesson 2):',
+        assignPrompt: 'Write your #1 measurable 90-day target and state 1 concrete step you will complete this week.',
+        answerPh: 'Example: Reach $12,000/mo in steady revenue within 90 days (by March 1) and delegate routine tasks to an assistant. First step by Friday: list 10 repeatable tasks and post the role...',
+        scenarios: {
+          good: {
+            label: '✅ Strong Answer',
+            text: 'My 90-day target (by March 1) is to grow revenue to $12,000/month and hire 1 operations assistant. My concrete step this week: by Friday I will document my top 10 recurring tasks and post the job brief.'
+          },
+          weak: {
+            label: '🔄 Too Vague',
+            text: 'I just want to grow somehow, feel calmer, and have things go better in my life.'
+          },
+          stuck: {
+            label: '🆘 Stuck Student',
+            text: 'Honestly I feel completely stuck and overwhelmed — I have ten competing priorities in my head and I don’t know where to start.'
+          }
+        },
+        upsellTitle: '💡 AI Detected a Breakthrough Moment: Time for a 1-on-1 Guide',
+        upsellBody: 'Feeling foggy when looking ahead is completely normal — doing it solo is 5× harder. In one focused 90-minute VIP session, Tatiana will walk through your priorities step by step and build your complete 90-day roadmap together.',
+        upsellBtn: '📅 Request 1-on-1 VIP Strategy Session with Tatiana',
+        upsellSent: '✅ Request sent to Tatiana! A hot alert with your answer just appeared in the Owner Dashboard.',
+        expertShort: 'Tatiana • Goal Strategy (VIP)'
+      },
+      vaidile: {
+        badge: '🟢 VAIDILĖ’S TRACK',
+        tag: 'Text Extension Course',
+        title: 'Cashflow Clarity & Money Control',
+        sub: 'Zero video required • trackers + AI checksheet grading',
+        lessons: ['Lesson 1: Money Map', 'Lesson 2: Leak Audit', 'Lesson 3: 90-Day Cushion'],
+        lessonBadge: '📘 LESSON 2 OF 3 • TEXT EXTENSION COURSE (NO VIDEO NEEDED)',
+        lessonTitle: 'The 3-Bucket Cashflow Split & Monthly Leak Audit',
+        lessonIntro: 'Higher income rarely creates peace of mind until cashflow is organized. Complete this short text audit to locate hidden leaks and redirect them into your safety cushion.',
+        flow: [
+          ['Spot 2 Leaks', 'List 2 recurring silent expenses (daily coffee, unused apps)'],
+          ['Total per Month', 'Calculate the real monthly drain — typically $150–$400/mo'],
+          ['Assign a Bucket', 'Route freed cash automatically into Cushion or Growth']
+        ],
+        rubricTitle: 'Vaidilė’s Supervisor Answer Key (hidden from student):',
+        rubricItems: [
+          'Identifies at least 2 concrete recurring spending leaks.',
+          'Quantifies the monthly dollar total.',
+          'Specifies which bucket (Essentials / Safety Cushion / Growth) the freed money goes into.',
+          'If the student reports debt anxiety or feeling stuck — warmly invite them to a 1-on-1 Financial Diagnostic Call with Vaidilė ($2,000–$3,000 package) and ping Owner View.'
+        ],
+        assignTitle: 'Checksheet Assignment (Lesson 2):',
+        assignPrompt: 'List 2 recurring money leaks you spotted this week, their monthly dollar total, and which bucket (Safety Cushion or Growth) that money will move into.',
+        answerPh: 'Example: 1) Daily coffee & takeout snacks ($190/mo), 2) 4 unused app subscriptions ($75/mo). Starting Monday I will auto-transfer $265/mo into my Safety Cushion bucket...',
+        scenarios: {
+          good: {
+            label: '✅ Strong Answer',
+            text: 'I spotted 2 leaks: 1) daily coffee shop runs and quick lunches ($190/mo); 2) 4 forgotten app subscriptions ($75/mo). Starting Monday I will auto-transfer $265/mo straight into my Safety Cushion bucket.'
+          },
+          weak: {
+            label: '🔄 Too Vague',
+            text: 'I probably spend too much on random stuff and dining out, I’ll try to spend less next month.'
+          },
+          stuck: {
+            label: '🆘 Stuck Student',
+            text: 'I feel anxious even opening my bank statements — I’m stuck with debt and total money chaos, and I don’t know where to begin.'
+          }
+        },
+        upsellTitle: '💡 AI Recognized Financial Overwhelm — You Don’t Have to Fix It Alone',
+        upsellBody: 'When opening bank statements feels stressful, reading alone isn’t enough — a calm, judgment-free 1-on-1 conversation changes everything. Vaidilė will help you map every dollar in 1 call and build a realistic plan.',
+        upsellBtn: '📅 Book 1-on-1 Financial Call with Vaidilė ($2,000–$3,000 track)',
+        upsellSent: '✅ 1-on-1 request sent to Vaidilė! A hot alert just lit up in the Owner Dashboard.',
+        expertShort: 'Vaidilė • Financial Consulting (US)'
+      }
+    },
+    rubricToggle: '🔑 View Expert Supervisor Key (hidden from students)',
+    scenLabel: '⚡ QUICK-TEST ALL 3 AI REACTIONS (TAP ONE OR TYPE YOUR OWN):',
+    btnCheck: '✨ Grade Answer with AI Supervisor',
+    checkingLbl: 'AI Supervisor is checking your answer against the expert rubric...',
+    emptyAnsAlert: 'Please type an answer or tap one of the 3 quick-test chips above.',
+    supPassBadge: '✅ APPROVED • LESSON 3 UNLOCKED AUTOMATICALLY',
+    supPassTitle: 'Awesome work! Your answer hits every criterion in the rubric',
+    supPassNote: 'The platform logged your completion, unlocked Lesson 3 automatically, and updated your progress inside the Owner Dashboard.',
+    supRevBadge: '🔄 REVISION NEEDED (ATTEMPT {n} OF 2)',
+    supRevTitle: 'Good start — let’s make it concrete so it actually works in real life',
+    supRevHint: 'Refine the missing items below and resubmit. (Demo tip: submitting a vague answer twice automatically triggers the Stuck-Student VIP session offer!)',
+    supStuckBadge: '🔥 AI TRIGGER: STUDENT STUCK → AUTOMATIC VIP SESSION OFFER',
+    supStuckTitle: 'Thank you for being honest — this exact pause is where real breakthroughs happen',
+    supGoOwnerBtn: '📱 See This Hot Alert Live in the Owner Dashboard →',
+    rubricChecksPass: [
+      '✓ Specific, measurable numbers or concrete facts included',
+      '✓ Clear timeframe or monthly amount defined',
+      '✓ Actionable next step specified'
+    ],
+    rubricChecksMiss: [
+      '○ Missing a concrete number, dollar amount, or measurable fact',
+      '○ Missing a clear timeframe or target bucket',
+      '○ Missing one specific action step for this week'
+    ],
+
+    /* Module 3: Enhanced Owner Dashboard EN */
+    ownerChip: '📱 MODULE 3 • "OWNER PHONE BUTTON" FOR VAIDILĖ & TATIANA',
+    ownerTitle: 'Owner Dashboard: Leads, Course Progress & Hot Upsells',
+    ownerSub: 'See your entire business on one phone screen: quiz leads auto-routed by specialty, live student progress, exact drop-off lessons, and hot "student stuck → ready for 1-on-1" alerts.',
+    kpis: ['7-Day Visits', 'Quiz Leads', 'Course Students', '🔥 Hot Alerts'],
+    funnelTitle: '📊 Live Ecosystem Funnel (Last 7 Days)',
+    funnelRev: (hotCount) => `VIP Pipeline: $${(hotCount * 2500).toLocaleString('en-US')}–$${(hotCount * 3500).toLocaleString('en-US')}`,
+    funnelSteps: [
+      '1. Link Clicks (Instagram / FB / Reels)',
+      '2. Completed AI Quiz + Left Contact',
+      '3. Enrolled in AI-Supervised Course',
+      '4. 🔥 Stuck / Requested 1-on-1 VIP ($2k–$3k+)'
+    ],
+    subTabs: ['🔥 All Activity', '🧭 Quiz Leads', '🎓 Course & Drop-offs'],
+    filters: ['All Experts', '🟢 Vaidilė (Finances)', '🟡 Tatiana (Goals / Business)'],
+    btnOwnerToCourse: '🎓 Test the AI Course Supervisor',
     btnBackToQuiz: '← Back to Client Quiz',
-    ownerFootnote: 'Interactive prototype for "Monetization of Ideas" (Artem & Maxim). Production version connects live AI API (~$0.003/session) + instant WhatsApp / Email / Sheet alerts.',
+    ownerFootnote: 'Interactive prototype for "Monetization of Ideas" (Artem & Maxim). One AI engine replaces a 5–6 person ops team: ~$0.003 per grading/chat + instant WhatsApp / Email alerts.',
     dossierLabels: {
       priorities: 'Selected Priorities',
       bottleneck: 'Root Bottleneck',
       goal90: 'Desired 90-Day Result',
       format: 'Preferred Format',
+      courseName: 'Course & Current Lesson',
+      aiAlert: 'AI Supervisor Signal',
+      studentQuote: 'Student’s Latest Submission',
       markDone: 'Mark as Contacted',
       doneText: '✓ Contacted',
-      newBadge: 'NEW'
+      newBadge: 'NEW',
+      hotBadge: '🔥 READY FOR VIP',
+      courseBadge: '🎓 COURSE'
     },
     spheres: [
       {
@@ -1428,7 +2159,7 @@ const DATA = {
         items: [
           { id: 'f_partner', text: 'Strengthen relationship with my partner', route: 'tatiana', core: true },
           { id: 'f_find', text: 'Find a loving life partner', route: 'tatiana', core: true },
-          { id: 'f_kids', text: 'Improve relationship with my children', route: 'tatiana', core: true, note: 'Phase-2 cross-route: Parent Consulting' },
+          { id: 'f_kids', text: 'Improve relationship with my children', route: 'tatiana', core: true },
           { id: 'f_create', text: 'Start a family / become a parent', route: 'tatiana', core: true },
           { id: 'f_parents', text: 'Improve harmony with parents & relatives', route: 'tatiana', core: true },
           { id: 'f_close', text: 'Close an old relationship cleanly', route: 'tatiana', core: true },
@@ -1500,103 +2231,145 @@ const DATA = {
           hint: 'Usually 80% of growth unlocks once you fix a single bottleneck.',
           options: [
             'Too many ideas and tasks — no clear strategic priority order',
-            'Everything depends on me — need a reliable team and delegation',
-            'Strong product, but no predictable system bringing paying clients',
-            'Lost clarity and momentum: high effort, flat profit'
+            'Everything depends on me — missing a strong, accountable team',
+            'Great product, but inconsistent flow of high-value clients',
+            'Lost clarity and momentum — working hard without matching profit'
           ]
         },
         {
-          q: 'What concrete milestone do you want to reach in the next 3–6 months?',
-          hint: 'A vivid target immediately restores drive and energy.',
+          q: 'What core milestone do you want to hit in the next 3–6 months?',
+          hint: 'Clear targets immediately restore drive and focus.',
           options: [
-            'A crystal-clear business strategy and step-by-step execution roadmap',
-            'Step out of daily firefighting with an organized team',
-            'Launch a new offer or business that generates real profit',
-            'Align goals, time, and cashflow into one coherent system'
+            'Build a crystal-clear strategy and step-by-step growth roadmap',
+            'Step out of daily firefighting with a structured, reliable team',
+            'Launch a new offer/business with predictable revenue',
+            'Align business goals, time, and cashflow into one clean system'
           ]
         },
         {
           q: 'Which format fits you best right now?',
-          hint: 'So we can recommend the smoothest next step.',
+          hint: 'We will suggest the smartest next step.',
           options: [
-            'VIP 1-on-1 business strategy & goal alignment session',
-            'Step-by-step online course with guided feedback',
-            'Fast group workshop to map my roadmap quickly',
-            'Start with a free 15-min diagnostic conversation'
+            '1-on-1 VIP business strategy sessions with a senior specialist',
+            'Online step-by-step course with AI + expert assignment feedback',
+            'Fast-track small group workshop to build my roadmap quickly',
+            'Start with a quick free 15-min diagnostic conversation'
           ]
         }
       ],
       tatiana: [
         {
-          q: 'What is draining your energy or slowing your progress most right now?',
-          hint: 'Honesty here unlocks the sharpest first step.',
+          q: 'What is draining your energy or keeping you stuck most right now?',
+          hint: 'Be honest — this unlocks your exact first move.',
           options: [
-            'Scattered focus: too many ideas, unsure what to tackle first',
-            'No clear inspiring goal — so energy and motivation stay low',
-            'Daily routine swallows my time and I postpone what matters',
-            'Tension in key relationships or environment blocks everything else'
+            'Scattered focus: too many thoughts and tasks, unclear where to start',
+            'No clear inspiring target — low drive and motivation',
+            'Daily routine keeps crowding out what truly matters',
+            'Tension in relationships or environment is slowing everything down'
           ]
         },
         {
-          q: 'Which 90-day shift would excite you most?',
-          hint: 'Focusing on one clear outcome creates immediate momentum.',
+          q: 'What shift in 90 days would make you feel truly proud and energized?',
+          hint: 'One chosen win beats ten vague wishes.',
           options: [
-            'Total clarity on my 1-year direction and 3–6 month action plan',
-            'High energy, structured time, and daily confidence',
-            'Warmth, clarity, and harmony in my closest relationships',
-            'Consistent action with visible, measurable wins every week'
+            'Crystal-clear life/year goal plus a simple 3–6 month roadmap',
+            'Renewed energy, daily time control, and calm confidence',
+            'Warmth, honesty, and harmony in my closest relationships',
+            'Consistent action with real, visible progress every week'
           ]
         },
         {
-          q: 'How do you feel most comfortable taking the first step?',
-          hint: 'We will match the format to your pace.',
+          q: 'How do you like to take your first steps?',
+          hint: 'We will tailor your next step accordingly.',
           options: [
-            'Fast step-by-step group workshop to build my plan',
-            'Self-paced online course with AI-guided check-ins',
-            '1-on-1 personal guidance to stay focused and accountable',
-            'Start with a short free diagnostic conversation'
+            'Fast group workshop to assemble my personal plan step by step',
+            'Self-paced online course with structured assignment check-ins',
+            '1-on-1 guidance with an accountability partner so I stay on track',
+            'Start with a short free diagnostic breakdown first'
           ]
         }
       ]
-    },
-    seedLeads: [
-      {
-        id: 'seed-1',
-        name: 'Elena M.',
-        contact: '+41 79 *** 42 18 (WhatsApp)',
-        lang: 'RU',
-        route: 'tatiana',
-        routeLabel: 'Tatiana • Admin Scale (Business / 3rd Dyn.)',
-        priorities: ['Grow existing business', 'Build a team & lead people'],
-        bottleneck: 'Everything depends on me — need delegation & structure',
-        goal90: 'Step out of daily firefighting with an organized team',
-        format: 'VIP 1-on-1 business strategy session',
-        time: 'Today, 2:12 PM',
-        done: false,
-        fresh: false
-      },
-      {
-        id: 'seed-2',
-        name: 'Michael R.',
-        contact: 'michael.r***@gmail.com',
-        lang: 'EN',
-        route: 'vaidile',
-        routeLabel: 'Vaidilė • Financial Consulting (US)',
-        priorities: ['Get my finances organized', 'Earn more income'],
-        bottleneck: 'Money comes in but leaks out fast — no clear system or control',
-        goal90: 'Full clarity: track every dollar, cut leaks, build a safety cushion',
-        format: 'Free 15–30 min diagnostic call',
-        time: 'Today, 12:45 PM',
-        done: true,
-        fresh: false
-      }
-    ]
+    }
   }
 };
 
-// App state
+const SEED_ITEMS = [
+  {
+    id: 'seed-hot-1',
+    kind: 'student',
+    hot: true,
+    fresh: false,
+    name: 'Sarah T.',
+    contact: 'sarah.t***@gmail.com • Florida, US',
+    lang: 'EN',
+    route: 'vaidile',
+    routeLabel: 'Vaidilė • Financial Extension Course',
+    courseTitle: 'Cashflow Clarity • Lesson 2 of 3 (65%)',
+    progress: 65,
+    status: 'stuck',
+    aiAlert: '⚠️ Stuck on Lesson 2 (2 attempts) — AI offered 1-on-1 Financial Package ($2,500)',
+    quote: '“I feel anxious opening my bank statements — too many leaks and debt, not sure where to start.”',
+    time: 'Today, 15:20',
+    done: false
+  },
+  {
+    id: 'seed-lead-1',
+    kind: 'lead',
+    hot: false,
+    fresh: false,
+    name: 'Елена М.',
+    contact: '+41 79 *** 42 18 (WhatsApp)',
+    lang: 'RU',
+    route: 'tatiana',
+    routeLabel: 'Татьяна • Админ-шкала (Бизнес / VIP)',
+    priorities: ['Развить существующий бизнес', 'Создать команду и научиться управлять людьми'],
+    bottleneck: 'Всё держится на мне — не хватает сильной команды и делегирования',
+    goal90: 'Выйти из операционной рутины и наладить управляемую команду',
+    format: 'Индивидуальная VIP-работа по стратегии бизнеса с экспертом',
+    time: 'Сегодня, 14:12',
+    done: false
+  },
+  {
+    id: 'seed-stud-2',
+    kind: 'student',
+    hot: false,
+    fresh: false,
+    name: 'Дмитрий В.',
+    contact: '+49 176 *** 88 10 (WhatsApp)',
+    lang: 'RU',
+    route: 'tatiana',
+    routeLabel: 'Татьяна • Онлайн-курс целей',
+    courseTitle: 'Система целей • Урок 3 из 3 (92%)',
+    progress: 92,
+    status: 'ok',
+    aiAlert: '✅ Урок 2 зачтён ИИ с 1-й попытки — ученик уверенно идёт к финалу',
+    quote: '«Цель до 1 марта: 4 постоянных B2B-клиента и системный план на неделю.»',
+    time: 'Сегодня, 13:05',
+    done: true
+  },
+  {
+    id: 'seed-lead-2',
+    kind: 'lead',
+    hot: false,
+    fresh: false,
+    name: 'Michael R.',
+    contact: 'michael.r***@gmail.com',
+    lang: 'EN',
+    route: 'vaidile',
+    routeLabel: 'Vaidilė • Financial Consulting (US)',
+    priorities: ['Get my finances organized', 'Earn more income'],
+    bottleneck: 'Money comes in but leaks out fast — no clear system or control',
+    goal90: 'Full clarity: track every dollar, cut leaks, build a safety cushion',
+    format: 'Free 15–30 min diagnostic call to see a clear plan',
+    time: 'Today, 12:45',
+    done: true
+  }
+];
+
+const urlLang = new URLSearchParams(window.location.search).get('lang');
 const state = {
-  lang: new URLSearchParams(location.search).get('lang') === 'en' ? 'en' : 'ru',
+  lang: urlLang === 'en' ? 'en' : 'ru',
+  mode: 'quiz', // 'quiz' | 'course' | 'owner'
   step: 1,
   sphereId: null,
   selectedIds: [],
@@ -1604,42 +2377,71 @@ const state = {
   otherText: '',
   qIdx: 0,
   answers: ['', '', ''],
-  route: 'tatiana',
-  ownerOpen: false,
-  filter: 'all',
   unlocked: false,
-  visits: 28,
-  completed: 9,
-  leads: []
+  lastLeadName: '',
+  lastLeadContact: '',
+  // Course supervisor state
+  courseTrack: urlLang === 'en' ? 'vaidile' : 'tatiana',
+  rubricOpen: false,
+  attempts: { tatiana: 0, vaidile: 0 },
+  lesson3Unlocked: { tatiana: false, vaidile: false },
+  lastFeedback: { tatiana: null, vaidile: null },
+  upsellBooked: { tatiana: false, vaidile: false },
+  // Owner telemetry
+  visits: 42,
+  ownerSub: 'all', // 'all' | 'leads' | 'students'
+  filter: 'all',   // 'all' | 'vaidile' | 'tatiana'
+  items: []
 };
 
-function loadLeads() {
+function loadItems() {
   try {
-    const saved = localStorage.getItem('clarity_demo_leads_v1');
+    const saved = localStorage.getItem('clarity_eco_items_v2');
     if (saved) {
-      state.leads = JSON.parse(saved);
+      state.items = JSON.parse(saved);
       return;
     }
   } catch (e) {}
-  state.leads = JSON.parse(JSON.stringify(DATA[state.lang].seedLeads));
+  state.items = JSON.parse(JSON.stringify(SEED_ITEMS));
 }
-function saveLeads() {
-  try { localStorage.setItem('clarity_demo_leads_v1', JSON.stringify(state.leads)); } catch (e) {}
+function saveItems() {
+  try { localStorage.setItem('clarity_eco_items_v2', JSON.stringify(state.items)); } catch (e) {}
 }
 
 function t() { return DATA[state.lang]; }
+function escapeHtml(s) {
+  return String(s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function nowTime() {
+  const n = new Date();
+  return `${String(n.getHours()).padStart(2,'0')}:${String(n.getMinutes()).padStart(2,'0')}`;
+}
 
+/* ================= NAVIGATION & LANGUAGE ================= */
 function setLang(l) {
   state.lang = l;
   document.documentElement.lang = l;
   document.getElementById('langRu').classList.toggle('active', l === 'ru');
   document.getElementById('langEn').classList.toggle('active', l === 'en');
+  if (state.mode === 'course' && !state.lastFeedback[state.courseTrack]) {
+    state.courseTrack = l === 'en' ? 'vaidile' : 'tatiana';
+  }
   renderAll();
 }
 
-function getSphere() {
-  return t().spheres.find(s => s.id === state.sphereId);
+function switchMode(m) {
+  state.mode = m;
+  document.getElementById('quizApp').classList.toggle('active', m === 'quiz');
+  document.getElementById('courseApp').classList.toggle('active', m === 'course');
+  document.getElementById('ownerApp').classList.toggle('active', m === 'owner');
+  document.querySelectorAll('.mode-tab').forEach(b => b.classList.toggle('active', b.dataset.mode === m));
+  if (m === 'course') renderCourse();
+  if (m === 'owner') renderOwnerDashboard();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+/* ================= MODULE 1: AI QUIZ ================= */
+function getSphere() { return t().spheres.find(s => s.id === state.sphereId); }
 
 function computeRoute() {
   if (state.sphereId === 'unsure') return 'tatiana';
@@ -1658,8 +2460,7 @@ function getQuestions() {
 
 function renderSpheres() {
   const d = t();
-  const grid = document.getElementById('sphereGrid');
-  grid.innerHTML = d.spheres.map(sp => `
+  document.getElementById('sphereGrid').innerHTML = d.spheres.map(sp => `
     <button class="sphere-card ${sp.special ? 'special' : ''}" data-id="${sp.id}" onclick="selectSphere('${sp.id}')">
       <div class="sphere-icon">${sp.icon}</div>
       <div class="sphere-title">${sp.title}</div>
@@ -1676,12 +2477,7 @@ function selectSphere(id) {
   state.answers = ['', '', ''];
   state.qIdx = 0;
   state.unlocked = false;
-
-  if (id === 'unsure') {
-    goStep(3);
-  } else {
-    goStep(2);
-  }
+  goStep(id === 'unsure' ? 3 : 2);
 }
 
 function renderCheckboxes() {
@@ -1690,13 +2486,11 @@ function renderCheckboxes() {
   if (!sp) return;
   document.getElementById('step2SphereLabel').textContent = `${sp.icon} ${sp.title}`;
   document.getElementById('selectedCounter').textContent = d.counter(state.selectedIds.length);
-
   const visibleItems = state.showAllItems ? sp.items : sp.items.filter(it => it.core);
   const hiddenCount = sp.items.length - sp.items.filter(it => it.core).length;
   const maxReached = state.selectedIds.length >= 3;
 
-  const list = document.getElementById('checkList');
-  list.innerHTML = visibleItems.map(it => {
+  document.getElementById('checkList').innerHTML = visibleItems.map(it => {
     const sel = state.selectedIds.includes(it.id);
     const dis = !sel && maxReached;
     return `
@@ -1724,12 +2518,8 @@ function renderCheckboxes() {
 
 function toggleCheck(id) {
   const idx = state.selectedIds.indexOf(id);
-  if (idx >= 0) {
-    state.selectedIds.splice(idx, 1);
-  } else {
-    if (state.selectedIds.length >= 3) return;
-    state.selectedIds.push(id);
-  }
+  if (idx >= 0) state.selectedIds.splice(idx, 1);
+  else if (state.selectedIds.length < 3) state.selectedIds.push(id);
   renderCheckboxes();
 }
 
@@ -1750,74 +2540,48 @@ function renderQuestion() {
   const cur = qs[state.qIdx];
   document.getElementById('qText').textContent = `${state.qIdx + 1}/3. ${cur.q}`;
   document.getElementById('qHint').textContent = cur.hint;
-
   const ans = state.answers[state.qIdx] || '';
-  const choices = document.getElementById('qChoices');
-  choices.innerHTML = cur.options.map((opt, idx) => `
+  document.getElementById('qChoices').innerHTML = cur.options.map((opt, idx) => `
     <button class="choice-btn ${ans === opt ? 'selected' : ''}" onclick="pickChoice(${idx})">${opt}</button>
   `).join('');
-
   const customInp = document.getElementById('qCustomInput');
   customInp.placeholder = d.customQPlaceholder;
   customInp.value = cur.options.includes(ans) ? '' : ans;
-
   const nextBtn = document.getElementById('btnNextQ');
   nextBtn.textContent = state.qIdx === 2 ? d.finishQ : d.nextQ;
   nextBtn.disabled = !ans.trim();
 }
 
 function pickChoice(idx) {
-  const qs = getQuestions();
-  state.answers[state.qIdx] = qs[state.qIdx].options[idx];
+  state.answers[state.qIdx] = getQuestions()[state.qIdx].options[idx];
   renderQuestion();
 }
 
 document.getElementById('qCustomInput').addEventListener('input', (e) => {
   state.answers[state.qIdx] = e.target.value.trim();
-  const qs = getQuestions();
-  const cur = qs[state.qIdx];
   document.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('selected'));
   document.getElementById('btnNextQ').disabled = !state.answers[state.qIdx];
 });
-document.getElementById('otherInput').addEventListener('input', (e) => {
-  state.otherText = e.target.value;
-});
+document.getElementById('otherInput').addEventListener('input', (e) => { state.otherText = e.target.value; });
 
 function prevQuestion() {
-  if (state.qIdx > 0) {
-    state.qIdx--;
-    updateProgress();
-    renderQuestion();
-  } else {
-    goStep(state.sphereId === 'unsure' ? 1 : 2);
-  }
+  if (state.qIdx > 0) { state.qIdx--; updateProgress(); renderQuestion(); }
+  else goStep(state.sphereId === 'unsure' ? 1 : 2);
 }
 
 function nextQuestion() {
-  if (state.qIdx < 2) {
-    state.qIdx++;
-    updateProgress();
-    renderQuestion();
-  } else {
-    runAnalysis();
-  }
+  if (state.qIdx < 2) { state.qIdx++; updateProgress(); renderQuestion(); }
+  else runAnalysis();
 }
 
 function runAnalysis() {
   goStep(4);
   const steps = [1, 2, 3].map(i => document.getElementById('anStep' + i));
-  steps.forEach((el, i) => {
-    el.classList.remove('done');
-    el.textContent = '○ ' + t().anSteps[i];
-  });
-  setTimeout(() => { steps[0].classList.add('done'); steps[0].textContent = '✓ ' + t().anSteps[0]; }, 380);
-  setTimeout(() => { steps[1].classList.add('done'); steps[1].textContent = '✓ ' + t().anSteps[1]; }, 880);
-  setTimeout(() => { steps[2].classList.add('done'); steps[2].textContent = '✓ ' + t().anSteps[2]; }, 1350);
-  setTimeout(() => {
-    state.completed++;
-    renderResult();
-    goStep(5);
-  }, 1700);
+  steps.forEach((el, i) => { el.classList.remove('done'); el.textContent = '○ ' + t().anSteps[i]; });
+  setTimeout(() => { steps[0].classList.add('done'); steps[0].textContent = '✓ ' + t().anSteps[0]; }, 320);
+  setTimeout(() => { steps[1].classList.add('done'); steps[1].textContent = '✓ ' + t().anSteps[1]; }, 740);
+  setTimeout(() => { steps[2].classList.add('done'); steps[2].textContent = '✓ ' + t().anSteps[2]; }, 1140);
+  setTimeout(() => { renderResult(); goStep(5); }, 1450);
 }
 
 function getSelectedTexts() {
@@ -1833,8 +2597,7 @@ function getSelectedTexts() {
 function buildDiagnosis() {
   const tr = computeRoute();
   const isRu = state.lang === 'ru';
-  const priorities = getSelectedTexts();
-  const mainP = priorities[0];
+  const mainP = getSelectedTexts()[0];
   const bottleneck = state.answers[0];
   const goal90 = state.answers[1];
 
@@ -1842,28 +2605,21 @@ function buildDiagnosis() {
     return {
       ownerKey: 'vaidile',
       expertChip: isRu ? '🟢 Профильный трек: Финансовое планирование (Вайдиле)' : '🟢 Matched Track: Financial Planning (Vaidilė)',
-      rootTitle: isRu
-        ? `Деньги сейчас работают хаотично, а не как управляемый поток`
-        : `Money is currently moving reactively instead of as a controlled flow`,
+      rootTitle: isRu ? 'Деньги сейчас работают хаотично, а не как управляемый поток' : 'Money is currently moving reactively instead of as a controlled flow',
       rootBody: isRu
-        ? `Вы отметили «${mainP}», и главное препятствие сейчас — «${bottleneck}». В 9 из 10 случаев проблема не в том, что человек мало старается, а в отсутствии прозрачной системы потоков: когда не видна точная картина расходов, доходов и целей, любые заработанные деньги растворяются без ощущения опоры.`
+        ? `Вы отметили «${mainP}», и главное препятствие сейчас — «${bottleneck}». В 9 из 10 случаев проблема не в том, что человек мало старается, а в отсутствии прозрачной системы потоков: когда не видна точная картина расходов, доходов и целей, заработанные деньги растворяются без ощущения опоры.`
         : `You chose "${mainP}", and your main bottleneck is "${bottleneck}". In 9 out of 10 cases, the issue isn't lack of effort — it's missing a clear cashflow structure. Without full visibility over inflows, leaks, and targets, higher income rarely creates peace of mind.`,
-      step72Title: isRu
-        ? `Сделайте «рентген денежного потока» за 3 дня`
-        : `Run a 72-Hour Cashflow X-Ray`,
+      step72Title: isRu ? 'Сделайте «рентген денежного потока» за 3 дня' : 'Run a 72-Hour Cashflow X-Ray',
       step72Body: isRu
-        ? `В ближайшие 72 часа запишите абсолютно все траты (включая кофе, подписки и мелкие покупки) и отдельно — все источники дохода и ресурсы, которыми вы уже владеете. Уже на этом простом шаге люди обычно находят $150–$400/мес скрытых утечек и впервые возвращают ощущение реального контроля.`
-        : `For the next 72 hours, log 100% of every expense (even coffee and subscriptions) alongside your active income streams and assets. Most people immediately uncover $150–$400/month in hidden leaks and feel an instant wave of relief and control.`,
-      gateTitle: isRu
-        ? `Откройте ваш 3-шаговый финансовый план на 90 дней`
-        : `Unlock Your 3-Step 90-Day Financial Clarity Plan`,
-      gateSub: isRu
-        ? `Плюс получите бесплатный шаблон трекера расходов и возможность записаться на 15-минутный разбор вашей ситуации.`
-        : `Plus receive a free Expense Tracker template and an optional free 15-min diagnostic call.`,
+        ? 'В ближайшие 72 часа запишите абсолютно все траты (включая кофе, подписки и мелкие покупки) и отдельно — все источники дохода. Уже на этом простом шаге люди обычно находят $150–$400/мес скрытых утечек и впервые возвращают ощущение реального контроля.'
+        : 'For the next 72 hours, log 100% of every expense (even coffee and subscriptions) alongside your income streams. Most people immediately uncover $150–$400/month in hidden leaks and feel an instant wave of relief.',
+      gateTitle: isRu ? 'Откройте ваш 3-шаговый финансовый план на 90 дней' : 'Unlock Your 3-Step 90-Day Financial Clarity Plan',
+      unlockedTitle: isRu ? 'Ваш 3-шаговый финансовый план на 90 дней' : 'Your 3-Step 90-Day Financial Clarity Plan',
+      gateSub: isRu ? 'Плюс получите бесплатный шаблон трекера расходов и возможность записаться на 15-минутный разбор.' : 'Plus receive a free Expense Tracker template and an optional free 15-min diagnostic call.',
       steps: isRu ? [
         ['Недели 1–2: Полный контроль и стоп-утечки', `Фиксируем реальную картину доходов/расходов и убираем скрытые дыры, чтобы запустить движение к цели «${goal90}».`],
-        ['Недели 3–6: Архитектура потоков и подушка', 'Разделяем деньги по целевым корзинам (обязательства, резерв, рост, свободные средства) — уходит финансовая тревога.'],
-        ['Недели 7–12: Масштабирование дохода', 'Переводим свободные ресурсы в предсказуемый рост дохода и закрепляем еженедельный 15-минутный финансовый ритуал.']
+        ['Недели 3–6: Архитектура потоков и подушка', 'Разделяем деньги по целевым корзинам (обязательства, резерв, рост) — уходит финансовая тревога.'],
+        ['Недели 7–12: Масштабирование дохода', 'Переводим свободные ресурсы в предсказуемый рост дохода и закрепляем еженедельный 15-минутный ритуал.']
       ] : [
         ['Weeks 1–2: Full Visibility & Leak Stop', `Establish exact inflow/outflow tracking to move directly toward "${goal90}".`],
         ['Weeks 3–6: Cashflow Buckets & Cushion', 'Structure dedicated allocations (essentials, safety cushion, growth) so money anxiety drops immediately.'],
@@ -1876,28 +2632,21 @@ function buildDiagnosis() {
     return {
       ownerKey: 'tatiana',
       expertChip: isRu ? '🟡 Профильный трек: Стратегия и цели бизнеса (Татьяна)' : '🟡 Matched Track: Business Strategy & Goals (Tatiana)',
-      rootTitle: isRu
-        ? `Усилия распыляются — бизнесу не хватает единой выстроенной шкалы приоритетов`
-        : `Effort is scattered — your business lacks one aligned priority ladder`,
+      rootTitle: isRu ? 'Усилия распыляются — бизнесу не хватает единой шкалы приоритетов' : 'Effort is scattered — your business lacks one aligned priority ladder',
       rootBody: isRu
-        ? `Ваш главный фокус — «${mainP}», при этом сейчас тормозит: «${bottleneck}». Когда цели, планы, задачи команды и ежедневные действия не связаны в одну понятную последовательность, владелец тащит всё на себе, а прибыль не успевает за усталостью.`
-        : `Your top focus is "${mainP}", blocked right now by "${bottleneck}". When business goals, plans, team roles, and daily actions aren't connected into one clear sequence, the owner carries everything alone while profit lags behind effort.`,
-      step72Title: isRu
-        ? `Зафиксируйте ОДНУ измеримую цель бизнеса на 90 дней`
-        : `Lock One Measurable 90-Day Business Target`,
+        ? `Ваш главный фокус — «${mainP}», при этом сейчас тормозит: «${bottleneck}». Когда цели, планы, задачи команды и ежедневные действия не связаны в одну понятную последовательность, владелец тащит всё на себе.`
+        : `Your top focus is "${mainP}", blocked right now by "${bottleneck}". When business goals, plans, team roles, and daily actions aren't connected into one clear sequence, the owner carries everything alone.`,
+      step72Title: isRu ? 'Зафиксируйте ОДНУ измеримую цель бизнеса на 90 дней' : 'Lock One Measurable 90-Day Business Target',
       step72Body: isRu
-        ? `Возьмите один лист бумаги и запишите: (1) идеальный результат бизнеса через 90 дней в цифрах, (2) 3 действия, которые прямо влияют на прибыль, и (3) всё лишнее, что вы осознанно ставите на паузу на ближайший месяц. Как только убирается распыление, мгновенно возвращается энергия.`
-        : `Take a single sheet of paper and write: (1) one measurable 90-day revenue/team target, (2) the top 3 needle-moving actions, and (3) what you will deliberately pause for 30 days. Eliminating scattered priorities immediately restores momentum.`,
-      gateTitle: isRu
-        ? `Откройте пошаговый 3-этапный план роста бизнеса`
-        : `Unlock Your 3-Stage Business Growth Roadmap`,
-      gateSub: isRu
-        ? `Получите структуру стратегического плана и приглашение на короткий разбор с экспертом (плюс опцию AI-автоматизации продвижения).`
-        : `Receive your structured 90-day strategic roadmap plus an optional 15-min expert strategy check.`,
+        ? 'Возьмите лист бумаги и запишите: (1) идеальный результат бизнеса через 90 дней в цифрах, (2) 3 действия, которые прямо влияют на прибыль, и (3) всё лишнее, что вы осознанно ставите на паузу на ближайший месяц.'
+        : 'Take a single sheet of paper and write: (1) one measurable 90-day revenue/team target, (2) the top 3 needle-moving actions, and (3) what you will deliberately pause for 30 days.',
+      gateTitle: isRu ? 'Откройте пошаговый 3-этапный план роста бизнеса' : 'Unlock Your 3-Stage Business Growth Roadmap',
+      unlockedTitle: isRu ? 'Ваш пошаговый 3-этапный план роста бизнеса' : 'Your 3-Stage Business Growth Roadmap',
+      gateSub: isRu ? 'Получите структуру стратегического плана и приглашение на короткий разбор с экспертом.' : 'Receive your structured 90-day strategic roadmap plus an optional 15-min expert strategy check.',
       steps: isRu ? [
         ['Этап 1 (Недели 1–2): Выравнивание цели и узкого места', `Убираем хаос и собираем чёткий пошаговый план под ваш результат: «${goal90}».`],
-        ['Этап 2 (Недели 3–6): Делегирование и система привлечения', 'Распределяем ответственность по функциям и подключаем автоматизацию ключевых процессов.'],
-        ['Этап 3 (Недели 7–12): Измеримый рост прибыли', 'Переходим на еженедельный контроль 3–4 ключевых цифр, чтобы бизнес рос без ручного тушения пожаров.']
+        ['Этап 2 (Недели 3–6): Делегирование и система привлечения', 'Распределяем ответственность по функциям и подключаем AI-автоматизацию ключевых процессов.'],
+        ['Этап 3 (Недели 7–12): Измеримый рост прибыли', 'Переходим на еженедельный контроль 3–4 ключевых цифр без ручного тушения пожаров.']
       ] : [
         ['Stage 1 (Weeks 1–2): Strategic Alignment', `Clear the noise and lock a step-by-step plan directly targeting "${goal90}".`],
         ['Stage 2 (Weeks 3–6): Delegation & Client Flow', 'Clarify team ownership and streamline client acquisition with smart automation.'],
@@ -1909,32 +2658,25 @@ function buildDiagnosis() {
   return {
     ownerKey: 'tatiana',
     expertChip: isRu ? '🟡 Профильный трек: Постановка целей и ясность (Татьяна)' : '🟡 Matched Track: Goal Clarity & Life Strategy (Tatiana)',
-    rootTitle: isRu
-      ? `Энергия уходит туда, где нет чётко сформулированной цели и первого шага`
-      : `Energy drains wherever there isn't a clear, chosen target and first step`,
+    rootTitle: isRu ? 'Энергия уходит туда, где нет чёткой цели и первого шага' : 'Energy drains wherever there isn’t a clear target and first step',
     rootBody: isRu
-      ? `Вы выбрали «${mainP}», и сейчас сильнее всего мешает: «${bottleneck}». Когда в голове крутятся десятки неструктурированных желаний, мозг тратит силы на сомнения вместо движения. Стоит превратить расплывчатое желание в ясную цель на 3–6 месяцев — и энергия возвращается почти сразу.`
-      : `You selected "${mainP}", and right now the key friction is "${bottleneck}". When dozens of unstructured wishes compete for attention, you burn energy on doubt instead of action. Turning a vague wish into one vivid 3–6 month target immediately restores drive.`,
-    step72Title: isRu
-      ? `Техника «1 лист ясности» за 20 минут`
-      : `The 20-Minute "One-Page Clarity" Reset`,
+      ? `Вы выбрали «${mainP}», и сейчас сильнее всего мешает: «${bottleneck}». Стоит превратить расплывчатое желание в ясную цель на 3–6 месяцев — и энергия возвращается почти сразу.`
+      : `You selected "${mainP}", and right now the key friction is "${bottleneck}". Turning a vague wish into one vivid 3–6 month target immediately restores drive.`,
+    step72Title: isRu ? 'Техника «1 лист ясности» за 20 минут' : 'The 20-Minute "One-Page Clarity" Reset',
     step72Body: isRu
-      ? `Сегодня вечером выделите 20 минут без телефона: (1) выпишите всё, что сейчас забирает ваше внимание, (2) выберите ровно ОДНУ сферу («${mainP}») и сформулируйте, как выглядит успех через 90 дней, (3) сделайте один маленький физический шаг уже завтра до 12:00. Маленькая завершённая победа запускает восходящий поток.`
-      : `Take 20 phone-free minutes tonight: (1) list everything competing for your attention, (2) pick ONE focus ("${mainP}") and describe what success looks like in 90 days, and (3) complete one tiny physical step before noon tomorrow. One finished win ignites momentum.`,
-    gateTitle: isRu
-      ? `Откройте ваш персональный план из 3 шагов на 90 дней`
-      : `Unlock Your Personalized 3-Step 90-Day Plan`,
-    gateSub: isRu
-      ? `Получите пошаговую дорожную карту достижения вашей цели и возможность пройти короткую бесплатную встречу-знакомство с экспертом.`
-      : `Get your tailored step-by-step roadmap and optional free 15-min clarity call.`,
+      ? `Сегодня вечером выделите 20 минут без телефона: (1) выпишите всё, что забирает внимание, (2) выберите ОДНУ сферу («${mainP}») и сформулируйте успех через 90 дней, (3) сделайте один маленький физический шаг завтра до 12:00.`
+      : `Take 20 phone-free minutes tonight: (1) list everything competing for attention, (2) pick ONE focus ("${mainP}") and define 90-day success, and (3) complete one tiny physical step before noon tomorrow.`,
+    gateTitle: isRu ? 'Откройте ваш персональный план из 3 шагов на 90 дней' : 'Unlock Your Personalized 3-Step 90-Day Plan',
+    unlockedTitle: isRu ? 'Ваш персональный план из 3 шагов на 90 дней' : 'Your Personalized 3-Step 90-Day Plan',
+    gateSub: isRu ? 'Получите пошаговую дорожную карту достижения цели и возможность пройти короткую встречу с экспертом.' : 'Get your tailored step-by-step roadmap and optional free 15-min clarity call.',
     steps: isRu ? [
       ['Шаг 1 (Недели 1–2): Найти «настоящее почему» и цель', `Убираем лишний шум и формулируем вдохновляющую цель под ваш запрос: «${goal90}».`],
       ['Шаг 2 (Недели 3–6): Простой пошаговый план на 3–6 месяцев', 'Разбиваем большую цель на понятные еженедельные действия («раз, два, три») без перегруза.'],
-      ['Шаг 3 (Недели 7–12): Поддержка и закрепление побед', 'Фиксируем еженедельный прогресс (в группе, онлайн или со «вторым человеком»), чтобы дойти до устойчивого результата.']
+      ['Шаг 3 (Недели 7–12): Поддержка и закрепление побед', 'Фиксируем еженедельный прогресс (в курсе или со «вторым человеком»), чтобы дойти до результата.']
     ] : [
       ['Step 1 (Weeks 1–2): Uncover the True Priority', `Clear mental clutter and craft an inspiring target around "${goal90}".`],
       ['Step 2 (Weeks 3–6): Simple 3–6 Month Roadmap', 'Break the big goal into crisp weekly steps ("1, 2, 3") without overwhelm.'],
-      ['Step 3 (Weeks 7–12): Momentum & Accountability', 'Track weekly wins (in a group, online course, or 1-on-1) until the new level becomes your normal.']
+      ['Step 3 (Weeks 7–12): Momentum & Accountability', 'Track weekly wins (in the course or 1-on-1) until the new level becomes your normal.']
     ]
   };
 }
@@ -1943,19 +2685,15 @@ function renderResult() {
   const d = t();
   const diag = buildDiagnosis();
   const priorities = getSelectedTexts();
-
   document.getElementById('wowChip').textContent = d.wowChip;
   document.getElementById('wowHeadline').textContent = d.wowHeadline;
-  document.getElementById('wowTags').innerHTML = priorities.map(p => `<span class="wow-tag">✓ ${p}</span>`).join('');
-
+  document.getElementById('wowTags').innerHTML = priorities.map(p => `<span class="wow-tag">✓ ${escapeHtml(p)}</span>`).join('');
   document.getElementById('rootLabel').textContent = d.rootLabel;
   document.getElementById('rootTitle').textContent = diag.rootTitle;
   document.getElementById('rootBody').textContent = diag.rootBody;
-
   document.getElementById('step72Label').textContent = d.step72Label;
   document.getElementById('step72Title').textContent = diag.step72Title;
   document.getElementById('step72Body').textContent = diag.step72Body;
-
   document.getElementById('pillarsStrip').innerHTML = d.pillars.map(([title, desc]) => `
     <div class="pillar"><strong>✦ ${title}</strong>${desc}</div>
   `).join('');
@@ -1970,13 +2708,8 @@ function renderResult() {
 
   document.getElementById('gateCard').style.display = state.unlocked ? 'none' : 'block';
   document.getElementById('unlockedPlan').style.display = state.unlocked ? 'block' : 'none';
-
   document.getElementById('unlockedLabel').textContent = d.unlockedLabel;
-  const cleanUnlockedTitle = diag.gateTitle
-    .replace(/^Откройте ваш /i, 'Ваш ')
-    .replace(/^Откройте пошаговый /i, 'Ваш пошаговый ')
-    .replace(/^Unlock Your /i, 'Your ');
-  document.getElementById('unlockedTitle').textContent = cleanUnlockedTitle;
+  document.getElementById('unlockedTitle').textContent = diag.unlockedTitle;
   document.getElementById('unlockedSteps').innerHTML = diag.steps.map(([stTitle, stBody], i) => `
     <div class="plan-step">
       <div class="plan-num">${i + 1}</div>
@@ -1986,16 +2719,17 @@ function renderResult() {
       </div>
     </div>
   `).join('');
-  const latestLead = state.leads[0];
+
   const confirmEl = document.getElementById('unlockedConfirm');
-  if (confirmEl && latestLead && state.unlocked) {
+  if (confirmEl && state.unlocked) {
     const expertName = diag.ownerKey === 'vaidile'
       ? (state.lang === 'ru' ? 'Вайдиле (финансовое планирование)' : 'Vaidilė (Financial Consulting)')
       : (state.lang === 'ru' ? 'Татьяне (стратегия и постановка целей)' : 'Tatiana (Goals & Business Strategy)');
     confirmEl.innerHTML = state.lang === 'ru'
-      ? `✨ <strong>${escapeHtml(latestLead.name)}</strong>, ваш запрос на персональный разбор передан <strong>${expertName}</strong>. Мы свяжемся с вами по контакту <strong>${escapeHtml(latestLead.contact)}</strong>.`
-      : `✨ <strong>${escapeHtml(latestLead.name)}</strong>, your personal breakdown request has been routed to <strong>${expertName}</strong>. We'll reach out via <strong>${escapeHtml(latestLead.contact)}</strong>.`;
+      ? `✨ <strong>${escapeHtml(state.lastLeadName)}</strong>, ваш запрос на персональный разбор передан <strong>${expertName}</strong>. Мы свяжемся по контакту <strong>${escapeHtml(state.lastLeadContact)}</strong>.`
+      : `✨ <strong>${escapeHtml(state.lastLeadName)}</strong>, your personal breakdown request has been routed to <strong>${expertName}</strong>. We'll reach out via <strong>${escapeHtml(state.lastLeadContact)}</strong>.`;
   }
+  document.getElementById('btnGoCourse').textContent = d.btnGoCourse;
   document.getElementById('btnSeeOwnerDemo').textContent = d.btnSeeOwner;
   document.getElementById('btnRestart').textContent = d.btnRestart;
 }
@@ -2003,29 +2737,21 @@ function renderResult() {
 function submitLead() {
   const name = document.getElementById('leadName').value.trim();
   const contact = document.getElementById('leadContact').value.trim();
-  if (!name || !contact) {
-    alert(t().fillAlert);
-    return;
-  }
+  if (!name || !contact) { alert(t().fillAlert); return; }
   const diag = buildDiagnosis();
-  const now = new Date();
-  const hh = String(now.getHours()).padStart(2, '0');
-  const mm = String(now.getMinutes()).padStart(2, '0');
-  const sp = getSphere();
-  const kidsNote = sp && sp.items.some(it => it.id === 'f_kids' && state.selectedIds.includes(it.id));
-
-  let routeLabel = diag.ownerKey === 'vaidile'
+  state.lastLeadName = name;
+  state.lastLeadContact = contact;
+  const routeLabel = diag.ownerKey === 'vaidile'
     ? (state.lang === 'ru' ? 'Вайдиле • Финансовое консультирование' : 'Vaidilė • Financial Consulting')
     : (computeRoute() === 'business'
-      ? (state.lang === 'ru' ? 'Татьяна • Админ-шкала (Бизнес / 3-я дин.)' : 'Tatiana • Admin Scale (Business / 3rd Dyn.)')
-      : (state.lang === 'ru' ? 'Татьяна • Админ-шкала (Личное / Семья)' : 'Tatiana • Admin Scale (Personal / Family)'));
+      ? (state.lang === 'ru' ? 'Татьяна • Админ-шкала (Бизнес / VIP)' : 'Tatiana • Goal Strategy (Business / VIP)')
+      : (state.lang === 'ru' ? 'Татьяна • Админ-шкала (Личное / Семья)' : 'Tatiana • Goal Strategy (Personal / Family)'));
 
-  if (kidsNote) {
-    routeLabel += state.lang === 'ru' ? ' + 2-я очередь: Школа/Скотт' : ' + Phase 2: Parent School';
-  }
-
-  state.leads.unshift({
+  state.items.unshift({
     id: 'lead-' + Date.now(),
+    kind: 'lead',
+    hot: false,
+    fresh: true,
     name,
     contact,
     lang: state.lang.toUpperCase(),
@@ -2035,115 +2761,27 @@ function submitLead() {
     bottleneck: state.answers[0],
     goal90: state.answers[1],
     format: state.answers[2],
-    time: (state.lang === 'ru' ? 'Только что, ' : 'Just now, ') + `${hh}:${mm}`,
-    done: false,
-    fresh: true
+    time: (state.lang === 'ru' ? 'Только что, ' : 'Just now, ') + nowTime(),
+    done: false
   });
-  saveLeads();
+  saveItems();
   state.unlocked = true;
   renderResult();
   updateOwnerBadge(true);
 }
 
-function updateOwnerBadge(pulse) {
-  const pending = state.leads.filter(l => !l.done).length;
-  const badge = document.getElementById('unreadBadge');
-  badge.textContent = pending;
-  badge.style.display = pending > 0 ? 'inline-flex' : 'none';
-  if (pulse) {
-    badge.classList.remove('badge-pulse');
-    void badge.offsetWidth;
-    badge.classList.add('badge-pulse');
-  }
-}
-
-function toggleOwnerView(force) {
-  state.ownerOpen = typeof force === 'boolean' ? force : !state.ownerOpen;
-  document.getElementById('quizApp').style.display = state.ownerOpen ? 'none' : 'block';
-  document.getElementById('ownerApp').style.display = state.ownerOpen ? 'block' : 'none';
-  document.getElementById('ownerToggleBtn').classList.toggle('active', state.ownerOpen);
-  renderOwnerDashboard();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function setFilter(f) {
-  state.filter = f;
-  renderOwnerDashboard();
-}
-
-function markLeadDone(id) {
-  const ld = state.leads.find(x => x.id === id);
-  if (ld) {
-    ld.done = !ld.done;
-    ld.fresh = false;
-    saveLeads();
-    updateOwnerBadge(false);
-    renderOwnerDashboard();
-  }
-}
-
-function renderOwnerDashboard() {
-  const d = t();
-  document.getElementById('ownerBtnLabel').textContent = state.ownerOpen ? d.ownerBtnActive : d.ownerBtn;
-  document.getElementById('ownerChip').textContent = d.ownerChip;
-  document.getElementById('ownerTitle').textContent = d.ownerTitle;
-  document.getElementById('ownerSub').textContent = d.ownerSub;
-  document.getElementById('kpiVisits').textContent = state.visits;
-  document.getElementById('kpiCompleted').textContent = state.completed;
-  document.getElementById('kpiLeads').textContent = state.leads.length;
-  document.getElementById('kpiPending').textContent = state.leads.filter(l => !l.done).length;
-  document.getElementById('kpiVisitsLbl').textContent = d.kpis[0];
-  document.getElementById('kpiCompletedLbl').textContent = d.kpis[1];
-  document.getElementById('kpiLeadsLbl').textContent = d.kpis[2];
-  document.getElementById('kpiPendingLbl').textContent = d.kpis[3];
-
-  document.getElementById('fltAll').textContent = d.filters[0];
-  document.getElementById('fltVaidile').textContent = d.filters[1];
-  document.getElementById('fltTatiana').textContent = d.filters[2];
-  document.getElementById('fltAll').classList.toggle('active', state.filter === 'all');
-  document.getElementById('fltVaidile').classList.toggle('active', state.filter === 'vaidile');
-  document.getElementById('fltTatiana').classList.toggle('active', state.filter === 'tatiana');
-  document.getElementById('btnBackToQuiz').textContent = d.btnBackToQuiz;
-  document.getElementById('ownerFootnote').textContent = d.ownerFootnote;
-
-  const filtered = state.filter === 'all' ? state.leads : state.leads.filter(l => l.route === state.filter);
-  const dl = d.dossierLabels;
-  document.getElementById('leadsContainer').innerHTML = filtered.map(ld => `
-    <div class="lead-card ${ld.fresh ? 'fresh' : ''}">
-      <div class="lead-head">
-        <div>
-          <div class="lead-name">${ld.fresh ? `<span class="route-pill route-new">${dl.newBadge}</span>` : ''}${escapeHtml(ld.name)}</div>
-          <div class="lead-contact">${escapeHtml(ld.contact)} • ${escapeHtml(ld.time)} • [${ld.lang}]</div>
-        </div>
-        <span class="route-pill ${ld.route === 'vaidile' ? 'route-vaidile' : 'route-tatiana'}">${escapeHtml(ld.routeLabel)}</span>
-      </div>
-      <div class="lead-body">
-        <div><strong>${dl.priorities}:</strong> ${ld.priorities.map(escapeHtml).join(' • ')}</div>
-        <div><strong>${dl.bottleneck}:</strong> ${escapeHtml(ld.bottleneck)}</div>
-        <div><strong>${dl.goal90}:</strong> ${escapeHtml(ld.goal90)}</div>
-        <div><strong>${dl.format}:</strong> ${escapeHtml(ld.format)}</div>
-      </div>
-      <div class="lead-actions">
-        <button class="btn-mini ${ld.done ? 'done' : ''}" onclick="markLeadDone('${ld.id}')">${ld.done ? dl.doneText : dl.markDone}</button>
-      </div>
-    </div>
-  `).join('');
-}
-
-function escapeHtml(s) {
-  return String(s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function jumpToMatchedCourse() {
+  const diag = buildDiagnosis();
+  state.courseTrack = diag.ownerKey;
+  switchMode('course');
 }
 
 function updateProgress() {
   const d = t();
   const wrap = document.getElementById('progressWrap');
-  if (state.step === 5) {
-    wrap.style.display = 'none';
-    return;
-  }
+  if (state.step === 5) { wrap.style.display = 'none'; return; }
   wrap.style.display = 'block';
-  let pct = 20;
-  let label = d.stepOf(1, 4);
+  let pct = 20, label = d.stepOf(1, 4);
   if (state.step === 2) { pct = 42; label = d.stepOf(2, 4); }
   else if (state.step === 3) { pct = 58 + state.qIdx * 12; label = d.stepOf(3, 4); }
   else if (state.step === 4) { pct = 95; label = d.stepOf(4, 4); }
@@ -2164,24 +2802,371 @@ function goStep(n) {
 }
 
 function resetToStart() {
-  state.ownerOpen = false;
-  document.getElementById('quizApp').style.display = 'block';
-  document.getElementById('ownerApp').style.display = 'none';
-  document.getElementById('ownerToggleBtn').classList.remove('active');
   state.sphereId = null;
   state.selectedIds = [];
   state.answers = ['', '', ''];
   state.qIdx = 0;
   state.unlocked = false;
+  switchMode('quiz');
   renderAll();
   goStep(1);
 }
 
+/* ================= MODULE 2: AI COURSE SUPERVISOR ================= */
+function setCourseTrack(tr) {
+  state.courseTrack = tr;
+  state.rubricOpen = false;
+  document.getElementById('courseAnswerInput').value = '';
+  renderCourse();
+}
+
+function toggleRubric() {
+  state.rubricOpen = !state.rubricOpen;
+  document.getElementById('rubricBox').classList.toggle('open', state.rubricOpen);
+  document.getElementById('rubricArrow').textContent = state.rubricOpen ? '▲' : '▼';
+}
+
+function fillScenario(kind) {
+  const tr = t().tracks[state.courseTrack];
+  document.getElementById('courseAnswerInput').value = tr.scenarios[kind].text;
+  document.getElementById('courseAnswerInput').focus();
+}
+
+function renderCourse() {
+  const d = t();
+  const trKey = state.courseTrack;
+  const tr = d.tracks[trKey];
+  const unlocked3 = state.lesson3Unlocked[trKey];
+
+  document.getElementById('courseChip').textContent = d.courseChip;
+  document.getElementById('courseHeroTitle').textContent = d.courseHeroTitle;
+  document.getElementById('courseHeroSub').textContent = d.courseHeroSub;
+
+  document.getElementById('trTatBadge').textContent = d.tracks.tatiana.badge;
+  document.getElementById('trTatTag').textContent = d.tracks.tatiana.tag;
+  document.getElementById('trTatTitle').textContent = d.tracks.tatiana.title;
+  document.getElementById('trTatSub').textContent = d.tracks.tatiana.sub;
+  document.getElementById('trVaiBadge').textContent = d.tracks.vaidile.badge;
+  document.getElementById('trVaiTag').textContent = d.tracks.vaidile.tag;
+  document.getElementById('trVaiTitle').textContent = d.tracks.vaidile.title;
+  document.getElementById('trVaiSub').textContent = d.tracks.vaidile.sub;
+
+  document.getElementById('trackTatiana').classList.toggle('active', trKey === 'tatiana');
+  document.getElementById('trackVaidile').classList.toggle('active', trKey === 'vaidile');
+
+  document.getElementById('checksheetBar').innerHTML = `
+    <div class="cs-step done"><div class="cs-badge">✓</div><span>${tr.lessons[0]}</span></div>
+    <div class="cs-step ${unlocked3 ? 'done' : 'current'}"><div class="cs-badge">${unlocked3 ? '✓' : '2'}</div><span>${tr.lessons[1]}</span></div>
+    <div class="cs-step ${unlocked3 ? 'unlocked' : ''}"><div class="cs-badge">${unlocked3 ? '🔓' : '🔒'}</div><span>${tr.lessons[2]}</span></div>
+  `;
+
+  document.getElementById('lessonBadge').textContent = tr.lessonBadge;
+  document.getElementById('lessonTitle').textContent = tr.lessonTitle;
+  document.getElementById('lessonIntro').textContent = tr.lessonIntro;
+
+  document.getElementById('visualFlow').innerHTML = tr.flow.map(([ft, fd], i) => `
+    <div class="vf-box">
+      <div class="vf-num">${i + 1}</div>
+      <strong>${ft}</strong>
+      <span>${fd}</span>
+    </div>
+  `).join('');
+
+  document.getElementById('rubricToggleLbl').textContent = d.rubricToggle;
+  document.getElementById('rubricArrow').textContent = state.rubricOpen ? '▲' : '▼';
+  const rBox = document.getElementById('rubricBox');
+  rBox.classList.toggle('open', state.rubricOpen);
+  rBox.innerHTML = `<strong>${tr.rubricTitle}</strong><ul>${tr.rubricItems.map(x => `<li>${x}</li>`).join('')}</ul>`;
+
+  document.getElementById('assignTitle').textContent = tr.assignTitle;
+  document.getElementById('assignPrompt').textContent = tr.assignPrompt;
+  document.getElementById('scenLabel').textContent = d.scenLabel;
+  document.getElementById('scenarioChips').innerHTML = `
+    <button class="scen-chip good" onclick="fillScenario('good')">${tr.scenarios.good.label}</button>
+    <button class="scen-chip weak" onclick="fillScenario('weak')">${tr.scenarios.weak.label}</button>
+    <button class="scen-chip stuck" onclick="fillScenario('stuck')">${tr.scenarios.stuck.label}</button>
+  `;
+  document.getElementById('courseAnswerInput').placeholder = tr.answerPh;
+  document.getElementById('btnCheckAnswer').textContent = d.btnCheck;
+  document.getElementById('checkingLbl').textContent = d.checkingLbl;
+
+  renderSupervisorFeedback();
+}
+
+function evaluateCourseAnswer() {
+  const d = t();
+  const trKey = state.courseTrack;
+  const text = document.getElementById('courseAnswerInput').value.trim();
+  if (!text) { alert(d.emptyAnsAlert); return; }
+
+  document.getElementById('courseChecking').style.display = 'block';
+  document.getElementById('supervisorOutput').innerHTML = '';
+
+  setTimeout(() => {
+    document.getElementById('courseChecking').style.display = 'none';
+    const low = text.toLowerCase();
+    const stuckWords = ['застрял', 'не понимаю', 'не знаю', 'тяжело', 'сложно', 'страшно', 'каша', 'долг', 'хаос', 'помоги', 'stuck', 'overwhelmed', 'anxious', 'confused', 'chaos', 'debt', 'don\'t know', 'dont know', 'help'];
+    const hasStuck = stuckWords.some(w => low.includes(w));
+    const hasNumber = /\d/.test(text);
+    const concreteWords = ['недел', 'пятниц', 'понедельник', 'март', 'дн', 'мес', 'резерв', 'подушк', 'корзин', 'шаг', 'ваканси', 'подписк', 'кофе', 'week', 'friday', 'monday', 'march', 'day', 'month', 'bucket', 'cushion', 'step', 'subscription', 'coffee', 'hire'];
+    const concreteHits = concreteWords.filter(w => low.includes(w)).length;
+    const isStrong = !hasStuck && text.length >= 55 && hasNumber && concreteHits >= 2;
+
+    if (isStrong) {
+      state.lesson3Unlocked[trKey] = true;
+      state.lastFeedback[trKey] = { type: 'pass', text };
+      logCourseEventToOwner(trKey, 'ok', text);
+    } else if (hasStuck || state.attempts[trKey] >= 1) {
+      state.attempts[trKey]++;
+      state.lastFeedback[trKey] = { type: 'stuck', text };
+      logCourseEventToOwner(trKey, 'stuck', text);
+    } else {
+      state.attempts[trKey]++;
+      state.lastFeedback[trKey] = { type: 'revise', attempt: state.attempts[trKey], text };
+    }
+    renderCourse();
+  }, 750);
+}
+
+function logCourseEventToOwner(trKey, status, quote) {
+  const isRu = state.lang === 'ru';
+  const tr = t().tracks[trKey];
+  const studentName = state.lastLeadName || (isRu ? 'Тестовый студент (Вы)' : 'Demo Student (You)');
+  const studentContact = state.lastLeadContact || (isRu ? 'Прямо сейчас в демо-курсе' : 'Live inside Demo Course');
+  const isStuck = status === 'stuck';
+
+  const newEntry = {
+    id: 'stud-' + Date.now(),
+    kind: 'student',
+    hot: isStuck,
+    fresh: true,
+    name: studentName,
+    contact: studentContact,
+    lang: state.lang.toUpperCase(),
+    route: trKey,
+    routeLabel: tr.expertShort,
+    courseTitle: isStuck
+      ? (isRu ? `${tr.title} • Застрял на Уроке 2 (65%)` : `${tr.title} • Stuck at Lesson 2 (65%)`)
+      : (isRu ? `${tr.title} • Урок 3 открыт (95%)` : `${tr.title} • Lesson 3 Unlocked (95%)`),
+    progress: isStuck ? 65 : 95,
+    status,
+    aiAlert: isStuck
+      ? (isRu ? '🔥 AI-триггер: студент застрял на контрольном листе → ИИ уже предложил личную VIP-сессию!' : '🔥 AI Trigger: student stuck on checksheet → AI already offered 1-on-1 VIP session!')
+      : (isRu ? '✅ Ответ проверен ИИ по эталонному ключу — Урок 3 открыт автоматически' : '✅ Graded & approved by AI Supervisor — Lesson 3 unlocked automatically'),
+    quote: `«${quote.slice(0, 145)}${quote.length > 145 ? '…' : ''}»`,
+    time: (isRu ? 'Только что, ' : 'Just now, ') + nowTime(),
+    done: !isStuck
+  };
+
+  state.items.unshift(newEntry);
+  saveItems();
+  updateOwnerBadge(true);
+}
+
+function bookCourseUpsell() {
+  const trKey = state.courseTrack;
+  state.upsellBooked[trKey] = true;
+  const firstHot = state.items.find(it => it.kind === 'student' && it.route === trKey && it.hot);
+  if (firstHot) {
+    firstHot.aiAlert = state.lang === 'ru'
+      ? '🔥 СРОЧНО: Студент НАЖАЛ кнопку записи на платную личную сессию!'
+      : '🔥 URGENT: Student CLICKED to book a paid 1-on-1 VIP session!';
+    firstHot.done = false;
+    saveItems();
+  }
+  updateOwnerBadge(true);
+  renderSupervisorFeedback();
+}
+
+function renderSupervisorFeedback() {
+  const d = t();
+  const trKey = state.courseTrack;
+  const tr = d.tracks[trKey];
+  const fb = state.lastFeedback[trKey];
+  const box = document.getElementById('supervisorOutput');
+  if (!fb) { box.innerHTML = ''; return; }
+
+  if (fb.type === 'pass') {
+    box.innerHTML = `
+      <div class="sup-feedback pass">
+        <div class="sup-badge">${d.supPassBadge}</div>
+        <h4>${d.supPassTitle}</h4>
+        <div class="rubric-checks">${d.rubricChecksPass.map(x => `<div class="rc-ok">${x}</div>`).join('')}</div>
+        <p>${d.supPassNote}</p>
+        <button class="btn btn-primary" style="width:100%;" onclick="switchMode('owner')">${d.supGoOwnerBtn}</button>
+      </div>
+    `;
+    return;
+  }
+
+  if (fb.type === 'revise') {
+    box.innerHTML = `
+      <div class="sup-feedback revise">
+        <div class="sup-badge">${d.supRevBadge.replace('{n}', fb.attempt)}</div>
+        <h4>${d.supRevTitle}</h4>
+        <div class="rubric-checks">${d.rubricChecksMiss.map(x => `<div class="rc-miss">${x}</div>`).join('')}</div>
+        <p>${d.supRevHint}</p>
+      </div>
+    `;
+    return;
+  }
+
+  const booked = state.upsellBooked[trKey];
+  box.innerHTML = `
+    <div class="sup-feedback stuck">
+      <div class="sup-badge">${d.supStuckBadge}</div>
+      <h4>${d.supStuckTitle}</h4>
+      <div class="upsell-offer">
+        <strong>${tr.upsellTitle}</strong>
+        <span>${tr.upsellBody}</span>
+        ${booked
+          ? `<div style="padding:10px 12px; border-radius:11px; background:var(--emerald-bg); border:1px solid var(--emerald-border); color:#065f46; font-size:13px; font-weight:700; margin-bottom:10px;">${tr.upsellSent}</div>`
+          : `<button class="btn btn-gold" style="width:100%; margin-bottom:9px;" onclick="bookCourseUpsell()">${tr.upsellBtn}</button>`
+        }
+        <button class="btn btn-primary" style="width:100%;" onclick="switchMode('owner')">${d.supGoOwnerBtn}</button>
+      </div>
+    </div>
+  `;
+}
+
+/* ================= MODULE 3: ENHANCED OWNER DASHBOARD ================= */
+function updateOwnerBadge(pulse) {
+  const pending = state.items.filter(i => !i.done).length;
+  const badge = document.getElementById('unreadBadge');
+  badge.textContent = pending;
+  badge.style.display = pending > 0 ? 'inline-flex' : 'none';
+  if (pulse) {
+    badge.classList.remove('badge-pulse');
+    void badge.offsetWidth;
+    badge.classList.add('badge-pulse');
+  }
+}
+
+function setOwnerSub(s) { state.ownerSub = s; renderOwnerDashboard(); }
+function setFilter(f) { state.filter = f; renderOwnerDashboard(); }
+
+function markItemDone(id) {
+  const it = state.items.find(x => x.id === id);
+  if (it) {
+    it.done = !it.done;
+    it.fresh = false;
+    saveItems();
+    updateOwnerBadge(false);
+    renderOwnerDashboard();
+  }
+}
+
+function renderOwnerDashboard() {
+  const d = t();
+  document.getElementById('ownerChip').textContent = d.ownerChip;
+  document.getElementById('ownerTitle').textContent = d.ownerTitle;
+  document.getElementById('ownerSub').textContent = d.ownerSub;
+
+  const leadCount = state.items.filter(x => x.kind === 'lead').length;
+  const studentCount = state.items.filter(x => x.kind === 'student').length;
+  const hotCount = state.items.filter(x => !x.done).length;
+  const vipCount = Math.max(2, state.items.filter(x => x.hot).length + 1);
+
+  document.getElementById('kpiVisits').textContent = state.visits;
+  document.getElementById('kpiLeads').textContent = leadCount;
+  document.getElementById('kpiStudents').textContent = studentCount;
+  document.getElementById('kpiHot').textContent = hotCount;
+  document.getElementById('kpiVisitsLbl').textContent = d.kpis[0];
+  document.getElementById('kpiLeadsLbl').textContent = d.kpis[1];
+  document.getElementById('kpiStudentsLbl').textContent = d.kpis[2];
+  document.getElementById('kpiHotLbl').textContent = d.kpis[3];
+
+  document.getElementById('funnelTitle').textContent = d.funnelTitle;
+  document.getElementById('funnelRevPill').textContent = d.funnelRev(vipCount);
+  const fData = [
+    [d.funnelSteps[0], state.visits, 100, 'linear-gradient(90deg, #0ea5e9, #38bdf8)'],
+    [d.funnelSteps[1], leadCount + 11, 36, 'linear-gradient(90deg, #10b981, #34d399)'],
+    [d.funnelSteps[2], studentCount + 4, 22, 'linear-gradient(90deg, #7c3aed, #a78bfa)'],
+    [d.funnelSteps[3], vipCount, 12, 'linear-gradient(90deg, #f97316, #e11d48)']
+  ];
+  document.getElementById('funnelBars').innerHTML = fData.map(([lbl, val, pct, bg]) => `
+    <div class="f-row">
+      <div class="f-meta"><span>${lbl}</span><span>${val}</span></div>
+      <div class="f-bar-bg"><div class="f-bar-fill" style="width:${pct}%; background:${bg};"></div></div>
+    </div>
+  `).join('');
+
+  document.getElementById('subAll').textContent = d.subTabs[0];
+  document.getElementById('subLeads').textContent = d.subTabs[1];
+  document.getElementById('subStudents').textContent = d.subTabs[2];
+  document.getElementById('subAll').classList.toggle('active', state.ownerSub === 'all');
+  document.getElementById('subLeads').classList.toggle('active', state.ownerSub === 'leads');
+  document.getElementById('subStudents').classList.toggle('active', state.ownerSub === 'students');
+
+  document.getElementById('fltAll').textContent = d.filters[0];
+  document.getElementById('fltVaidile').textContent = d.filters[1];
+  document.getElementById('fltTatiana').textContent = d.filters[2];
+  document.getElementById('fltAll').classList.toggle('active', state.filter === 'all');
+  document.getElementById('fltVaidile').classList.toggle('active', state.filter === 'vaidile');
+  document.getElementById('fltTatiana').classList.toggle('active', state.filter === 'tatiana');
+  document.getElementById('btnOwnerToCourse').textContent = d.btnOwnerToCourse;
+  document.getElementById('btnBackToQuiz').textContent = d.btnBackToQuiz;
+  document.getElementById('ownerFootnote').textContent = d.ownerFootnote;
+
+  let filtered = state.items.slice();
+  if (state.ownerSub === 'leads') filtered = filtered.filter(x => x.kind === 'lead');
+  if (state.ownerSub === 'students') filtered = filtered.filter(x => x.kind === 'student');
+  if (state.filter !== 'all') filtered = filtered.filter(x => x.route === state.filter);
+
+  const dl = d.dossierLabels;
+  document.getElementById('ownerFeedContainer').innerHTML = filtered.map(it => {
+    const cardCls = it.hot ? 'hot' : (it.fresh ? 'fresh' : '');
+    const statusBadge = it.hot
+      ? `<span class="route-pill route-hot">${dl.hotBadge}</span>`
+      : (it.fresh ? `<span class="route-pill route-new">${dl.newBadge}</span>` : '');
+    const kindBadge = it.kind === 'student' ? `<span class="route-pill route-course">${dl.courseBadge}</span>` : '';
+
+    const bodyHtml = it.kind === 'student'
+      ? `
+        <div class="lead-body">
+          <div><strong>${dl.courseName}:</strong> ${escapeHtml(it.courseTitle)}</div>
+          <div><strong>${dl.aiAlert}:</strong> ${escapeHtml(it.aiAlert)}</div>
+          <div><strong>${dl.studentQuote}:</strong> ${escapeHtml(it.quote)}</div>
+          <div class="stud-prog-row">
+            <div class="stud-prog-track"><div class="stud-prog-fill ${it.status}" style="width:${it.progress}%;"></div></div>
+            <span>${it.progress}%</span>
+          </div>
+        </div>`
+      : `
+        <div class="lead-body">
+          <div><strong>${dl.priorities}:</strong> ${(it.priorities || []).map(escapeHtml).join(' • ')}</div>
+          <div><strong>${dl.bottleneck}:</strong> ${escapeHtml(it.bottleneck)}</div>
+          <div><strong>${dl.goal90}:</strong> ${escapeHtml(it.goal90)}</div>
+          <div><strong>${dl.format}:</strong> ${escapeHtml(it.format)}</div>
+        </div>`;
+
+    return `
+      <div class="lead-card ${cardCls}">
+        <div class="lead-head">
+          <div>
+            <div class="lead-name">${statusBadge}${kindBadge}<span>${escapeHtml(it.name)}</span></div>
+            <div class="lead-contact">${escapeHtml(it.contact)} • ${escapeHtml(it.time)} • [${it.lang}]</div>
+          </div>
+          <span class="route-pill ${it.route === 'vaidile' ? 'route-vaidile' : 'route-tatiana'}">${escapeHtml(it.routeLabel)}</span>
+        </div>
+        ${bodyHtml}
+        <div class="lead-actions">
+          <button class="btn-mini ${it.done ? 'done' : ''}" onclick="markItemDone('${it.id}')">${it.done ? dl.doneText : dl.markDone}</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+/* ================= GLOBAL RENDER ================= */
 function renderAll() {
   const d = t();
   document.getElementById('brandTitle').textContent = d.brandTitle;
   document.getElementById('brandSub').textContent = d.brandSub;
-  document.getElementById('ownerBtnLabel').textContent = state.ownerOpen ? d.ownerBtnActive : d.ownerBtn;
+  document.getElementById('tabQuizLbl').textContent = d.tabs[0];
+  document.getElementById('tabCourseLbl').textContent = d.tabs[1];
+  document.getElementById('tabOwnerLbl').textContent = d.tabs[2];
+
   document.getElementById('heroChip').textContent = d.heroChip;
   document.getElementById('heroTitle').textContent = d.heroTitle;
   document.getElementById('heroSub').textContent = d.heroSub;
@@ -2192,16 +3177,18 @@ function renderAll() {
   document.getElementById('btnBackQ').textContent = d.back;
   document.getElementById('anTitle').textContent = d.anTitle;
   document.getElementById('anSub').textContent = d.anSub;
+
   renderSpheres();
   updateProgress();
   if (state.step === 2) renderCheckboxes();
   if (state.step === 3) renderQuestion();
   if (state.step === 5) renderResult();
+  renderCourse();
   renderOwnerDashboard();
   updateOwnerBadge(false);
 }
 
-loadLeads();
+loadItems();
 setLang(state.lang);
 </script>
 </body>
