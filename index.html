@@ -3,10 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Компас Ясности · Clarity Compass</title>
-<meta name="description" content="Интерактивная AI-экосистема: бесплатный AI-опросник за 2 минуты, заочный курс с AI-супервайзером проверки заданий и мобильный пульт владельца." />
-<meta property="og:title" content="Компас Ясности · AI-экосистема (Демо)" />
-<meta property="og:description" content="3 модуля в одном приложении: 1) AI-опросник клиента, 2) AI-супервайзер курса с автодопродажей VIP, 3) Пульт владельца на телефоне." />
+<title>Платформа проектов · Вайдиле и Татьяна</title>
+<meta name="description" content="Два онлайн-проекта и единый рабочий кабинет: финансовый консалтинг и обучение Вайдиле + система прохождения Шкалы целей Татьяны." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
@@ -29,6 +27,8 @@
   --amber-line:#efdfbb;
   --yellow-bg:#fff6e2;
   --yellow-line:#f0dfb6;
+  --blue-bg:#e8f3ff;
+  --blue-ink:#245982;
   --radius:24px;
   --shadow:0 8px 26px rgba(24, 61, 53, 0.06);
 }
@@ -37,28 +37,28 @@ body{
   margin:0;
   background:var(--bg);
   color:var(--ink);
-  font:15.5px/1.52 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font:15.5px/1.54 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   -webkit-font-smoothing:antialiased;
 }
 button,input,textarea,select{font:inherit;color:inherit}
 button,select,summary{cursor:pointer}
 button{border:0}
-button:disabled{cursor:default;opacity:.46}
+button:disabled{cursor:default;opacity:.48}
 button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,summary:focus-visible{
   outline:3px solid #3682b5;
   outline-offset:3px;
 }
 h1,h2,h3,p{margin:0}
-h1,h2,h3{line-height:1.15;letter-spacing:-.03em}
-h1{font-size:clamp(27px, 4.8vw, 52px);font-weight:750}
-h2{font-size:clamp(20px, 2.4vw, 24px);font-weight:750}
+h1,h2,h3{line-height:1.16;letter-spacing:-.03em}
+h1{font-size:clamp(26px, 4.4vw, 48px);font-weight:750}
+h2{font-size:clamp(20px, 2.3vw, 24px);font-weight:750}
 h3{font-size:17.5px;font-weight:750}
 p,small{color:var(--muted)}
 small{font-size:13px}
 
 .shell{width:min(100% - 32px, 1120px);margin:auto}
 
-/* Sticky Nordic Topbar */
+/* Sticky Topbar */
 .top{
   position:sticky;
   top:0;
@@ -68,7 +68,7 @@ small{font-size:13px}
   border-bottom:1px solid var(--line);
 }
 .brandbar{
-  min-height:66px;
+  min-height:64px;
   display:flex;
   align-items:center;
   gap:11px;
@@ -83,16 +83,16 @@ small{font-size:13px}
 }
 .logo,.icon{display:grid;place-items:center;flex:none}
 .logo{
-  width:39px;
-  height:39px;
+  width:38px;
+  height:38px;
   border-radius:13px;
   background:#145745;
   color:#fff;
-  font-size:23px;
+  font-size:21px;
 }
 .brandbar strong,.brandbar small{display:block}
-.brandbar strong{line-height:1.15;font-size:16px;font-weight:800;color:var(--ink)}
-.brandbar small{font-size:12.5px;color:var(--muted)}
+.brandbar strong{line-height:1.15;font-size:15.5px;font-weight:800;color:var(--ink)}
+.brandbar small{font-size:12.2px;color:var(--muted)}
 
 .lang{
   margin-left:auto;
@@ -127,13 +127,17 @@ nav button{
   background:none;
   border-radius:11px;
   min-height:43px;
-  padding:4px 4px;
+  padding:4px 6px;
   font-weight:700;
-  font-size:clamp(11.5px, 3vw, 14px);
+  font-size:clamp(12px, 3vw, 14px);
   white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
   color:var(--muted);
   transition:all .18s ease;
 }
+.tab-ext{display:none}
+@media(min-width:600px){.tab-ext{display:inline}}
 nav button:hover{color:var(--ink)}
 nav .on{
   background:#fff;
@@ -157,10 +161,11 @@ nav .on{
 @keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.25)}100%{transform:scale(1)}}
 .count.pulse{animation:pop .5s ease 2}
 
-main{padding:20px 0 56px}
-.stack{display:grid;gap:16px}
+main{padding:20px 0 58px}
+.stack{display:grid;gap:18px}
+.sub-stack{display:grid;gap:12px}
 
-/* Serene Mint-Sky Hero + Geometric Compass */
+/* Hero Cards */
 .hero{
   position:relative;
   isolation:isolate;
@@ -170,23 +175,31 @@ main{padding:20px 0 56px}
   background:linear-gradient(117deg, #e9f8ee, #dff3f8 72%, #c9e8ee);
   border:1px solid #cfe9e4;
 }
-.hero h1{max-width:690px;margin:12px 0 10px;color:var(--ink)}
-.hero p{max-width:560px;color:#35565a;font-size:15px}
-.hero.intro{padding-top:144px}
+.hero.warm-hero{
+  background:linear-gradient(120deg, #f3f9f5 0%, #eef6fa 55%, #fff5e3 100%);
+  border-color:#d8e7e2;
+}
+.hero.cabinet-hero{
+  background:linear-gradient(117deg, #e7f3f9, #ebf6f1 75%, #e2efe9);
+  border-color:#cde2e0;
+}
+.hero h1{max-width:700px;margin:12px 0 10px;color:var(--ink)}
+.hero p{max-width:580px;color:#35565a;font-size:15px}
+.hero.with-art{padding-top:142px}
 
 .compass{
-  width:152px;
+  width:146px;
   aspect-ratio:1;
   position:absolute;
   right:24px;
-  top:-18px;
+  top:-16px;
   display:grid;
   place-items:center;
   border-radius:50%;
   background:
-    repeating-conic-gradient(from 0deg, #346f6e50 0deg 1deg, transparent 1deg 15deg),
+    repeating-conic-gradient(from 0deg, #346f6e48 0deg 1deg, transparent 1deg 15deg),
     linear-gradient(145deg, #ffffff, #a8dcd6);
-  box-shadow:0 10px 22px #30716a24, inset 0 0 0 6px #ffffff88;
+  box-shadow:0 10px 22px #30716a20, inset 0 0 0 6px #ffffff88;
   transform:rotate(-12deg);
 }
 .compass:before{
@@ -216,7 +229,10 @@ main{padding:20px 0 56px}
   box-shadow:0 1px 6px #173e45aa;
 }
 
-/* Badges / Tags (high contrast on BOTH hero AND white cards!) */
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.hero-actions .primary{width:auto;min-width:210px}
+
+/* Badges / Tags */
 .tag{
   display:inline-flex;
   align-items:center;
@@ -231,60 +247,27 @@ main{padding:20px 0 56px}
   font-weight:750;
   overflow-wrap:anywhere;
 }
-.hero .tag{background:rgba(255,255,255,0.82);color:#1f5548}
+.hero .tag{background:rgba(255,255,255,0.84);color:#1f5548}
 .tag.vaidile{background:#e3f5ec;color:#116851}
 .tag.tatiana{background:#fff3dc;color:#755020}
 .tag.hot-tag{background:#fae6e0;color:var(--coral)}
 .tag.new-tag{background:#e2f2fb;color:#1d5f86}
-.tag.course-tag{background:#edf2fb;color:#3d4d8a}
+.tag.self-tag{background:#e6f6ed;color:#16614a}
+.tag.replied-tag{background:#edf2f1;color:#3d5c5a}
 
-/* 4-Segment Step Bar */
-.stepbar{display:grid;gap:8px;padding:0 2px}
-.row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
-.segments{display:flex;gap:6px}
-.segments i,.meter{height:6px;border-radius:12px;background:#dceae5;overflow:hidden}
-.segments i{flex:1;transition:background .3s ease}
-.segments .filled,.meter i{background:#319779}
-.meter{width:100%}
-.meter i{height:100%;display:block;border-radius:inherit;transition:width .4s ease}
+/* Section Headers */
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.sec-head p{margin-top:4px;font-size:14.2px}
 
 /* Cards & Grids */
-.grid{display:grid;gap:11px}
-.choice,.card{
+.grid{display:grid;gap:12px}
+.card,.choice{
   border:1px solid var(--line);
   background:var(--paper);
   border-radius:var(--radius);
   box-shadow:var(--shadow);
 }
-.choice{
-  display:flex;
-  align-items:center;
-  gap:13px;
-  min-height:88px;
-  text-align:left;
-  padding:14px 15px;
-  transition:border-color .18s ease, transform .18s ease, box-shadow .18s ease;
-}
-.choice:hover,.option:hover,.check-row:hover{border-color:#72ab9a}
-.choice:hover{transform:translateY(-2px)}
-.choice .arrow{margin-left:auto;color:#3f695e;font-size:17px;flex:none}
-.choice strong{display:block;font-size:15.5px;font-weight:750;color:var(--ink);margin-bottom:2px}
-.choice small{display:block;font-size:13px;line-height:1.4}
-
-.icon{
-  height:44px;
-  width:44px;
-  border-radius:14px;
-  background:#e3f3ee;
-  color:#14664e;
-  font-size:21px;
-}
-.icon.blue{background:#e8f3ff;color:#285f87}
-.icon.rose{background:#faeaf1;color:#883f62}
-.icon.amber{background:#fff3dc;color:#755020}
-.choice.warm{background:linear-gradient(135deg, #fffdf8, #fff6e2);border-color:var(--amber-line)}
-
-.card{padding:19px;min-width:0}
+.card{padding:20px;min-width:0}
 .card>*+*{margin-top:12px}
 .card p,.card li{overflow-wrap:anywhere}
 .card.green{background:#e6f6ed;border-color:#c5e7d7}
@@ -293,12 +276,42 @@ main{padding:20px 0 56px}
 .card.peach p{color:#5e352d}
 .card.yellow{background:var(--yellow-bg);border-color:var(--yellow-line)}
 .card.yellow p,.card.yellow li{color:#5d441b}
+.card.soft-mint{background:linear-gradient(135deg, #f4fbf8, #ffffff);border-color:#cde5dc}
+
+.choice{
+  display:flex;
+  align-items:center;
+  gap:13px;
+  min-height:92px;
+  text-align:left;
+  padding:15px 16px;
+  transition:border-color .18s ease, transform .18s ease, box-shadow .18s ease;
+}
+.choice:hover,.option:hover,.check-row:hover{border-color:#72ab9a}
+.choice:hover{transform:translateY(-2px)}
+.choice .arrow{margin-left:auto;color:#3f695e;font-size:17px;flex:none}
+.choice strong{display:block;font-size:15.8px;font-weight:750;color:var(--ink);margin-bottom:3px}
+.choice small{display:block;font-size:13px;line-height:1.42}
+.choice.warm{background:linear-gradient(135deg, #fffdf8, #fff6e2);border-color:var(--amber-line)}
+
+.icon{
+  height:44px;
+  width:44px;
+  border-radius:14px;
+  background:#e3f3ee;
+  color:#14664e;
+  font-size:20px;
+  font-weight:700;
+}
+.icon.blue{background:var(--blue-bg);color:var(--blue-ink)}
+.icon.rose{background:#faeaf1;color:#883f62}
+.icon.amber{background:var(--amber-bg);color:var(--amber-ink)}
 
 /* Buttons */
 .primary,.secondary,.option{
   border-radius:14px;
-  min-height:48px;
-  padding:11px 16px;
+  min-height:47px;
+  padding:10px 16px;
   font-weight:700;
   transition:all .16s ease;
 }
@@ -310,12 +323,22 @@ main{padding:20px 0 56px}
 .secondary:hover:not(:disabled){background:#e6f2ec}
 .option{text-align:left;line-height:1.38}
 .option.on{background:#dff3e8;border-color:#5fa389;color:#0e4737}
+.btn-sm{min-height:38px;padding:7px 13px;font-size:13px;border-radius:11px}
 
-.actions{display:flex;gap:8px;flex-wrap:wrap}
+.actions{display:flex;gap:9px;flex-wrap:wrap}
 .actions>*{flex:1;min-width:140px}
-.back{width:fit-content}
 
-/* Checkboxes (Priority Selection) */
+/* Stepper & Progress */
+.stepbar{display:grid;gap:8px;padding:0 2px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.segments{display:flex;gap:6px}
+.segments i,.meter{height:6px;border-radius:12px;background:#dceae5;overflow:hidden}
+.segments i{flex:1;transition:background .3s ease}
+.segments .filled,.meter i{background:#319779}
+.meter{width:100%}
+.meter i{height:100%;display:block;border-radius:inherit;transition:width .4s ease}
+
+/* Checkboxes */
 .check-row{
   display:flex;
   align-items:center;
@@ -332,7 +355,7 @@ main{padding:20px 0 56px}
 .check-row.on{background:#e4f5ec;border-color:#68ab92}
 .check-row.dis{opacity:.48;cursor:not-allowed}
 .check-row input{width:19px;height:19px;accent-color:var(--green);flex:none;margin:0;cursor:inherit}
-.check-row span{font-size:14.5px;font-weight:600;color:var(--ink)}
+.check-row span{font-size:14.4px;font-weight:600;color:var(--ink)}
 
 /* Forms */
 .form{display:grid;gap:11px}
@@ -344,131 +367,74 @@ input.inp,textarea.inp,select.inp{
   border-radius:12px;
   background:#fff;
   padding:10px 13px;
-  min-height:46px;
+  min-height:45px;
 }
-textarea.inp{resize:vertical;min-height:106px;line-height:1.5}
+textarea.inp{resize:vertical;min-height:96px;line-height:1.5}
 .form-two{display:grid;gap:10px}
 
-/* Analyzing Spinner */
-.analyzing{text-align:center;padding:34px 18px}
-.spin{
-  width:46px;
-  height:46px;
-  border-radius:50%;
-  border:3.5px solid #d5e8e2;
-  border-top-color:var(--green);
-  margin:0 auto 16px;
-  animation:sp .8s linear infinite;
+/* Articles Accordion (Vaidile Info Hub) */
+.article-card{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:20px;
+  padding:16px 18px;
+  box-shadow:var(--shadow);
 }
-@keyframes sp{to{transform:rotate(360deg)}}
-.an-steps{
-  max-width:340px;
-  margin:14px auto 0;
-  text-align:left;
-  display:grid;
-  gap:8px;
-  font-size:13.8px;
-  color:var(--muted);
-}
-.an-steps .done{color:var(--green);font-weight:700}
-
-/* Result Pillars & Blurred Preview */
-.tags{display:flex;gap:6px;flex-wrap:wrap}
-.values,.track{
-  display:grid;
-  gap:7px;
-  grid-template-columns:repeat(3, minmax(0, 1fr));
-  text-align:center;
-}
-.values div{
-  padding:12px 10px;
-  border-radius:16px;
-  background:#ebf5f1;
-  border:1px solid #d3e8df;
-}
-.values strong{display:block;font-size:13.5px;color:var(--green);margin-bottom:2px}
-.values small{display:block;font-size:12px;line-height:1.35}
-@media(max-width:540px){.values{grid-template-columns:1fr;text-align:left}}
-
-.track span{
-  padding:10px 6px;
-  border-radius:13px;
-  background:#e6f4ee;
-  border:1px solid #cde6db;
-  color:#155342;
-  font-size:12.2px;
-  font-weight:750;
-}
-.track .active-step{background:#dff1f7;border-color:#b7dceb;color:#1b4f6e}
-.track .locked{background:#eef1f1;border-color:var(--line);color:#5a6e70}
-.track .unlocked{
-  background:#dff4e8;
-  border-color:#6db896;
-  color:#0e523e;
-  animation:unlock .45s ease-out;
-}
-@keyframes unlock{from{transform:scale(.9);background:#a9e9ba}}
-
-.blur-wrap{
-  position:relative;
-  border-radius:16px;
-  border:1px dashed #b9d2cb;
-  background:#f8fbfa;
-  padding:14px 16px;
-  overflow:hidden;
-}
-.blur{filter:blur(4px);user-select:none;font-size:13.8px;line-height:1.65;color:var(--muted)}
-.blur-ov{
-  position:absolute;
-  inset:0;
-  display:grid;
-  place-items:center;
-  padding:12px;
-  text-align:center;
-  background:rgba(246,249,248,0.52);
-  font-weight:750;
-  font-size:13.5px;
-  color:var(--ink);
-}
-
-/* Course 1-2-3 Visual Scheme */
-.scheme{
+.article-card summary{
+  list-style:none;
   display:flex;
   align-items:center;
-  justify-content:space-evenly;
-  text-align:center;
-  gap:6px;
-  background:linear-gradient(120deg, #e9f6fc, #e9f6ed);
-  border:1px solid #d1e8e4;
-  padding:14px 10px;
-  border-radius:16px;
+  justify-content:space-between;
+  gap:10px;
+  font-weight:750;
+  font-size:15.5px;
+  color:var(--ink);
 }
-.scheme .s-node{flex:1}
-.scheme b{display:block;font-size:21px;color:var(--green);line-height:1.1}
-.scheme strong{display:block;font-size:12.5px;color:var(--ink);margin-top:2px}
-.scheme small{display:block;font-size:11px;line-height:1.3;margin-top:2px}
-.scheme .s-arr{color:#5e8d82;font-weight:700;flex:none}
-@media(max-width:460px){.scheme{flex-direction:column;gap:8px}.scheme .s-arr{transform:rotate(90deg)}}
-
-.rubric-panel{
-  background:#f2f8f6;
-  border:1px dashed #9fc4b8;
-  border-radius:15px;
-  padding:13px 15px;
-  font-size:13.2px;
+.article-card summary::-webkit-details-marker{display:none}
+.article-card summary .plus{
+  width:28px;height:28px;border-radius:9px;background:#eaf4f1;color:var(--green);
+  display:grid;place-items:center;flex:none;font-size:16px;font-weight:800;
 }
-.rubric-panel ul{margin:7px 0 0;padding-left:20px}
-.rubric-panel li{margin-bottom:4px;color:var(--muted)}
+.article-card[open] summary .plus{background:var(--green);color:#fff}
+.article-body{margin-top:12px;padding-top:12px;border-top:1px solid #ecf2f0;font-size:14.2px;color:var(--muted);display:grid;gap:8px}
 
+/* Packages (Vaidile 4 Offers) */
+.pkg-card{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:22px;
+  padding:18px;
+  box-shadow:var(--shadow);
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+.pkg-card.featured{
+  background:linear-gradient(145deg, #f3fbf7, #ffffff);
+  border-color:#78b79e;
+}
+.pkg-price{font-size:18px;font-weight:800;color:var(--green)}
+.pkg-card p{font-size:13.8px;flex:1}
+
+/* Quick Demo Helpers (subtle) */
+.demo-strip{
+  background:#f3f7f6;
+  border:1px dashed #c4d7d2;
+  border-radius:14px;
+  padding:11px 13px;
+  display:grid;
+  gap:8px;
+}
+.demo-strip small{font-size:12px;font-weight:700;color:#4a6b68}
 .scen-grid{display:grid;grid-template-columns:repeat(3, minmax(0,1fr));gap:7px}
 @media(max-width:520px){.scen-grid{grid-template-columns:1fr}}
 .scen-btn{
-  border-radius:12px;
-  min-height:42px;
-  padding:8px 10px;
-  font-size:12.6px;
+  border-radius:11px;
+  min-height:38px;
+  padding:7px 9px;
+  font-size:12.4px;
   font-weight:700;
-  background:#f3f8f6;
+  background:#fff;
   border:1px solid var(--line);
   color:var(--ink);
   transition:all .15s;
@@ -476,30 +442,121 @@ textarea.inp{resize:vertical;min-height:106px;line-height:1.5}
 .scen-btn:hover{border-color:#68ab92;background:#e6f5ee}
 .scen-btn.st:hover{border-color:#d57967;background:#fff0e9;color:var(--coral)}
 
-/* Owner Dashboard */
+/* Interactive Expense Calculator inside Vaidile */
+.calc-result{
+  padding:14px 16px;
+  border-radius:16px;
+  background:#e6f6ed;
+  border:1px solid #c5e7d7;
+  color:#184b3a;
+  font-size:14.2px;
+}
+.calc-result strong{font-size:20px;color:var(--green)}
+
+/* Direct Contact Channels */
+.chan-grid{display:grid;grid-template-columns:repeat(3, minmax(0,1fr));gap:8px}
+@media(max-width:520px){.chan-grid{grid-template-columns:1fr}}
+.chan-pill{
+  border-radius:13px;
+  padding:10px 12px;
+  background:#f4f9f7;
+  border:1px solid var(--line);
+  font-size:13px;
+  font-weight:700;
+  text-align:center;
+  color:var(--ink);
+}
+.chan-pill.on{background:#dff3e8;border-color:#5fa389;color:#0e4737}
+
+/* Scale Map Result (Tatiana) */
+.scale-map{
+  display:grid;
+  gap:10px;
+  background:linear-gradient(135deg, #f3fbf8, #ffffff);
+  border:1px solid #cce3db;
+  border-radius:18px;
+  padding:16px;
+}
+.scale-row{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  padding-bottom:10px;
+  border-bottom:1px solid #e7f0ed;
+}
+.scale-row:last-child{padding-bottom:0;border-bottom:0}
+.scale-num{
+  width:28px;height:28px;border-radius:9px;background:var(--green);color:#fff;
+  display:grid;place-items:center;font-size:13px;font-weight:800;flex:none;
+}
+.scale-row strong{display:block;font-size:13.8px;color:var(--ink)}
+.scale-row span{display:block;font-size:13.6px;color:var(--muted);margin-top:2px}
+
+/* Back-Office Cabinet (Tab 3) */
+.cab-switch{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  gap:8px;
+}
+@media(max-width:560px){.cab-switch{grid-template-columns:1fr}}
 .kpis{grid-template-columns:repeat(2, minmax(0, 1fr))}
-.kpis strong{display:block;font-size:28px;line-height:1.18;color:var(--ink);margin-top:4px}
+.kpis strong{display:block;font-size:28px;line-height:1.15;color:var(--ink);margin-top:4px}
 .kpis .card{padding:14px 16px}
 .kpis .kpi-hot strong{color:var(--coral)}
 .kpis .kpi-green strong{color:var(--green)}
 
-.funnel{display:grid;gap:11px}
-.filters{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.hot{border-left:4px solid var(--coral-accent);background:linear-gradient(135deg, #fffaf8 0%, #ffffff 38%)}
-.fresh-card{border-left:4px solid #319779;background:linear-gradient(135deg, #f4fbf8 0%, #ffffff 42%)}
+.filters{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:520px){.filters{grid-template-columns:1fr}}
+
+.hot{border-left:4px solid var(--coral-accent);background:linear-gradient(135deg, #fffaf8 0%, #ffffff 36%)}
+.fresh-card{border-left:4px solid #319779;background:linear-gradient(135deg, #f3fbf8 0%, #ffffff 40%)}
+.tags{display:flex;gap:6px;flex-wrap:wrap}
 blockquote{
-  margin:10px 0;
+  margin:8px 0;
   color:var(--muted);
-  border-left:2.5px solid #d6a494;
+  border-left:2.5px solid #c7d9d4;
   padding-left:11px;
   font-size:13.8px;
   overflow-wrap:anywhere;
 }
-details summary{font-weight:700;font-size:13.8px;color:var(--green)}
-details p{margin-top:6px;font-size:13.5px}
-ol,ul{padding-left:21px;margin:0}
-li+li{margin-top:7px}
-.break{overflow-wrap:anywhere}
+.hot blockquote{border-left-color:#d6a494}
+
+.reply-box{
+  margin-top:12px;
+  padding-top:12px;
+  border-top:1px solid #e9f1ee;
+  display:grid;
+  gap:8px;
+}
+.reply-history{
+  background:#eef7f3;
+  border:1px solid #cde5db;
+  border-radius:13px;
+  padding:10px 13px;
+  font-size:13.4px;
+  color:#194b3b;
+}
+.reply-history small{display:block;font-size:11.5px;color:#3d6b5c;margin-bottom:3px;font-weight:700}
+.quick-replies{display:flex;gap:6px;flex-wrap:wrap}
+.qr-btn{
+  border-radius:999px;
+  padding:5px 11px;
+  font-size:12px;
+  font-weight:700;
+  background:#eef5f2;
+  border:1px solid #cfe0da;
+  color:var(--ink);
+}
+.qr-btn:hover{background:#dff0e8;border-color:#72ab9a}
+
+.disclaimer{
+  font-size:12.3px;
+  color:var(--muted);
+  padding:12px 14px;
+  background:#f1f6f5;
+  border-radius:14px;
+  border:1px solid var(--line);
+}
 .foot{
   text-align:center;
   font-size:12.5px;
@@ -507,42 +564,45 @@ li+li{margin-top:7px}
   padding:14px 10px 0;
   border-top:1px solid var(--line);
 }
+ol,ul{padding-left:20px;margin:0}
+li+li{margin-top:6px}
+.break{overflow-wrap:anywhere}
 .visually-hidden{position:absolute;width:1px;height:1px;clip-path:inset(50%);overflow:hidden}
 
-/* Desktop 1280px Responsive Elevation */
 @media(min-width:760px){
-  main{padding-top:30px}
-  .brandbar{min-height:74px}
-  nav{width:min(100%, 600px)}
-  .hero{padding:38px 40px}
-  .hero.intro{padding:46px 320px 46px 40px}
-  .compass{width:224px;right:52px;top:50%;translate:0 -50%}
+  main{padding-top:28px}
+  .brandbar{min-height:72px}
+  nav{width:min(100%, 660px)}
+  .hero{padding:36px 40px}
+  .hero.with-art{padding:44px 310px 44px 40px}
+  .compass{width:214px;right:50px;top:50%;translate:0 -50%}
   .grid.two{grid-template-columns:repeat(2, minmax(0, 1fr))}
-  .choice{padding:18px 20px;min-height:102px}
-  .kpis{grid-template-columns:repeat(4, minmax(0, 1fr))}
-  .kpis .card,.card{padding:22px}
+  .grid.three{grid-template-columns:repeat(3, minmax(0, 1fr))}
+  .grid.four{grid-template-columns:repeat(2, minmax(0, 1fr))}
   .columns{grid-template-columns:1fr 1fr;align-items:start}
-  .narrow{max-width:740px;width:100%;margin-inline:auto}
+  .kpis{grid-template-columns:repeat(4, minmax(0, 1fr))}
+  .narrow{max-width:760px;width:100%;margin-inline:auto}
   .form-two{grid-template-columns:1fr 1fr}
-  .primary{min-height:50px}
 }
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+@media(min-width:1040px){
+  .grid.four{grid-template-columns:repeat(4, minmax(0, 1fr))}
+}
 </style>
 </head>
 <body>
 <header class="top">
   <div class="shell">
     <div class="brandbar">
-      <button class="brand-click" data-action="home" aria-label="Компас Ясности">
+      <button class="brand-click" data-action="tab:0">
         <span class="logo" aria-hidden="true">✦</span>
         <span>
-          <strong id="brand">Компас Ясности</strong>
-          <small id="sub">AI-экосистема • Демо</small>
+          <strong id="brand">Платформа проектов</strong>
+          <small id="sub">Вайдиле · Татьяна · Кабинет управления</small>
         </span>
       </button>
       <div class="lang" aria-label="Language" id="lang"></div>
     </div>
-    <nav id="nav" aria-label="Ecosystem Modules"></nav>
+    <nav id="nav" aria-label="Projects"></nav>
   </div>
 </header>
 
@@ -552,1435 +612,1409 @@ li+li{margin-top:7px}
 <script>
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const nowTime = () => { const d = new Date(); return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`; };
+const nowTime = () => { const n = new Date(); return `${String(n.getHours()).padStart(2,'0')}:${String(n.getMinutes()).padStart(2,'0')}`; };
 
 const DATA = {
   ru: {
-    brand: 'Компас Ясности',
-    sub: 'AI-экосистема • Демо',
-    tabs: ['1. Опросник', '2. AI-курс', '3. Владелец'],
-    hotAria: 'Активных сигналов',
-    heroChip: '✦ Бесплатный AI-опросник · 2 минуты',
-    heroTitle: 'Что вы хотели бы улучшить в своей жизни?',
-    heroDesc: 'Не нужно долго формулировать проблему — выберите сферу, поставьте 1–3 галочки и получите конкретный первый шаг на 72 часа.',
-    stepOf: (a, b) => `Шаг ${a} из ${b}`,
-    stepFlow: 'Сфера · Приоритеты · Вопросы · Разбор',
-    chooseArea: 'Выберите сферу',
-    step2Title: 'Отметьте, что важнее всего сейчас',
-    picked: (n) => `Выбрано ${n} из 3 — так разбор будет максимально точным.`,
-    showMore: (n) => `Показать все пункты направления (+${n})`,
-    showLess: 'Свернуть дополнительные пункты',
-    otherLbl: 'Другое (свой вариант)',
-    otherPh: 'Напишите коротко своими словами...',
-    back: '← Назад',
-    cont: 'Продолжить →',
-    qBadge: (i) => `Вопрос ${i} из 3`,
-    ownLbl: 'Или напишите свой вариант',
-    ownPh: 'Коротко своими словами...',
-    nextQ: 'Следующий вопрос →',
-    finishQ: 'Получить разбор ✦',
-    anTitle: 'ИИ собирает вашу картину...',
-    anSub: 'Сопоставляем приоритеты и готовим конкретный первый шаг',
-    anSteps: [
-      'Определяем главную точку торможения',
-      'Подбираем конкретный первый шаг на 72 часа',
-      'Формируем персональный план на 90 дней'
+    brand: 'Платформа проектов',
+    sub: 'Два самостоятельных бизнеса и рабочий кабинет',
+    tabs: [
+      ['1. Вайдиле', ' · Финансы'],
+      ['2. Татьяна', ' · Шкала целей'],
+      ['3. Кабинет', '']
     ],
-    resChip: '✦ Опрос завершён · ВАУ! Теперь понятно, что делать',
-    resTitle: 'Ваш персональный экспресс-разбор готов',
-    resDesc: 'Начните с одного конкретного действия в ближайшие три дня — без распыления и лишнего шума.',
-    rootH: 'Корень ситуации',
-    step72H: 'Ваш первый шаг на 72 часа',
-    pillars: [
-      ['✓ Решение', 'Чёткое понимание, с чего начать'],
-      ['◷ Удобство', 'Без сотен часов лишней теории'],
-      ['✦ Ясность', 'Теперь я точно знаю, что делать']
-    ],
-    planH: 'Персональный план на 90 дней',
-    blurHint: 'Оставьте имя и контакт, чтобы мгновенно открыть 3-шаговый план + получить 15-мин разбор',
-    nameLbl: 'Ваше имя',
-    contactLbl: 'WhatsApp или Email',
-    contactPh: '+41 79 ... или name@example.com',
-    demoNote: 'Для демонстрации можно указать любые тестовые данные.',
-    unlockBtn: 'Открыть полный план и получить разбор →',
-    goCourseBtn: 'Перейти в AI-курс по вашему треку →',
-    goOwnerBtn: 'Открыть пульт владельца',
-    resetBtn: 'Начать новый опрос',
-    fillNameErr: 'Введите ваше имя.',
-    fillContactErr: 'Укажите email или номер WhatsApp.',
 
-    /* Module 2: Course */
-    cChip: '✦ Модуль 2 · AI-супервайзер заочного курса',
-    cTitle: 'Обучение с AI-проверкой и автодопродажей VIP',
-    cDesc: 'Один движок для обеих: ИИ проверяет ответы по эталонному ключу эксперта, открывает следующий урок — а если ученик застрял, мягко предлагает личную сессию и шлёт сигнал в телефон владельца.',
-    trLessons: ['✓ Урок 1', '● Урок 2 · активен', '🔒 Урок 3 · закрыт', '✓ Урок 3 · открыт'],
-    staffShow: '🔑 Режим супервайзера (показать эталонный ключ)',
-    staffHide: 'Скрыть эталонный ключ супервайзера',
-    staffHint: 'Служебный ключ эксперта · скрыт от ученика (ИИ проверяет строго по этим критериям):',
-    scenLbl: 'Быстрый тест 3 реакций ИИ (или напишите свой ответ):',
-    scenBtns: ['✓ Сильный ответ', '↻ Неполный ответ', '! Ученик застрял'],
-    ansLbl: 'Ответ ученика по контрольному листу',
-    checkBtn: 'Проверить ответ через AI-супервайзера',
-    checkingTxt: 'AI-супервайзер сверяет ответ с эталонным ключом...',
-    fbEmptyH: 'Обратная связь AI-супервайзера',
-    fbEmptyP: 'Нажмите один из 3 тестовых сценариев слева или введите свой текст, затем запустите проверку. Вы увидите, как ИИ открывает Урок 3 или автоматически переводит застрявшего ученика на личную сессию.',
-    passH: '✓ Шаг зачтён · Урок 3 открыт',
-    passP: 'Ответ полностью соответствует эталонному ключу. Прогресс студента обновлён в пульте владельца, доступ к следующему уроку открыт автоматически.',
-    revH: (n) => `↻ Требуется доработка (попытка ${n} из 2)`,
-    revP: 'Хорошее начало, но ответ пока слишком общий. Уточните пункты ниже и отправьте ещё раз (подсказка для демо: вторая слабая попытка автоматически запускает предложение личной сессии).',
-    vipH: 'Разберём вместе · Предложена личная сессия',
-    vipP: 'Когда при взгляде вперёд возникает ступор или перегруз — самостоятельно сдвинуться в 5 раз сложнее. Именно здесь мягкое предложение 1-on-1 разбора даёт максимальную конверсию.',
-    bookBtn: (ex) => `Запросить личную VIP-сессию · ${ex}`,
-    bookedBtn: '✓ Запрос на VIP-сессию добавлен в пульт',
-    seeSigBtn: 'Посмотреть горячий сигнал в пульте владельца →',
-    seeProgBtn: 'Посмотреть прогресс студента в пульте владельца →',
-    l3H: 'Урок 3 · Закрепление (открыто автоматически)',
-
-    /* Module 3: Owner */
-    oChip: '◉ Модуль 3 · «Кнопочка на телефоне»',
-    oTitle: 'Пульт владельца',
-    oDesc: 'Все заявки с опросника, прогресс учеников на курсе, точки отвала и горячие сигналы «ученик застрял → готов к VIP-сессии» на одном экране.',
-    kpis: ['Визиты (7 дн.)', 'Заявки с опроса', 'Учатся на курсе', 'Горячие сигналы'],
-    funnelH: 'Живая воронка экосистемы',
-    revBadge: (n) => `Потенциал VIP · $${(n * 2500).toLocaleString('ru-RU')}–$${(n * 3500).toLocaleString('ru-RU')}`,
-    revSub: 'Ориентир по среднему чеку личных пакетов ($2 500–$3 500 за клиента)',
-    feedH: 'Лента событий и заявок',
-    fltTypeLbl: 'Тип события',
-    fltExpLbl: 'Эксперт',
-    fltTypes: [['all', 'Все события'], ['lead', 'Заявки с опроса'], ['student', 'Студенты и отвалы']],
-    fltExps: [['all', 'Все эксперты'], ['vaidile', 'Вайдиле (Финансы)'], ['tatiana', 'Татьяна (Цели / Бизнес)']],
-    tagsLbl: { vip: 'ГОТОВ К VIP', contacted: '✓ Связались', newLead: 'Новая заявка', course: 'Курс', requested: 'Сессия запрошена' },
-    progLbl: 'Прогресс курса',
-    dossierOpen: 'Открыть досье перед звонком',
-    markBtn: 'Отметить: Связались',
-    markedBtn: '✓ Связались',
-    emptyFeed: 'По выбранным фильтрам событий пока нет.',
-    foot: 'Интерактивный прототип экосистемы «Монетизация идей» (Артём и Максим). Один AI-движок на оба проекта: себестоимость проверки ~$0.003 + мгновенные уведомления в WhatsApp / Email.',
-
-    spheres: [
-      {
-        id: 'personal', icon: '↗', color: '',
-        title: 'Личное развитие',
-        desc: 'Финансы, доход, цели в жизни, энергия, здоровье, время и способности.',
-        items: [
-          { id: 'p_fin_order', text: 'Навести порядок в финансах', route: 'vaidile', core: true },
-          { id: 'p_earn_more', text: 'Больше зарабатывать', route: 'vaidile', core: true },
-          { id: 'p_life_goal', text: 'Определить свою цель в жизни', route: 'tatiana', core: true },
-          { id: 'p_time', text: 'Научиться управлять своим временем', route: 'tatiana', core: true },
-          { id: 'p_health', text: 'Улучшить здоровье', route: 'tatiana', core: true },
-          { id: 'p_job', text: 'Найти или сменить работу / освоить новую профессию', route: 'tatiana', core: true },
-          { id: 'p_skills', text: 'Развить свои способности', route: 'tatiana', core: true },
-          { id: 'p_body', text: 'Улучшить физическую форму и внешний вид', route: 'tatiana', core: false },
-          { id: 'p_habits', text: 'Избавиться от вредных привычек', route: 'tatiana', core: false },
-          { id: 'p_learn', text: 'Начать обучаться', route: 'tatiana', core: false },
-          { id: 'p_home', text: 'Улучшить жилищные условия', route: 'vaidile', core: false },
-          { id: 'p_travel', text: 'Больше путешествовать', route: 'vaidile', core: false }
-        ]
-      },
-      {
-        id: 'family', icon: '♡', color: 'rose',
-        title: 'Любовь и семья',
-        desc: 'Отношения с партнёром, детьми, родителями или поиск любимого человека.',
-        items: [
-          { id: 'f_partner', text: 'Улучшить отношения с партнёром', route: 'tatiana', core: true },
-          { id: 'f_find', text: 'Найти любимого человека', route: 'tatiana', core: true },
-          { id: 'f_kids', text: 'Наладить отношения с детьми', route: 'tatiana', core: true },
-          { id: 'f_create', text: 'Создать семью / стать родителем', route: 'tatiana', core: true },
-          { id: 'f_parents', text: 'Наладить отношения с родителями и родственниками', route: 'tatiana', core: true },
-          { id: 'f_close', text: 'Завершить отношения экологично', route: 'tatiana', core: true },
-          { id: 'f_intimate', text: 'Улучшить интимные отношения', route: 'tatiana', core: false }
-        ]
-      },
-      {
-        id: 'business', icon: '◇', color: 'blue',
-        title: 'Бизнес и общество',
-        desc: 'Создание и рост бизнеса, команда, управление людьми, партнёры и масштаб.',
-        items: [
-          { id: 'b_grow', text: 'Развить существующий бизнес', route: 'tatiana', core: true },
-          { id: 'b_start', text: 'Создать свой бизнес', route: 'tatiana', core: true },
-          { id: 'b_team', text: 'Создать команду и научиться управлять людьми', route: 'tatiana', core: true },
-          { id: 'b_partners', text: 'Найти деловых партнёров', route: 'tatiana', core: true },
-          { id: 'b_colleagues', text: 'Улучшить отношения с коллегами', route: 'tatiana', core: true },
-          { id: 'b_social', text: 'Реализовать общественный проект', route: 'tatiana', core: true },
-          { id: 'b_friends', text: 'Найти друзей, единомышленников и расширить круг общения', route: 'tatiana', core: false }
-        ]
-      },
-      {
-        id: 'unsure', icon: '✧', color: 'amber', warm: true,
-        title: 'Хочу перемен, но пока не знаю каких',
-        desc: 'Чувствую, что застрял(а) или нет энергии — помогите за 3 вопроса понять, с чего начать.',
-        items: []
-      }
-    ],
-    questionsByTrack: {
-      vaidile: [
+    /* ========= PROJECT 1: VAIDILE ========= */
+    v: {
+      chip: 'Финансовое планирование и обучение · США / Онлайн',
+      h1: 'Наведите спокойный порядок в деньгах — шаг за шагом',
+      sub: 'Образовательный портал и личный консалтинг Вайдиле: понятные статьи, рабочие трекеры, заочный текстовый курс и возможность напрямую связаться со мной для разбора вашей ситуации.',
+      ctaTracker: 'Посчитать утечки и взять трекер',
+      ctaDirect: 'Связаться с Вайдиле напрямую',
+      infoH: '1. Полезные материалы (информирование)',
+      infoSub: 'Короткие практические разборы простым языком — без сложного жаргона и перегруза.',
+      articles: [
         {
-          q: 'Что сейчас сильнее всего мешает навести порядок в деньгах и вырасти в доходе?',
-          choices: [
-            'Деньги приходят, но быстро утекают — нет ясной картины и контроля',
-            'Упёрся(лась) в потолок дохода, работаю много, а прорыва нет',
-            'Доход хороший, но непонятно, как выстроить потоки и подушку',
-            'Есть долги или постоянное напряжение из-за денег'
-          ]
+          t: 'Куда незаметно уходят $200–$400 каждый месяц',
+          tag: 'Быстрый старт · 2 мин',
+          p1: 'Большинство людей уверены, что им просто нужно больше зарабатывать. Но когда мы впервые выписываем все мелкие траты за 72 часа (кофе по дороге, забытые подписки, спонтанные покупки), почти всегда находится $150–$400 в месяц, которые уходят впустую.',
+          p2: 'Первый шаг к финансовому спокойствию — не жёсткая экономия, а полная видимость каждой цифры. Как только вы видите картину целиком, возвращается чувство управления.'
         },
         {
-          q: 'Какой конкретный результат через 90 дней даст вам реальное облегчение?',
-          choices: [
-            'Полная прозрачность: вижу каждую цифру, убрал(а) утечки, есть запас',
-            'Устойчивый рост дохода на 30–50% по понятному плану',
-            'Чёткая система денежных потоков и финансового будущего без тревоги',
-            'Избавиться от финансового хаоса и выстроить дисциплину шаг за шагом'
-          ]
+          t: 'Правило 3 корзин: почему рост дохода не снимает тревогу',
+          tag: 'Система потоков · 3 мин',
+          p1: 'Когда все деньги лежат в одном «общем котле», даже хороший доход вызывает напряжение: непонятно, сколько можно потратить спокойно, а сколько уже занято обязательствами.',
+          p2: 'Разделите поступления на 3 понятные корзины: Обязательства (база жизни), Финансовая подушка (спокойствие) и Рост/Свободные средства. Уже через 30 дней исчезает постоянный стресс из-за денег.'
         },
         {
-          q: 'В каком формате вам комфортнее всего двигаться к этому результату?',
-          choices: [
-            'Короткий бесплатный созвон-диагностика (15–30 мин), чтобы увидеть план',
-            'Личная работа с финансовым консультантом (пакет 4–6 недель)',
-            'Самостоятельный заочный текстовый курс и готовые трекеры',
-            'Пока просто хочу получить первый понятный шаг'
-          ]
+          t: 'Что делать, если страшно открыть банковскую выписку',
+          tag: 'Поддержка · 2 мин',
+          p1: 'Откладывание проверки счетов — самая частая реакция на финансовый хаос. Пока цифры в тумане, тревога кажется в 5 раз больше реальности.',
+          p2: 'Выделите 15 минут в спокойной обстановке, откройте выписку без самокритики и запишите факты на лист. А если в одиночку тяжело сдвинуться — на 15-минутной встрече мы разберём картину спокойно и без осуждения.'
         }
       ],
-      business: [
-        {
-          q: 'Где сейчас главная точка торможения в вашем бизнесе или проекте?',
-          choices: [
-            'Много идей и задач, но нет чёткой системы приоритетов и плана',
-            'Всё держится на мне — не хватает сильной команды и делегирования',
-            'Есть продукт, но нет стабильного потока платежеспособных клиентов',
-            'Потерял(а) фокус и энергию: много усилий, а прибыль не радует'
-          ]
-        },
-        {
-          q: 'Какой главный результат вы хотите зафиксировать через 3–6 месяцев?',
-          choices: [
-            'Выстроить чёткую стратегию и пошаговый план роста бизнеса',
-            'Выйти из операционной рутины и наладить управляемую команду',
-            'Запустить новый проект/продукт с предсказуемой прибылью',
-            'Упорядочить цели, время и финансы бизнеса в одну систему'
-          ]
-        },
-        {
-          q: 'Какой формат работы вам ближе сейчас?',
-          choices: [
-            'Индивидуальная VIP-работа по стратегии бизнеса с экспертом',
-            'Онлайн-курс пошагово с AI-проверкой заданий и обратной связью',
-            'Быстрый групповой практикум — собрать свой план за короткий срок',
-            'Начать с бесплатного 15-минутного разбора моей ситуации'
-          ]
-        }
+      calcH: 'Бесплатный мини-расчёт: сколько денег «утекает» за год?',
+      calcSub: 'Подвигайте цифры и сразу увидите, сколько можно вернуть в финансовую подушку.',
+      calcCoffee: 'Кофе, перекусы и спонтанные покупки ($ в неделю)',
+      calcSubs: 'Редко используемые подписки и сервисы ($ в месяц)',
+      calcRes: (m, y) => `Это <strong>$${m.toLocaleString('ru-RU')}/мес</strong> или <strong>$${y.toLocaleString('ru-RU')} за год</strong> — готовая основа вашей финансовой подушки.`,
+      trackerBtn: 'Получить бесплатный «Трекер расходов на 30 дней»',
+      trackerSent: '✓ Шаблон трекера открыт! Заявка также появилась в кабинете Вайдиле.',
+
+      helpH: '2. Заочное обучение и помощь (без видео)',
+      helpSub: 'Вы можете начать с короткого заочного урока в текстовом формате — напишите ваш расчёт, и система сразу проверит задание и подскажет следующий шаг.',
+      lessonTag: 'Урок 1 · Практика заочного курса (текстовый формат)',
+      lessonTask: 'Напишите 2 регулярные траты, которые вы заметили на этой неделе, их примерную сумму в месяц и в какую корзину (Подушка или Рост) вы хотите направить эти деньги.',
+      demoLbl: 'Быстро проверить, как работает автоматическая проверка (для демонстрации):',
+      demoBtns: ['✓ Чёткий ответ', '↻ Слишком общий ответ', '! Нужна помощь Вайдиле'],
+      samples: [
+        'Заметил 2 утечки: ежедневный кофе и перекусы ($180/мес) и 4 неиспользуемые подписки ($65/мес). Итого $245/мес перевожу в корзину финансовой подушки.',
+        'Трачу много на еду и разное, хочу начать экономить со следующего месяца.',
+        'Мне тяжело и страшно смотреть в счета — есть долги и хаос, не понимаю, с чего начать.'
       ],
-      tatiana: [
-        {
-          q: 'Что сейчас сильнее всего забирает вашу энергию или мешает сдвинуться с места?',
-          choices: [
-            'Разброс внимания: много мыслей и дел, непонятно, за что хвататься первым',
-            'Нет ясной вдохновляющей цели — от этого мало сил и мотивации',
-            'Постоянно откладываю важное из-за рутины и нехватки времени',
-            'Эмоциональное напряжение в отношениях / окружении тормозит всё остальное'
-          ]
-        },
-        {
-          q: 'Какое изменение через 90 дней порадовало бы вас больше всего?',
-          choices: [
-            'Чётко понимать главную цель на год и пошаговый план на 3–6 месяцев',
-            'Почувствовать прилив энергии, порядок во времени и уверенность в каждом дне',
-            'Восстановить гармонию, теплоту и ясность в важных отношениях',
-            'Начать системно действовать и увидеть первые ощутимые победы'
-          ]
-        },
-        {
-          q: 'Как вам комфортнее всего делать первые шаги?',
-          choices: [
-            'Быстрый групповой практикум — шаг за шагом составить свой план',
-            'Онлайн-курс в своём темпе с проверкой заданий',
-            'Личное сопровождение со «вторым человеком», чтобы не свернуть',
-            'Сначала короткий бесплатный разбор моей ситуации'
-          ]
-        }
-      ]
+      ansPh: 'Напишите ваш короткий расчёт здесь...',
+      checkBtn: 'Отправить задание на проверку',
+      passH: '✓ Отлично! Урок 1 зачтён — открыт Урок 2',
+      passP: 'Вы чётко увидели цифры и выбрали целевую корзину. Вы можете спокойно переходить к следующему уроку «Построение подушки на 90 дней» в своём темпе.',
+      revH: 'Давайте сделаем расчёт чуть точнее',
+      revP: 'Хорошее начало! Чтобы трекер реально сработал, укажите: (1) две конкретные статьи трат, (2) примерную сумму в долларах в месяц и (3) куда направите освободившиеся деньги.',
+      stuckH: 'С этим не нужно разбираться в одиночку',
+      stuckP: 'Когда накопилось напряжение вокруг денег и долгов, текстового урока бывает недостаточно — лучше спокойно разложить всё на 15-минутной встрече с Вайдиле без оценок и давления. Я уже передала заметку в её кабинет.',
+      stuckCta: 'Перейти к прямой записи к Вайдиле ↓',
+
+      pkgsH: 'Форматы работы с Вайдиле',
+      pkgs: [
+        { tag: 'Старт', title: 'Шаблоны и трекеры', price: '$29–$79', desc: 'Готовые трекеры расходов, доходов и планировщик финансовой подушки для самостоятельного наведения порядка.', btn: 'Запросить доступ' },
+        { tag: 'Заочно', title: 'Текстовый курс', price: '$290', desc: 'Пошаговый курс в текстовом формате (без длинных видео) с проверкой каждого задания и готовыми таблицами.', btn: 'Выбрать курс' },
+        { tag: 'Популярно', title: 'Личное сопровождение', price: '$2 000–$3 000', desc: '4–6 недель индивидуальной работы: полная ревизия потоков, закрытие утечек, подушка и спокойный контроль. Для первых клиентов — специальные условия.', btn: 'Записаться на разбор', feat: true },
+        { tag: 'Бизнес / VIP', title: 'Финансы бизнеса + личное', price: 'От $4 500', desc: 'Разделение личных и бизнес-денег, понятные отчёты для владельца. При необходимости — доп. сессии по отношениям и личному состоянию.', btn: 'Обсудить задачу' }
+      ],
+
+      directH: '3. Связаться с Вайдиле напрямую',
+      directSub: 'Оставьте короткое сообщение или выберите удобный способ связи — запрос сразу попадёт в личный кабинет Вайдиле.',
+      channels: ['Бесплатная 15-мин встреча', 'Написать в WhatsApp', 'Ответить по Email'],
+      nameLbl: 'Ваше имя',
+      contactLbl: 'Ваш WhatsApp, телефон или Email',
+      contactPh: '+1 ... или name@example.com',
+      msgLbl: 'Коротко о вашей задаче (необязательно)',
+      msgPh: 'Например: хочу навести порядок в личных расходах или узнать про пакет сопровождения...',
+      sendBtn: 'Отправить напрямую Вайдиле',
+      sentOk: (n) => `✓ Спасибо, ${n}! Ваше сообщение отправлено напрямую Вайдиле — вы уже можете увидеть его и ответить во вкладке «3. Кабинет».`,
+      disclaimer: 'Образовательные материалы и планирование личных/бизнес денежных потоков. Не является лицензируемой налоговой, юридической или инвестиционной рекомендацией.'
     },
-    tracks: {
-      tatiana: {
-        ownerName: 'Татьяна',
-        projectLabel: 'Проект · Татьяна',
-        title: 'Система целей',
-        sub: '3 шага · схемы 1–2–3 + контрольный лист (простым языком)',
-        lessonH: 'Урок 2 · Практика: Цель на 90 дней',
-        scheme: [
-          ['Точный ориентир', 'Одна измеримая цель'],
-          ['Срок 90 дней', 'Понятная дата финиша'],
-          ['Первый шаг', 'Действие за 48 часов']
+
+    /* ========= PROJECT 2: TATIANA (ADMIN SCALE) ========= */
+    t: {
+      chip: 'Пошаговая система целей · Татьяна Ольсен',
+      h1: 'Выберите вашу Шкалу целей и соберите понятный план действий',
+      sub: 'Ответьте на несколько простых вопросов без сложной теории. Если задача ясная — вы сразу получите пошаговый план и сможете идти по курсу самостоятельно. Если возникнет сложность — к работе лично подключится Татьяна.',
+      stepsLbl: ['1. Выбор шкалы', '2. Приоритеты', '3. Вопросы шкалы', '4. Ваш план и формат'],
+      chooseH: 'Какую Шкалу целей вы хотите пройти сейчас?',
+      scales: [
+        {
+          id: 'personal', icon: '↗', color: '',
+          badge: 'Личная · Укороченная шкала',
+          title: 'Личное развитие и жизнь',
+          desc: 'Определить главную цель, навести порядок во времени, вернуть энергию, здоровье, работу или личный доход.',
+          items: [
+            { id: 'p_goal', text: 'Определить свою главную цель в жизни', core: true },
+            { id: 'p_time', text: 'Научиться управлять своим временем', core: true },
+            { id: 'p_health', text: 'Улучшить здоровье и уровень энергии', core: true },
+            { id: 'p_job', text: 'Найти или сменить работу / освоить новую профессию', core: true },
+            { id: 'p_skills', text: 'Развить свои способности', core: true },
+            { id: 'p_fin', text: 'Увеличить доход и навести порядок в личных финансах', core: true },
+            { id: 'p_body', text: 'Улучшить физическую форму и внешний вид', core: false },
+            { id: 'p_habits', text: 'Избавиться от вредных привычек', core: false },
+            { id: 'p_learn', text: 'Начать обучаться новому', core: false },
+            { id: 'p_travel', text: 'Больше путешествовать и улучшить жильё', core: false }
+          ]
+        },
+        {
+          id: 'family', icon: '♡', color: 'rose',
+          badge: 'Семья · Укороченная шкала',
+          title: 'Любовь, семья и отношения',
+          desc: 'Укрепить отношения с партнёром, наладить контакт с детьми или родителями, создать семью или гармонично завершить старый этап.',
+          items: [
+            { id: 'f_partner', text: 'Улучшить отношения с партнёром', core: true },
+            { id: 'f_kids', text: 'Наладить отношения с детьми', core: true },
+            { id: 'f_find', text: 'Найти любимого человека', core: true },
+            { id: 'f_create', text: 'Создать семью / стать родителем', core: true },
+            { id: 'f_parents', text: 'Наладить отношения с родителями и родственниками', core: true },
+            { id: 'f_close', text: 'Завершить прежние отношения экологично', core: true },
+            { id: 'f_intimate', text: 'Улучшить близость и доверие в паре', core: false }
+          ]
+        },
+        {
+          id: 'business', icon: '◇', color: 'blue',
+          badge: 'Бизнес · Полная шкала (VIP)',
+          title: 'Бизнес, команда и общество',
+          desc: 'Создать или масштабировать бизнес, собрать сильную команду, выстроить управление, партнёрства или общественный проект.',
+          items: [
+            { id: 'b_grow', text: 'Развить и масштабировать существующий бизнес', core: true },
+            { id: 'b_start', text: 'Создать свой бизнес с нуля', core: true },
+            { id: 'b_team', text: 'Создать команду и научиться управлять людьми', core: true },
+            { id: 'b_partners', text: 'Найти сильных деловых партнёров', core: true },
+            { id: 'b_colleagues', text: 'Улучшить взаимодействие с коллегами', core: true },
+            { id: 'b_social', text: 'Реализовать общественный проект', core: true },
+            { id: 'b_friends', text: 'Расширить круг единомышленников и друзей', core: false }
+          ]
+        },
+        {
+          id: 'unsure', icon: '✧', color: 'amber', warm: true,
+          badge: 'Экспресс-выбор',
+          title: 'Хочу перемен, но пока не знаю, с какой шкалы начать',
+          desc: 'Чувствую, что застрял(а) или распыляюсь — помогите за 3 коротких вопроса определить главное направление.',
+          items: []
+        }
+      ],
+      step2H: 'Что сейчас важнее всего сдвинуть в первую очередь?',
+      picked: (n) => `Выбрано ${n} из 3 приоритетов`,
+      showMore: (n) => `Показать все пункты (+${n})`,
+      showLess: 'Скрыть дополнительные пункты',
+      otherLbl: 'Другое (напишите своими словами)',
+      otherPh: 'Если нужного пункта нет в списке...',
+      back: '← Назад',
+      next: 'Перейти к вопросам шкалы →',
+
+      step3H: 'Ответьте на 3 вопроса вашей Шкалы целей',
+      step3Sub: 'Отвечайте честно и простыми словами — это основа вашего личного плана.',
+      q1Lbl: '1. Что сейчас сильнее всего тормозит движение или забирает энергию?',
+      q1Opts: [
+        'Разброс внимания: слишком много задач, непонятно за что хвататься первым',
+        'Нет одной чёткой вдохновляющей цели на ближайшие 3–6 месяцев',
+        'Всё держится на мне — не хватает системы, плана и делегирования',
+        'Чувствую ступор / эмоциональную усталость — трудно сдвинуться одному'
+      ],
+      q2Lbl: '2. Какую главную цель вы хотите зафиксировать на 90 дней и какой первый шаг готовы сделать на этой неделе?',
+      q2Ph: 'Например: За 90 дней выстроить команду из 3 человек и увеличить доход на 30%. До пятницы пропишу список задач для передачи...',
+      q3Lbl: '3. Как вам комфортнее проходить Шкалу дальше?',
+      q3Opts: [
+        { id: 'self', label: 'Самостоятельно в онлайн-курсе (шаг за шагом с проверкой заданий)' },
+        { id: 'group', label: 'В небольшой группе — быстро собрать шкалу вместе' },
+        { id: 'personal', label: 'Хочу, чтобы подключилась Татьяна лично (индивидуальная работа / «второй человек»)' }
+      ],
+      demoLbl: 'Быстрая подстановка для демонстрации (как система решает: вести самой или подключить Татьяну):',
+      demoBtns: ['✓ Чёткий ответ (идёт сам)', '↻ Общий ответ (уточнить)', '! Застрял (подключить Татьяну)'],
+      demoSamples: [
+        'Моя цель на 90 дней до 1 марта — навести порядок в бизнесе, нанять ассистента и вырасти в доходе на 30%. Первый шаг на этой неделе: до пятницы выпишу 10 задач на делегирование.',
+        'Хочу чтобы просто стало больше порядка, энергии и спокойствия в делах.',
+        'Честно, я застрял и не понимаю, с чего начать — в голове каша, тяжело в одиночку заглядывать вперёд на 3 месяца.'
+      ],
+      submitScaleBtn: 'Собрать мою Шкалу целей →',
+      revBannerH: 'Уточните, пожалуйста, цель и первый шаг',
+      revBannerP: 'Сейчас ответ звучит слишком обще. Чтобы ваша Шкала реально заработала, напишите конкретный результат через 90 дней (в цифрах или фактах) и 1 маленькое действие на этой неделе — или выберите вариант с личным подключением Татьяны.',
+
+      resSelfTag: 'Самостоятельный режим · Татьяна не требуется',
+      resSelfH: 'Ваша Шкала целей собрана — можно сразу идти по урокам',
+      resSelfP: 'Вы чётко сформулировали ориентир и первый шаг. Система открыла вам Урок 1 и контрольный лист — вы спокойно двигаетесь в своём темпе, а Татьяна увидит ваш прогресс в кабинете.',
+      resPersTag: 'Рекомендуется подключение Татьяны лично',
+      resPersH: 'Шкала подготовлена — на этом этапе лучше пройти шаг вместе с Татьяной',
+      resPersP: 'Вы выбрали индивидуальную работу (или сейчас сложно увидеть ясную картину в одиночку). Как «второй человек», Татьяна за одну спокойную встречу поможет убрать лишний шум и довести вашу Шкалу до чёткого плана.',
+      mapRows: ['Выбранная шкала и приоритеты', 'Главная точка торможения', 'Зафиксированная цель и первый шаг (72 часа)', 'Следующий этап (90 дней)'],
+      saveLeadH: 'Сохранить вашу Шкалу и открыть доступ / записаться',
+      saveLeadSubSelf: 'Оставьте имя и контакт — откроем ваш пошаговый чек-лист Урока 1 и сохраним прогресс в системе.',
+      saveLeadSubPers: 'Оставьте имя и контакт — ваши ответы сразу появятся у Татьяны в кабинете, и она ответит вам лично.',
+      saveBtnSelf: 'Сохранить шкалу и начать обучение →',
+      saveBtnPers: 'Передать ответы Татьяне для личной связи →',
+      savedOkSelf: (n) => `✓ Готово, ${n}! Доступ к Уроку 1 открыт. В кабинете Татьяны вы отображаетесь со статусом «Идёт самостоятельно».`,
+      savedOkPers: (n) => `✓ Готово, ${n}! Все ваши ответы переданы Татьяне. Перейдите во вкладку «3. Кабинет», чтобы посмотреть заявку и ответить от её имени.`,
+      toCabBtn: 'Посмотреть заявку во вкладке «3. Кабинет» →',
+      restartBtn: 'Пройти другую шкалу'
+    },
+
+    /* ========= TAB 3: BACK-OFFICE CABINET ========= */
+    c: {
+      chip: 'Внутренняя панель управления · Видят только эксперты',
+      h1: 'Кабинет управления: заявки, обучение и ответы',
+      sub: 'Здесь Татьяна и Вайдиле видят все новые обращения, кто какую шкалу или урок сейчас проходит, кто идёт самостоятельно, а где нужно подключиться и ответить лично.',
+      views: [
+        ['tatiana', 'Кабинет Татьяны (Шкала целей)'],
+        ['vaidile', 'Кабинет Вайдиле (Финансы)'],
+        ['all', 'Общий обзор (оба проекта)']
+      ],
+      kpis: ['Новых заявок', 'Проходят обучение', 'Нужно подключиться', 'Идут сами (экономия времени)'],
+      fltStatusLbl: 'Показать записи',
+      fltStatuses: [
+        ['all', 'Все заявки и ученики'],
+        ['need_expert', 'Нужно подключиться / ответить'],
+        ['self', 'Идут самостоятельно в курсе'],
+        ['replied', 'Уже ответили']
+      ],
+      fltSearchLbl: 'Поиск по имени или теме',
+      fltSearchPh: 'Например: Елена, бизнес, трекер...',
+      stNeed: 'Нужно подключиться',
+      stNew: 'Новая заявка',
+      stSelf: 'Идёт самостоятельно',
+      stReplied: '✓ Ответ отправлен',
+      openAnswers: 'Посмотреть все ответы клиента',
+      replyLbl: 'Ответить клиенту прямо отсюда:',
+      replyPh: 'Напишите ответ, обратную связь или предложите время созвона...',
+      sendReply: 'Отправить ответ',
+      sentBy: (who, tm) => `Ваш ответ (${who} · ${tm}):`,
+      quickReplies: {
+        tatiana: [
+          'Здравствуйте! Вижу ваши ответы по Шкале — давайте созвонимся на 15 минут завтра, помогу собрать ясный план.',
+          'Отличная формулировка цели! Продолжайте к следующему шагу, если возникнут вопросы — напишите здесь.'
         ],
-        rubric: [
-          'Конкретная, измеримая цель (цифра, событие или ясный факт, а не «хочу лучше»).',
-          'Указан конкретный срок / горизонт (например, 90 дней или дата).',
-          'Назван первый практический шаг, который ученик сделает на этой неделе.',
-          'Если ученик в тумане или застрял — не давить, а предложить VIP-сессию со «вторым человеком» и отправить сигнал в пульт.'
-        ],
-        task: 'Сформулируйте вашу главную цель на 90 дней с измеримым результатом, укажите срок и назовите 1 конкретное действие на эту неделю.',
-        samples: [
-          'Моя цель на 90 дней (до 1 марта) — вывести бизнес на стабильный доход $12 000/мес и передать рутину ассистенту. Первый шаг на этой неделе: до пятницы выпишу 10 повторяющихся задач и размещу вакансию.',
-          'Хочу просто развиваться, чувствовать больше спокойствия и чтобы в делах стало лучше.',
-          'Честно, я застрял и не понимаю, за что хвататься — в голове каша из десяти дел, тяжело даже представить, что будет через 3 месяца.'
-        ],
-        checksPass: ['Конкретная измеримая цель и цифры', 'Понятный срок (90 дней / дата)', 'Назван практический первый шаг на неделю'],
-        checksMiss: ['Добавьте конкретную цифру или измеримый факт цели', 'Укажите чёткий срок (дата или 90 дней)', 'Напишите 1 физический шаг, который сделаете на этой неделе'],
-        vipBadge: 'Платная VIP-сессия · Татьяна (стратегия целей)',
-        lesson3: 'Разбейте вашу цель на 12 коротких недельных контрольных точек и закрепите 15-минутный пятничный ритуал сверки, чтобы двигаться без откатов.'
+        vaidile: [
+          'Здравствуйте! Получила ваш запрос — готова провести бесплатную 15-мин встречу на этой неделе. Какой день удобен?',
+          'Отправила вам трекер расходов на 30 дней! Заполните первые 3 дня и напишите, какие утечки нашлись.'
+        ]
       },
-      vaidile: {
-        ownerName: 'Вайдиле',
-        projectLabel: 'Проект · Вайдиле',
-        title: 'Финансовый порядок',
-        sub: 'Заочный текстовый курс без видео · США / EN',
-        lessonH: 'Урок 2 · Практика: Аудит утечек и 3 корзины',
-        scheme: [
-          ['2 утечки', 'Регулярные траты'],
-          ['Сумма / мес', 'Обычно $150–$400'],
-          ['Корзина', 'Резерв или Рост']
-        ],
-        rubric: [
-          'Названы минимум 2 конкретные повторяющиеся статьи трат-утечек.',
-          'Посчитана реальная сумма в деньгах ($ или € в месяц).',
-          'Указано, в какую корзину (Обязательства / Резерв / Рост) перенаправляется эта сумма.',
-          'Если ученик пишет про тревогу, долги или ступор — мягко предложить 1-on-1 финансовый разбор Вайдиле (пакет $2 000–$3 000).'
-        ],
-        task: 'Назовите 2 регулярные траты-утечки за неделю, посчитайте их сумму в месяц и напишите, в какую корзину (Резерв / Рост) вы направите освободившиеся деньги.',
-        samples: [
-          'Нашёл 2 утечки: 1) ежедневный кофе и перекусы — $190/мес; 2) 4 неиспользуемые подписки — $75/мес. Итого $265/мес с понедельника автоматически перевожу в корзину финансовой подушки.',
-          'Я вроде трачу много на ерунду и еду, постараюсь экономить со следующего месяца.',
-          'Мне страшно открывать выписку банка — я застряла, есть долги и финансовый хаос, не понимаю с чего начать.'
-        ],
-        checksPass: ['Найдены конкретные регулярные статьи утечек', 'Посчитана точная сумма в месяц ($)', 'Определена целевая корзина (Подушка / Рост)'],
-        checksMiss: ['Назовите минимум 2 конкретные регулярные траты', 'Посчитайте точную сумму в деньгах за месяц', 'Укажите, в какую корзину (Резерв / Рост) пойдёт эта сумма'],
-        vipBadge: '1-on-1 финансовый разбор · Вайдиле ($2 000–$3 000)',
-        lesson3: 'Настройте автоматический перевод освободившейся суммы в день получения дохода и внесите первую неделю в ваш текстовый трекер финансовой подушки.'
-      }
+      empty: 'По этим фильтрам записей пока нет.',
+      foot: 'Внутренности системы (проект Артёма и Максима). В рабочей версии ответы из этого кабинета автоматически уходят клиенту в WhatsApp или Email, а рутинная проверка простых шагов работает в фоне.'
     }
   },
 
   en: {
-    brand: 'Clarity Compass',
-    sub: 'AI Ecosystem • Demo',
-    tabs: ['1. AI Quiz', '2. AI Course', '3. Owner'],
-    hotAria: 'Active alerts',
-    heroChip: '✦ Free AI Clarity Quiz · 2 minutes',
-    heroTitle: 'What would you like to improve in your life?',
-    heroDesc: 'No need to overthink — pick one area, check 1–3 priorities, and get a concrete 72-hour first step.',
-    stepOf: (a, b) => `Step ${a} of ${b}`,
-    stepFlow: 'Area · Priorities · Questions · Review',
-    chooseArea: 'Choose an area',
-    step2Title: 'Check what matters most right now',
-    picked: (n) => `Selected ${n} of 3 — keeps your action breakdown laser-focused.`,
-    showMore: (n) => `Show all options in this area (+${n})`,
-    showLess: 'Show fewer options',
-    otherLbl: 'Other (your own words)',
-    otherPh: 'Briefly describe what you want to improve...',
-    back: '← Back',
-    cont: 'Continue →',
-    qBadge: (i) => `Question ${i} of 3`,
-    ownLbl: 'Or write your own short answer',
-    ownPh: 'In your own words...',
-    nextQ: 'Next question →',
-    finishQ: 'Get My Clarity Plan ✦',
-    anTitle: 'AI is assembling your breakdown...',
-    anSub: 'Connecting your priorities and crafting your first 72-hour step',
-    anSteps: [
-      'Pinpointing the real root bottleneck',
-      'Designing your concrete 72-hour first action',
-      'Building your personalized 90-day roadmap'
+    brand: 'Project Hub',
+    sub: 'Two Independent Businesses & Expert Back-Office',
+    tabs: [
+      ['1. Vaidilė', ' · Finances'],
+      ['2. Tatiana', ' · Goal Scale'],
+      ['3. Back-Office', '']
     ],
-    resChip: '✦ Quiz complete · WOW! Now I know what to do',
-    resTitle: 'Your personal clarity review is ready',
-    resDesc: 'Start with one clear move over the next three days — zero overwhelm, pure direction.',
-    rootH: 'What’s really getting in the way',
-    step72H: 'Your concrete 72-hour first step',
-    pillars: [
-      ['✓ Solution', 'Clear direction on where to start'],
-      ['◷ Convenience', 'Skip hundreds of hours of noise'],
-      ['✦ Clarity', 'Now I know my exact next move']
-    ],
-    planH: 'Your 90-day roadmap',
-    blurHint: 'Enter your name and contact to unlock your 3-step roadmap + optional 15-min review',
-    nameLbl: 'Your name',
-    contactLbl: 'WhatsApp or Email',
-    contactPh: 'name@example.com or phone',
-    demoNote: 'Feel free to use any fictional details for this demo.',
-    unlockBtn: 'Unlock full plan & get review →',
-    goCourseBtn: 'Open AI Course for your track →',
-    goOwnerBtn: 'Open Owner Dashboard',
-    resetBtn: 'Start a new quiz',
-    fillNameErr: 'Please enter your name.',
-    fillContactErr: 'Please enter an email address or WhatsApp/phone number.',
 
-    /* Module 2: Course EN */
-    cChip: '✦ Module 2 · AI Course Supervisor (LMS)',
-    cTitle: 'Self-Paced Learning with AI Grading & VIP Upsells',
-    cDesc: 'One shared engine for both experts: AI grades student submissions against your exact rubric, unlocks the next lesson — and when someone gets stuck, invites them to a 1-on-1 session while alerting your phone.',
-    trLessons: ['✓ Lesson 1', '● Lesson 2 · active', '🔒 Lesson 3 · locked', '✓ Lesson 3 · open'],
-    staffShow: '🔑 Supervisor view (reveal expert answer key)',
-    staffHide: 'Hide supervisor answer key',
-    staffHint: 'Expert grading rubric · hidden from students (AI checks strictly against these criteria):',
-    scenLbl: 'Quick-test all 3 AI reactions (or type your own answer):',
-    scenBtns: ['✓ Strong answer', '↻ Incomplete answer', '! Student is stuck'],
-    ansLbl: 'Student checksheet submission',
-    checkBtn: 'Review answer with AI Supervisor',
-    checkingTxt: 'AI Supervisor is checking against the expert rubric...',
-    fbEmptyH: 'AI Supervisor Feedback',
-    fbEmptyP: 'Pick one of the 3 quick-test scenarios on the left or write your own answer, then click Review to watch Lesson 3 unlock or trigger a live VIP alert.',
-    passH: '✓ Passed · Lesson 3 Unlocked',
-    passP: 'Your submission meets every rubric criterion. Progress has been synced to the Owner Dashboard and Lesson 3 is now unlocked.',
-    revH: (n) => `↻ Revision needed (attempt ${n} of 2)`,
-    revP: 'Good start, but still too general. Add the missing items below and resubmit (demo tip: a second vague attempt automatically offers a 1-on-1 session).',
-    vipH: 'Let’s work through it together · 1-on-1 Offered',
-    vipP: 'Feeling stuck when looking ahead is completely normal — doing it solo is 5× harder. A warm 1-on-1 invitation right at the friction point converts naturally.',
-    bookBtn: (ex) => `Request 1-on-1 VIP Session · ${ex}`,
-    bookedBtn: '✓ VIP session request sent to Owner Dashboard',
-    seeSigBtn: 'View this hot signal in Owner Dashboard →',
-    seeProgBtn: 'View student progress in Owner Dashboard →',
-    l3H: 'Lesson 3 · Follow-Through (unlocked automatically)',
-
-    /* Module 3: Owner EN */
-    oChip: '◉ Module 3 · "Owner Phone Button"',
-    oTitle: 'Owner Dashboard',
-    oDesc: 'Every quiz lead, live student progress, drop-off lesson, and hot "student stuck → ready for 1-on-1" alert on one clean screen.',
-    kpis: ['Visits (7d)', 'Quiz Leads', 'Active Students', 'Hot Signals'],
-    funnelH: 'Live Ecosystem Funnel',
-    revBadge: (n) => `VIP Pipeline · $${(n * 2500).toLocaleString('en-US')}–$${(n * 3500).toLocaleString('en-US')}`,
-    revSub: 'Estimated from target 1-on-1 consulting packages ($2,500–$3,500 per client)',
-    feedH: 'Live Activity & Leads',
-    fltTypeLbl: 'Event type',
-    fltExpLbl: 'Expert',
-    fltTypes: [['all', 'All activity'], ['lead', 'Quiz leads'], ['student', 'Students & drop-offs']],
-    fltExps: [['all', 'All experts'], ['vaidile', 'Vaidilė (Finances)'], ['tatiana', 'Tatiana (Goals / Business)']],
-    tagsLbl: { vip: 'VIP READY', contacted: '✓ Contacted', newLead: 'New lead', course: 'Course', requested: 'Session requested' },
-    progLbl: 'Course progress',
-    dossierOpen: 'Open pre-call dossier',
-    markBtn: 'Mark as contacted',
-    markedBtn: '✓ Contacted',
-    emptyFeed: 'No events match these filters yet.',
-    foot: 'Interactive prototype for "Monetization of Ideas" (Artem & Maxim). One AI engine for both projects: ~$0.003 per grading/chat + instant WhatsApp / Email alerts.',
-
-    spheres: [
-      {
-        id: 'personal', icon: '↗', color: '',
-        title: 'Personal Growth',
-        desc: 'Finances, income, life purpose, time management, energy, health & skills.',
-        items: [
-          { id: 'p_fin_order', text: 'Get my finances organized & under control', route: 'vaidile', core: true },
-          { id: 'p_earn_more', text: 'Earn more income', route: 'vaidile', core: true },
-          { id: 'p_life_goal', text: 'Define my true goal & direction in life', route: 'tatiana', core: true },
-          { id: 'p_time', text: 'Master my time & daily focus', route: 'tatiana', core: true },
-          { id: 'p_health', text: 'Improve my health & energy', route: 'tatiana', core: true },
-          { id: 'p_job', text: 'Find a better job or learn a new profession', route: 'tatiana', core: true },
-          { id: 'p_skills', text: 'Develop my abilities & confidence', route: 'tatiana', core: true },
-          { id: 'p_body', text: 'Improve physical fitness & appearance', route: 'tatiana', core: false },
-          { id: 'p_habits', text: 'Break unproductive habits', route: 'tatiana', core: false },
-          { id: 'p_learn', text: 'Start learning something meaningful', route: 'tatiana', core: false },
-          { id: 'p_home', text: 'Upgrade my living conditions', route: 'vaidile', core: false },
-          { id: 'p_travel', text: 'Travel more freely', route: 'vaidile', core: false }
-        ]
-      },
-      {
-        id: 'family', icon: '♡', color: 'rose',
-        title: 'Love & Family',
-        desc: 'Partner relationships, kids, parents, or finding the right life partner.',
-        items: [
-          { id: 'f_partner', text: 'Strengthen relationship with my partner', route: 'tatiana', core: true },
-          { id: 'f_find', text: 'Find a loving life partner', route: 'tatiana', core: true },
-          { id: 'f_kids', text: 'Improve relationship with my children', route: 'tatiana', core: true },
-          { id: 'f_create', text: 'Start a family / become a parent', route: 'tatiana', core: true },
-          { id: 'f_parents', text: 'Improve harmony with parents & relatives', route: 'tatiana', core: true },
-          { id: 'f_close', text: 'Close an old relationship cleanly', route: 'tatiana', core: true },
-          { id: 'f_intimate', text: 'Deepen intimacy & connection', route: 'tatiana', core: false }
-        ]
-      },
-      {
-        id: 'business', icon: '◇', color: 'blue',
-        title: 'Business & Society',
-        desc: 'Launch or scale a business, build a team, lead people, find partners.',
-        items: [
-          { id: 'b_grow', text: 'Grow & scale my existing business', route: 'tatiana', core: true },
-          { id: 'b_start', text: 'Start my own business', route: 'tatiana', core: true },
-          { id: 'b_team', text: 'Build a team & lead people effectively', route: 'tatiana', core: true },
-          { id: 'b_partners', text: 'Find strong business partners', route: 'tatiana', core: true },
-          { id: 'b_colleagues', text: 'Improve communication with colleagues', route: 'tatiana', core: true },
-          { id: 'b_social', text: 'Launch a meaningful community project', route: 'tatiana', core: true },
-          { id: 'b_friends', text: 'Find like-minded friends & expand my circle', route: 'tatiana', core: false }
-        ]
-      },
-      {
-        id: 'unsure', icon: '✧', color: 'amber', warm: true,
-        title: 'I want change, not sure where to start',
-        desc: 'Feeling stuck or low on energy — let AI ask 3 simple questions to uncover your next move.',
-        items: []
-      }
-    ],
-    questionsByTrack: {
-      vaidile: [
+    /* ========= PROJECT 1: VAIDILE EN ========= */
+    v: {
+      chip: 'Financial Clarity & Consulting · US / Online',
+      h1: 'Bring calm, clear order to your money — step by step',
+      sub: 'Vaidilė’s educational hub and personal financial consulting: practical guides, working trackers, a self-paced text course, and direct access to connect with me 1-on-1.',
+      ctaTracker: 'Calculate leaks & get tracker',
+      ctaDirect: 'Contact Vaidilė directly',
+      infoH: '1. Helpful Guides (Inform & Educate)',
+      infoSub: 'Short, real-world insights in plain language — zero jargon, zero overwhelm.',
+      articles: [
         {
-          q: 'What is holding you back most from full financial clarity and growth?',
-          choices: [
-            'Money comes in but leaks out fast — no clear system or control',
-            'I hit an income ceiling — working hard without real breakthrough',
-            'My income is good, but I need structure for cashflow & safety cushion',
-            'Debt or ongoing money stress keeps draining my peace of mind'
-          ]
+          t: 'Where $200–$400 silently disappears every single month',
+          tag: 'Quick start · 2 min',
+          p1: 'Most people assume they simply need to earn more. Yet the moment we log every small expense for just 72 hours (daily coffee, forgotten subscriptions, impulse buys), we almost always uncover $150–$400/month leaking out unnoticed.',
+          p2: 'The first step to peace of mind isn’t painful restriction — it’s clear visibility. Once you see every dollar clearly, calm control comes right back.'
         },
         {
-          q: 'What 90-day result would make you say: “Yes, I finally own my finances”?',
-          choices: [
-            'Full visibility: track every dollar, plug leaks, build a growing cushion',
-            'Increase personal or business income by 30–50% with a structured plan',
-            'Clear cashflow system and confidence about my financial future',
-            'Eliminate money chaos step by step with simple weekly habits'
-          ]
+          t: 'The 3-Bucket Rule: why higher income alone never removes stress',
+          tag: 'Cashflow structure · 3 min',
+          p1: 'When all money sits in one pile, even a strong income feels stressful — you never truly know what is safe to spend versus already spoken for.',
+          p2: 'Split every inflow into 3 clean buckets: Essentials (living base), Safety Cushion (peace of mind), and Growth/Freedom. Within 30 days, money anxiety drops sharply.'
         },
         {
-          q: 'How do you prefer to move forward?',
-          choices: [
-            'A free 15–30 min diagnostic call to map out my exact plan',
-            '1-on-1 financial consulting (4–6 week structured program)',
-            'A self-paced text course + plug-and-play expense trackers',
-            'Just give me my clear first step for now'
-          ]
+          t: 'What to do when opening your bank statement feels overwhelming',
+          tag: 'Support · 2 min',
+          p1: 'Avoiding statements is the #1 reaction to financial clutter. As long as numbers stay foggy, stress feels 5× heavier than reality.',
+          p2: 'Set aside 15 quiet minutes, write down the plain facts without self-judgment — and if it feels heavy to do alone, we can walk through it calmly together on a free 15-minute call.'
         }
       ],
-      business: [
-        {
-          q: 'Where is the #1 bottleneck in your business or project right now?',
-          choices: [
-            'Too many ideas and tasks — no clear strategic priority order',
-            'Everything depends on me — missing a strong, accountable team',
-            'Great product, but inconsistent flow of high-value clients',
-            'Lost clarity and momentum — working hard without matching profit'
-          ]
-        },
-        {
-          q: 'What core milestone do you want to hit in the next 3–6 months?',
-          choices: [
-            'Build a crystal-clear strategy and step-by-step growth roadmap',
-            'Step out of daily firefighting with a structured, reliable team',
-            'Launch a new offer/business with predictable revenue',
-            'Align business goals, time, and cashflow into one clean system'
-          ]
-        },
-        {
-          q: 'Which format fits you best right now?',
-          choices: [
-            '1-on-1 VIP business strategy sessions with a senior specialist',
-            'Online step-by-step course with AI + expert assignment feedback',
-            'Fast-track small group workshop to build my roadmap quickly',
-            'Start with a quick free 15-min diagnostic conversation'
-          ]
-        }
+      calcH: 'Free Quick Check: how much leaks out in a year?',
+      calcSub: 'Adjust the numbers to see how much you can redirect into your safety cushion.',
+      calcCoffee: 'Coffee, snacks & impulse buys ($ per week)',
+      calcSubs: 'Rarely used subscriptions & apps ($ per month)',
+      calcRes: (m, y) => `That equals <strong>$${m.toLocaleString('en-US')}/month</strong> or <strong>$${y.toLocaleString('en-US')}/year</strong> — ready to seed your safety cushion.`,
+      trackerBtn: 'Get the Free “30-Day Expense Tracker”',
+      trackerSent: '✓ Tracker template unlocked! Your request is also logged in Vaidilė’s Back-Office.',
+
+      helpH: '2. Self-Paced Text Course & Guided Practice (No Video Needed)',
+      helpSub: 'Try Lesson 1 right here in simple text format — submit your short audit and receive immediate guidance on your next step.',
+      lessonTag: 'Lesson 1 · Text Extension Course Practice',
+      lessonTask: 'List 2 recurring spending leaks you spotted this week, their monthly dollar total, and which bucket (Safety Cushion or Growth) you will move that cash into.',
+      demoLbl: 'Quick demo presets (test how feedback responds automatically):',
+      demoBtns: ['✓ Clear answer', '↻ Too general', '! Need Vaidilė’s help'],
+      samples: [
+        'I spotted 2 leaks: daily coffee & snacks ($180/mo) and 4 unused app subscriptions ($65/mo). Starting Monday I will move $245/mo into my Safety Cushion bucket.',
+        'I spend too much on dining out and random things, I’ll try to save next month.',
+        'I feel anxious even opening my bank accounts — debt and money chaos feel too heavy, I don’t know where to start.'
       ],
-      tatiana: [
-        {
-          q: 'What is draining your energy or keeping you stuck most right now?',
-          choices: [
-            'Scattered focus: too many thoughts and tasks, unclear where to start',
-            'No clear inspiring target — low drive and motivation',
-            'Daily routine keeps crowding out what truly matters',
-            'Tension in relationships or environment is slowing everything down'
-          ]
-        },
-        {
-          q: 'What shift in 90 days would make you feel truly proud and energized?',
-          choices: [
-            'Crystal-clear year goal plus a simple 3–6 month roadmap',
-            'Renewed energy, daily time control, and calm confidence',
-            'Warmth, honesty, and harmony in my closest relationships',
-            'Consistent action with real, visible progress every week'
-          ]
-        },
-        {
-          q: 'How do you like to take your first steps?',
-          choices: [
-            'Fast group workshop to assemble my personal plan step by step',
-            'Self-paced online course with structured assignment check-ins',
-            '1-on-1 guidance with an accountability partner so I stay on track',
-            'Start with a short free diagnostic breakdown first'
-          ]
-        }
-      ]
+      ansPh: 'Write your short audit here...',
+      checkBtn: 'Submit assignment for review',
+      passH: '✓ Great work! Lesson 1 passed — Lesson 2 is now open',
+      passP: 'You identified clear numbers and assigned a target bucket. You can move smoothly into Lesson 2 (“Building Your 90-Day Cushion”) at your own pace.',
+      revH: 'Let’s make this slightly more specific',
+      revP: 'Solid start! For this tracker to work in real life, include: (1) 2 concrete recurring expenses, (2) their approximate monthly dollar total, and (3) which bucket receives the freed cash.',
+      stuckH: 'You don’t have to untangle this alone',
+      stuckP: 'When debt or financial stress piles up, reading a text lesson isn’t enough — a calm, judgment-free 15-minute conversation with Vaidilė changes everything. I’ve already flagged your note in her Back-Office.',
+      stuckCta: 'Jump to direct booking with Vaidilė ↓',
+
+      pkgsH: 'Ways to Work with Vaidilė',
+      pkgs: [
+        { tag: 'Starter', title: 'Trackers & Templates', price: '$29–$79', desc: 'Clean plug-and-play expense, income, and safety-cushion trackers to start organizing on your own.', btn: 'Request templates' },
+        { tag: 'Self-paced', title: 'Text Extension Course', price: '$290', desc: 'Step-by-step written course (no long videos) with structured assignment feedback and worksheets.', btn: 'Choose course' },
+        { tag: 'Most popular', title: '1-on-1 Financial Consulting', price: '$2,000–$3,000', desc: '4–6 weeks of direct personal guidance: cashflow audit, leak elimination, cushion & steady growth. Special introductory terms for pilot clients.', btn: 'Book intro call', feat: true },
+        { tag: 'Business / VIP', title: 'Owner Cashflow + Life Support', price: 'From $4,500', desc: 'Clean separation of business & personal cashflows plus clear weekly metrics. Optional add-on support for personal/relationship clarity.', btn: 'Discuss your case' }
+      ],
+
+      directH: '3. Contact Vaidilė Directly',
+      directSub: 'Pick your preferred channel and drop a short note — it goes straight into Vaidilė’s Back-Office.',
+      channels: ['Free 15-min Intro Call', 'Message on WhatsApp', 'Reply by Email'],
+      nameLbl: 'Your name',
+      contactLbl: 'Your WhatsApp, phone, or Email',
+      contactPh: 'name@example.com or phone',
+      msgLbl: 'Briefly share what you’d like help with (optional)',
+      msgPh: 'Example: I want to organize my monthly cashflow or ask about 1-on-1 consulting...',
+      sendBtn: 'Send Directly to Vaidilė',
+      sentOk: (n) => `✓ Thank you, ${n}! Your message was delivered directly to Vaidilė — switch to “3. Back-Office” to see and reply to it.`,
+      disclaimer: 'Educational financial organization and personal/business cashflow planning. Does not constitute licensed investment, legal, or tax advice.'
     },
-    tracks: {
-      tatiana: {
-        ownerName: 'Tatiana',
-        projectLabel: 'Project · Tatiana',
-        title: 'Goal Strategy System',
-        sub: '3 steps · 1–2–3 visual flow + checksheet grading (plain language)',
-        lessonH: 'Lesson 2 · Practice: 90-Day Target',
-        scheme: [
-          ['Clear Target', 'One measurable win'],
-          ['90-Day Date', 'Concrete finish line'],
-          ['First Step', 'Action in 48 hours']
+
+    /* ========= PROJECT 2: TATIANA EN ========= */
+    t: {
+      chip: 'Step-by-Step Goal Strategy · Tatiana Olsen',
+      h1: 'Choose your Goal Scale and build a clear action roadmap',
+      sub: 'Answer a few focused questions in plain language. When your direction is clear, you can progress right away on your own; whenever you hit a roadblock or want 1-on-1 depth, Tatiana joins personally.',
+      stepsLbl: ['1. Choose scale', '2. Priorities', '3. Scale questions', '4. Your plan & path'],
+      chooseH: 'Which Goal Scale would you like to work through?',
+      scales: [
+        {
+          id: 'personal', icon: '↗', color: '',
+          badge: 'Personal · Express Scale',
+          title: 'Personal Growth & Life Direction',
+          desc: 'Clarify your core life goal, master time, restore energy, health, career direction, or personal abilities.',
+          items: [
+            { id: 'p_goal', text: 'Define my core goal & direction in life', core: true },
+            { id: 'p_time', text: 'Master my time & daily focus', core: true },
+            { id: 'p_health', text: 'Improve my health & energy', core: true },
+            { id: 'p_job', text: 'Find a better job or learn a new profession', core: true },
+            { id: 'p_skills', text: 'Develop my personal abilities', core: true },
+            { id: 'p_fin', text: 'Increase income & organize personal finances', core: true },
+            { id: 'p_body', text: 'Improve physical fitness & appearance', core: false },
+            { id: 'p_habits', text: 'Break unproductive habits', core: false },
+            { id: 'p_learn', text: 'Start learning something meaningful', core: false },
+            { id: 'p_travel', text: 'Travel more & upgrade living conditions', core: false }
+          ]
+        },
+        {
+          id: 'family', icon: '♡', color: 'rose',
+          badge: 'Family · Express Scale',
+          title: 'Love, Family & Relationships',
+          desc: 'Strengthen your partnership, improve connection with children or parents, build a family, or close an old chapter cleanly.',
+          items: [
+            { id: 'f_partner', text: 'Strengthen relationship with my partner', core: true },
+            { id: 'f_kids', text: 'Improve relationship with my children', core: true },
+            { id: 'f_find', text: 'Find a loving life partner', core: true },
+            { id: 'f_create', text: 'Start a family / become a parent', core: true },
+            { id: 'f_parents', text: 'Improve harmony with parents & relatives', core: true },
+            { id: 'f_close', text: 'Close a past relationship cleanly', core: true },
+            { id: 'f_intimate', text: 'Deepen trust & intimacy', core: false }
+          ]
+        },
+        {
+          id: 'business', icon: '◇', color: 'blue',
+          badge: 'Business · Full Scale (VIP)',
+          title: 'Business, Team & Community',
+          desc: 'Launch or scale a business, build an accountable team, structure leadership, find strong partners, or launch a community project.',
+          items: [
+            { id: 'b_grow', text: 'Grow & scale my existing business', core: true },
+            { id: 'b_start', text: 'Start my own business from scratch', core: true },
+            { id: 'b_team', text: 'Build a team & lead people effectively', core: true },
+            { id: 'b_partners', text: 'Find strong business partners', core: true },
+            { id: 'b_colleagues', text: 'Improve communication with colleagues', core: true },
+            { id: 'b_social', text: 'Launch a meaningful community project', core: true },
+            { id: 'b_friends', text: 'Expand my circle of like-minded people', core: false }
+          ]
+        },
+        {
+          id: 'unsure', icon: '✧', color: 'amber', warm: true,
+          badge: 'Quick guidance',
+          title: 'I want change, not sure which scale to start with',
+          desc: 'Feeling stuck or scattered — answer 3 quick questions to pinpoint your highest-leverage focus.',
+          items: []
+        }
+      ],
+      step2H: 'What matters most to shift first?',
+      picked: (n) => `Selected ${n} of 3 priorities`,
+      showMore: (n) => `Show all options (+${n})`,
+      showLess: 'Show fewer options',
+      otherLbl: 'Other (in your own words)',
+      otherPh: 'If your priority isn’t listed above...',
+      back: '← Back',
+      next: 'Continue to scale questions →',
+
+      step3H: 'Answer 3 core questions for your Goal Scale',
+      step3Sub: 'Write honestly in plain words — this forms the backbone of your personal plan.',
+      q1Lbl: '1. What is slowing you down or draining your energy most right now?',
+      q1Opts: [
+        'Scattered focus: too many tasks, unclear what to tackle first',
+        'No single inspiring 3–6 month target locked in yet',
+        'Everything relies on me — missing a clear plan and delegation',
+        'Feeling stuck or overwhelmed — hard to get clarity on my own'
+      ],
+      q2Lbl: '2. What key 90-day goal do you want to lock in, and what is 1 concrete step you’ll take this week?',
+      q2Ph: 'Example: Reach steady $12,000/mo revenue and hire 1 assistant within 90 days. By Friday I will list 10 tasks to delegate...',
+      q3Lbl: '3. How would you like to continue with your Scale?',
+      q3Opts: [
+        { id: 'self', label: 'Self-paced online course (step-by-step with assignment checks)' },
+        { id: 'group', label: 'Small group workshop — assemble my roadmap together' },
+        { id: 'personal', label: 'Have Tatiana join personally (1-on-1 accountability & VIP guidance)' }
+      ],
+      demoLbl: 'Demo quick-fill (see how the portal decides: self-paced vs connecting Tatiana):',
+      demoBtns: ['✓ Clear answer (self-paced)', '↻ Vague (ask to refine)', '! Stuck (connect Tatiana)'],
+      demoSamples: [
+        'My 90-day target by March 1 is to organize my business, hire an assistant, and grow revenue by 30%. First step this week: by Friday list 10 recurring tasks to delegate.',
+        'I just want more calm, energy, and things to go better overall.',
+        'Honestly I feel stuck and don’t know where to start — my head is cluttered and looking 3 months ahead feels heavy alone.'
+      ],
+      submitScaleBtn: 'Build My Goal Scale →',
+      revBannerH: 'Let’s sharpen your target and first step',
+      revBannerP: 'Your answer is still quite broad. To make your Goal Scale truly actionable, include a concrete 90-day outcome (number or clear milestone) and 1 step for this week — or choose personal guidance with Tatiana.',
+
+      resSelfTag: 'Self-paced path · No live call required',
+      resSelfH: 'Your Goal Scale is ready — jump straight into Lesson 1',
+      resSelfP: 'You defined a crisp target and first move. Lesson 1 and your worksheet are now unlocked so you can progress independently while Tatiana sees your progress in her Back-Office.',
+      resPersTag: 'Personal connection with Tatiana recommended',
+      resPersH: 'Your draft is ready — this step works best 1-on-1 with Tatiana',
+      resPersP: 'You chose personal support (or hit a natural fog point where going solo is tough). Working with Tatiana 1-on-1 clears the clutter in a single focused session.',
+      mapRows: ['Chosen Scale & Priorities', 'Key Bottleneck', 'Locked Target & 72-Hour First Step', '90-Day Next Phase'],
+      saveLeadH: 'Save your Goal Scale to unlock access / request a call',
+      saveLeadSubSelf: 'Enter your name and contact to unlock Lesson 1 worksheet and track your progress.',
+      saveLeadSubPers: 'Enter your name and contact — your answers go straight to Tatiana’s Back-Office so she can reply personally.',
+      saveBtnSelf: 'Save Scale & Start Course →',
+      saveBtnPers: 'Send Answers to Tatiana for 1-on-1 Follow-Up →',
+      savedOkSelf: (n) => `✓ All set, ${n}! Lesson 1 is unlocked. In Tatiana’s Back-Office you appear under “Progressing independently”.`,
+      savedOkPers: (n) => `✓ All set, ${n}! Your answers have been sent to Tatiana. Open “3. Back-Office” to inspect and reply as her.`,
+      toCabBtn: 'View this submission in “3. Back-Office” →',
+      restartBtn: 'Start another scale'
+    },
+
+    /* ========= TAB 3: BACK-OFFICE EN ========= */
+    c: {
+      chip: 'Internal Workspace · Visible Only to Experts',
+      h1: 'Back-Office: Requests, Active Students & Replies',
+      sub: 'Tatiana and Vaidilė see every incoming inquiry, who is actively studying which course or Goal Scale, who is moving independently, and where to step in and reply directly.',
+      views: [
+        ['tatiana', 'Tatiana’s Desk (Goal Scale)'],
+        ['vaidile', 'Vaidilė’s Desk (Finances)'],
+        ['all', 'Combined View (Both Projects)']
+      ],
+      kpis: ['New Requests', 'Active in Course', 'Needs Your Reply', 'Self-Paced (Time Saved)'],
+      fltStatusLbl: 'Filter by status',
+      fltStatuses: [
+        ['all', 'All requests & students'],
+        ['need_expert', 'Needs your reply / 1-on-1'],
+        ['self', 'Progressing independently'],
+        ['replied', 'Already replied']
+      ],
+      fltSearchLbl: 'Search by name or topic',
+      fltSearchPh: 'e.g. Elena, business, tracker...',
+      stNeed: 'Needs expert reply',
+      stNew: 'New inquiry',
+      stSelf: 'Progressing independently',
+      stReplied: '✓ Replied',
+      openAnswers: 'View client’s full answers',
+      replyLbl: 'Reply to client directly from here:',
+      replyPh: 'Write feedback, answer their question, or propose a call time...',
+      sendReply: 'Send Reply',
+      sentBy: (who, tm) => `Your reply (${who} · ${tm}):`,
+      quickReplies: {
+        tatiana: [
+          'Hi! I reviewed your Goal Scale answers — let’s hop on a 15-min call tomorrow so we can finalize your roadmap together.',
+          'Sharp, clear goal! Keep going into Lesson 2 and message me right here anytime you need support.'
         ],
-        rubric: [
-          'Includes a specific, measurable goal (number, milestone, or tangible outcome).',
-          'Includes a clear deadline or 90-day timeframe.',
-          'Names one concrete physical step to complete this week.',
-          'If the student feels stuck or overwhelmed — never push; offer a 1-on-1 VIP Strategy Session with Tatiana and send a hot alert to Owner View.'
-        ],
-        task: 'Write your #1 measurable 90-day target, include a clear deadline, and name 1 concrete action you will complete this week.',
-        samples: [
-          'My 90-day target (by March 1) is to grow revenue to $12,000/month and delegate routine work to an assistant. First step this week: by Friday I will document 10 recurring tasks and post the role.',
-          'I just want to grow somehow, feel calmer, and have things go better in my life.',
-          'Honestly I feel completely stuck — I have ten competing priorities in my head and don’t know where to start.'
-        ],
-        checksPass: ['Specific measurable target & numbers included', 'Clear timeframe / deadline set', 'Concrete weekly first action named'],
-        checksMiss: ['Add a concrete number or measurable outcome', 'Specify a clear deadline or 90-day date', 'Name 1 specific physical step for this week'],
-        vipBadge: 'Paid 1-on-1 VIP Session · Tatiana (Goal Strategy)',
-        lesson3: 'Break your 90-day target into 12 simple weekly checkpoints and schedule a 15-minute Friday review ritual so progress stays steady.'
+        vaidile: [
+          'Hi! I received your inquiry — I’d love to do a free 15-min clarity call this week. Which day works best?',
+          'Just sent over your 30-Day Expense Tracker! Log the first 3 days and reply with what leaks you uncover.'
+        ]
       },
-      vaidile: {
-        ownerName: 'Vaidilė',
-        projectLabel: 'Project · Vaidilė',
-        title: 'Cashflow Clarity',
-        sub: 'Self-paced text course · zero video required · US / EN',
-        lessonH: 'Lesson 2 · Practice: Leak Audit & 3 Buckets',
-        scheme: [
-          ['Spot 2 Leaks', 'Recurring drains'],
-          ['Monthly Total', 'Often $150–$400'],
-          ['Assign Bucket', 'Cushion or Growth']
-        ],
-        rubric: [
-          'Identifies at least 2 concrete recurring spending leaks.',
-          'Quantifies the real monthly dollar total.',
-          'Specifies which bucket (Essentials / Safety Cushion / Growth) the freed money moves into.',
-          'If the student reports debt anxiety or feeling stuck — warmly invite them to a 1-on-1 Financial Diagnostic Call with Vaidilė ($2,000–$3,000 package).'
-        ],
-        task: 'List 2 recurring money leaks you spotted this week, calculate their monthly total, and state which bucket (Safety Cushion or Growth) that freed cash will go into.',
-        samples: [
-          'I spotted 2 leaks: 1) daily coffee runs and takeout ($190/mo); 2) 4 forgotten app subscriptions ($75/mo). Starting Monday I will auto-transfer $265/mo straight into my Safety Cushion bucket.',
-          'I probably spend too much on random stuff and dining out, I’ll try to spend less next month.',
-          'I feel anxious opening my bank statements — I’m stuck with debt and money chaos, and I don’t know where to begin.'
-        ],
-        checksPass: ['Concrete recurring money leaks identified', 'Exact monthly dollar total calculated', 'Target bucket (Cushion / Growth) assigned'],
-        checksMiss: ['Name at least 2 concrete recurring expenses', 'Calculate the exact monthly dollar total', 'Specify which bucket (Cushion / Growth) receives the money'],
-        vipBadge: '1-on-1 Financial Consulting · Vaidilė ($2,000–$3,000)',
-        lesson3: 'Automate your weekly transfer on payday and log your first 7 days inside the Expense & Cushion text tracker.'
-      }
+      empty: 'No records match these filters yet.',
+      foot: 'Internal system workspace (built by Artem & Maxim). In production, replies sent here deliver straight to the client’s WhatsApp or Email while routine lesson checks run quietly in the background.'
     }
   }
 };
 
-const SEED_EVENTS = [
+const SEED_RECORDS = [
   {
-    id: 'seed-vip-1',
-    type: 'student',
-    expert: 'vaidile',
-    hot: true,
-    fresh: false,
-    name: 'Sarah T.',
-    channel: 'sarah.t***@gmail.com · Florida, US',
-    lang: 'EN',
-    progress: 65,
-    courseLabel: 'Cashflow Clarity · Lesson 2 of 3',
-    quote: '“I feel anxious opening my bank statements — too many leaks and debt, not sure where to start.”',
-    requested: false,
-    contacted: false,
-    time: 'Today, 15:20'
-  },
-  {
-    id: 'seed-lead-1',
-    type: 'lead',
+    id: 'rec-t-1',
     expert: 'tatiana',
-    hot: false,
-    fresh: false,
+    status: 'need_expert',
     name: 'Елена М.',
-    channel: '+41 79 *** 42 18 (WhatsApp)',
+    contact: '+41 79 *** 42 18 (WhatsApp)',
     lang: 'RU',
-    tags: ['Развить существующий бизнес', 'Создать команду'],
-    detail: 'Всё держится на мне — не хватает делегирования · Цель: управляемая команда · Формат: VIP-стратегия с экспертом',
-    contacted: false,
-    time: 'Сегодня, 14:12'
+    program: 'Бизнес-шкала (VIP) · Шаг 2',
+    progress: 45,
+    summary: 'Запросила личное подключение Татьяны — хочет вывести бизнес из ручного управления и собрать команду.',
+    answers: [
+      'Приоритеты: Развить бизнес, Создать команду',
+      'Что тормозит: Всё держится на мне — не хватает системы и делегирования',
+      'Ответ по цели: «Хочу масштабироваться, но в одиночку тяжело разложить приоритеты на 6 месяцев»'
+    ],
+    replies: [],
+    time: 'Сегодня, 14:15'
   },
   {
-    id: 'seed-stud-2',
-    type: 'student',
+    id: 'rec-t-2',
     expert: 'tatiana',
-    hot: false,
-    fresh: false,
+    status: 'self',
     name: 'Дмитрий В.',
-    channel: '+49 176 *** 88 10 (WhatsApp)',
+    contact: '+49 176 *** 88 10 (WhatsApp)',
     lang: 'RU',
-    progress: 92,
-    courseLabel: 'Система целей · Урок 3 открыт',
-    quote: '«Цель до 1 марта: 4 постоянных B2B-клиента и системный недельный план.»',
-    requested: false,
-    contacted: true,
-    time: 'Сегодня, 13:05'
+    program: 'Личная шкала целей · Урок 2 из 3',
+    progress: 78,
+    summary: 'Идёт самостоятельно по онлайн-курсу: чётко сформулировал цель на 90 дней, Урок 2 открыт автоматически.',
+    answers: [
+      'Приоритеты: Определить цель в жизни, Управление временем',
+      'Ответ по цели: «До 1 марта запустить 2 новых клиента и выстроить утренний фокус без рутины»'
+    ],
+    replies: [],
+    time: 'Сегодня, 12:40'
   },
   {
-    id: 'seed-lead-2',
-    type: 'lead',
+    id: 'rec-v-1',
     expert: 'vaidile',
-    hot: false,
-    fresh: false,
-    name: 'Michael R.',
-    channel: 'michael.r***@gmail.com',
+    status: 'need_expert',
+    name: 'Sarah T.',
+    contact: 'sarah.t***@gmail.com · Florida, US',
     lang: 'EN',
-    tags: ['Get my finances organized', 'Earn more income'],
-    detail: 'Money leaks out fast · Goal: full visibility & growing cushion · Format: Free 15–30 min diagnostic call',
-    contacted: true,
-    time: 'Today, 12:45'
+    program: 'Text Course · Lesson 1 (Needs 1-on-1)',
+    progress: 35,
+    summary: 'Requested direct 15-min call with Vaidilė after Lesson 1 — feels overwhelmed by debt and fluctuating expenses.',
+    answers: [
+      'Course note: “I feel anxious opening bank statements — not sure where to start.”',
+      'Interest: 1-on-1 Financial Consulting ($2,000–$3,000)'
+    ],
+    replies: [],
+    time: 'Today, 15:10'
+  },
+  {
+    id: 'rec-v-2',
+    expert: 'vaidile',
+    status: 'self',
+    name: 'Michael R.',
+    contact: 'michael.r***@gmail.com · Texas, US',
+    lang: 'EN',
+    program: '30-Day Expense Tracker · Lesson 2',
+    progress: 70,
+    summary: 'Downloaded Expense Tracker & passed Lesson 1 audit ($280/mo leaks found) — moving independently to Lesson 2.',
+    answers: [
+      'Lesson 1 audit: “Cut $195/mo dining + $85/mo unused apps -> moved $280/mo to Safety Cushion.”'
+    ],
+    replies: [],
+    time: 'Today, 11:20'
   }
 ];
 
 const urlLang = new URLSearchParams(window.location.search).get('lang');
 const state = {
   lang: urlLang === 'en' ? 'en' : 'ru',
-  tab: 0, // 0=quiz, 1=course, 2=owner
-  step: 0, // 0=area, 1=checks, 2=questions, 2.5=analyzing, 3=result
-  analyzing: false,
-  areaId: 'personal',
-  selectedIds: [],
-  expanded: false,
-  other: '',
-  qIdx: 0,
-  answers: ['', '', ''],
-  contact: null,
-  track: urlLang === 'en' ? 'vaidile' : 'tatiana',
-  staff: false,
-  checking: false,
-  courseState: {
-    tatiana: { text: '', result: '', attempts: 0, passed: false, requested: false },
-    vaidile: { text: '', result: '', attempts: 0, passed: false, requested: false }
-  },
-  filterType: 'all',
-  filterExpert: 'all',
-  events: []
+  tab: urlLang === 'en' ? 0 : 1, // EN opens Vaidile (0); RU opens Tatiana (1) OR let's default RU to 0? Wait: Artem asked "Первое — Вайдиле, второе — Татьяна, третье — кабинет", so tab 0 = Vaidile!
+  // Vaidile state
+  vCoffee: 45,
+  vSubs: 65,
+  vTrackerSent: false,
+  vLessonText: '',
+  vLessonResult: '', // '' | 'pass' | 'revise' | 'stuck'
+  vLessonAttempts: 0,
+  vChannel: 0,
+  vSelectedPkg: '',
+  vDirectSent: '',
+  // Tatiana Admin Scale state
+  tStep: 0, // 0=choose scale, 1=priorities, 2=questions, 3=result
+  tScaleId: 'personal',
+  tSelectedIds: [],
+  tExpanded: false,
+  tOther: '',
+  tQ1: '',
+  tQ2: '',
+  tQ3: 'self',
+  tNeedRefine: false,
+  tNeedsTatiana: false,
+  tSavedName: '',
+  // Cabinet state
+  cabExpert: urlLang === 'en' ? 'vaidile' : 'tatiana',
+  cabStatus: 'all',
+  cabSearch: '',
+  replyDrafts: {},
+  records: []
 };
+state.tab = 0; // Always start cleanly on Tab 1 (Vaidile) so tabs read 1 -> 2 -> 3 in order!
 
-function loadEvents() {
+function loadRecords() {
   try {
-    const raw = localStorage.getItem('clarity_nordic_events_v3');
-    if (raw) { state.events = JSON.parse(raw); return; }
+    const raw = localStorage.getItem('two_projects_cabinet_v1');
+    if (raw) { state.records = JSON.parse(raw); return; }
   } catch (e) {}
-  state.events = JSON.parse(JSON.stringify(SEED_EVENTS));
+  state.records = JSON.parse(JSON.stringify(SEED_RECORDS));
 }
-function saveEvents() {
-  try { localStorage.setItem('clarity_nordic_events_v3', JSON.stringify(state.events)); } catch (e) {}
+function saveRecords() {
+  try { localStorage.setItem('two_projects_cabinet_v1', JSON.stringify(state.records)); } catch (e) {}
 }
 
-const d = () => DATA[state.lang];
-const getArea = () => d().spheres.find(s => s.id === state.areaId) || d().spheres[0];
-const selectedLabels = () => {
-  const sp = getArea();
-  if (sp.id === 'unsure') return [state.lang === 'ru' ? 'Хочу перемен, ищу фокус' : 'Ready for change, seeking clarity'];
-  const list = sp.items.filter(it => state.selectedIds.includes(it.id)).map(it => it.text);
-  if (state.other.trim()) list.push(state.other.trim());
-  return list;
+const L = () => DATA[state.lang];
+const pendingCount = () => state.records.filter(r => r.status === 'need_expert').length;
+const getScale = () => L().t.scales.find(s => s.id === state.tScaleId) || L().t.scales[0];
+const tChosenLabels = () => {
+  const sc = getScale();
+  if (sc.id === 'unsure') return [state.lang === 'ru' ? 'Подобрать главное направление' : 'Identify core direction'];
+  const arr = sc.items.filter(it => state.tSelectedIds.includes(it.id)).map(it => it.text);
+  if (state.tOther.trim()) arr.push(state.tOther.trim());
+  return arr;
 };
-const computeTrack = () => {
-  if (state.areaId === 'unsure') return 'tatiana';
-  const sp = getArea();
-  const chosen = sp.items.filter(it => state.selectedIds.includes(it.id));
-  if (chosen.some(it => it.route === 'vaidile')) return 'vaidile';
-  if (state.areaId === 'business') return 'business';
-  return 'tatiana';
-};
-const expertKey = () => computeTrack() === 'vaidile' ? 'vaidile' : 'tatiana';
-const expertName = (k) => k === 'vaidile' ? (state.lang === 'ru' ? 'Вайдиле' : 'Vaidilė') : (state.lang === 'ru' ? 'Татьяна' : 'Tatiana');
-const hotOpenCount = () => state.events.filter(e => !e.contacted).length;
-const vipOpenCount = () => state.events.filter(e => e.hot && !e.contacted).length;
 
-function buildDiagnosis() {
-  const tr = computeTrack();
-  const isRu = state.lang === 'ru';
-  const mainP = selectedLabels()[0] || '';
-  const obstacle = state.answers[0] || '';
-  const goal90 = state.answers[1] || '';
-
-  if (tr === 'vaidile') {
-    return {
-      expert: 'vaidile',
-      expertBadge: isRu ? 'Ваш эксперт · Вайдиле (Финансовый консалтинг)' : 'Your expert · Vaidilė (Financial Consulting)',
-      root: isRu
-        ? `Вы отметили «${mainP}», и главное препятствие сейчас — «${obstacle}». В 9 из 10 случаев причина не в нехватке усилий, а в отсутствии прозрачной системы денежных потоков: без ясной картины расходов, доходов и целей деньги растворяются без ощущения опоры.`
-        : `You chose “${mainP}”, and your key friction is “${obstacle}”. In 9 out of 10 cases, the issue isn’t effort — it’s missing a clear cashflow system. Without visibility over inflows, leaks, and targets, higher income rarely creates peace of mind.`,
-      step72: isRu
-        ? 'Сделайте «рентген денежного потока» за 72 часа: запишите абсолютно все траты (включая кофе и подписки) рядом с источниками дохода. Уже на этом простом шаге люди находят $150–$400/мес скрытых утечек и впервые возвращают ощущение контроля.'
-        : 'Run a 72-Hour Cashflow X-Ray: log 100% of every expense (including coffee and subscriptions) alongside your income streams. Most people immediately uncover $150–$400/month in hidden leaks and feel instant relief.',
-      plan: isRu ? [
-        `Недели 1–2 · Полный контроль: фиксируем реальную картину доходов/расходов и закрываем скрытые утечки ради цели «${goal90}».`,
-        'Недели 3–6 · Архитектура потоков: разделяем деньги по корзинам (Обязательства / Резерв / Рост) — уходит финансовая тревога.',
-        'Недели 7–12 · Рост дохода: переводим свободные ресурсы в предсказуемый рост и закрепляем 15-минутный еженедельный ритуал.'
-      ] : [
-        `Weeks 1–2 · Full Visibility: establish clear inflow/outflow tracking and stop leaks toward “${goal90}”.`,
-        'Weeks 3–6 · 3-Bucket Cashflow: structure dedicated allocations (Essentials / Safety Cushion / Growth) so money anxiety drops.',
-        'Weeks 7–12 · Income Expansion: direct surplus cashflow into steady growth backed by a 15-min weekly check-in.'
-      ]
-    };
-  }
-  if (tr === 'business') {
-    return {
-      expert: 'tatiana',
-      expertBadge: isRu ? 'Ваш эксперт · Татьяна (Стратегия бизнеса / VIP)' : 'Your expert · Tatiana (Business Strategy / VIP)',
-      root: isRu
-        ? `Ваш главный фокус — «${mainP}», а сейчас тормозит: «${obstacle}». Когда цели, планы, задачи команды и ежедневные действия не связаны в одну понятную шкалу приоритетов, владелец тащит всё на себе.`
-        : `Your top focus is “${mainP}”, blocked right now by “${obstacle}”. When business goals, plans, team roles, and daily actions aren’t connected into one clear ladder, the founder carries everything alone.`,
-      step72: isRu
-        ? 'Зафиксируйте ОДНУ измеримую цель бизнеса на 90 дней на одном листе бумаги: (1) целевая цифра, (2) 3 действия, которые прямо влияют на прибыль, и (3) всё лишнее, что вы осознанно ставите на паузу на ближайшие 30 дней.'
-        : 'Lock ONE measurable 90-day business target on a single sheet of paper: (1) target metric, (2) top 3 needle-moving actions, and (3) what you will deliberately pause for 30 days.',
-      plan: isRu ? [
-        `Недели 1–2 · Выравнивание цели: убираем распыление и собираем пошаговый план под результат «${goal90}».`,
-        'Недели 3–6 · Делегирование и система: распределяем ответственность по функциям и подключаем AI-автоматизацию.',
-        'Недели 7–12 · Управляемый рост: переходим на еженедельный контроль 3–4 ключевых цифр без ручного тушения пожаров.'
-      ] : [
-        `Weeks 1–2 · Strategic Alignment: clear the noise and build a crisp plan directly targeting “${goal90}”.`,
-        'Weeks 3–6 · Delegation & Automation: clarify team ownership and streamline client flow with smart AI tools.',
-        'Weeks 7–12 · Profitable Scale: run on a calm weekly KPI rhythm without founder burnout.'
-      ]
-    };
-  }
-  return {
-    expert: 'tatiana',
-    expertBadge: isRu ? 'Ваш эксперт · Татьяна (Постановка целей и ясность)' : 'Your expert · Tatiana (Goal Clarity & Strategy)',
-    root: isRu
-      ? `Вы выбрали «${mainP}», и сейчас сильнее всего мешает: «${obstacle}». Когда в голове десятки неструктурированных желаний, энергия уходит на сомнения. Стоит превратить расплывчатое желание в одну ясную цель на 90 дней — и энергия возвращается сразу.`
-      : `You selected “${mainP}”, and your main friction is “${obstacle}”. When dozens of unstructured wishes compete for attention, energy drains into doubt. Turning one vague wish into a clear 90-day target restores drive fast.`,
-    step72: isRu
-      ? `Техника «1 лист ясности» за 20 минут сегодня вечером: выпишите всё, что забирает внимание, выберите ОДНУ сферу («${mainP}»), опишите результат через 90 дней и сделайте один маленький физический шаг завтра до 12:00.`
-      : `Do the 20-Minute “One-Page Clarity” Reset tonight: list everything competing for attention, pick ONE focus (“${mainP}”), define 90-day success, and finish one tiny physical step before noon tomorrow.`,
-    plan: isRu ? [
-      `Недели 1–2 · Настоящее «почему»: убираем лишний шум и формулируем вдохновляющую цель под запрос «${goal90}».`,
-      'Недели 3–6 · Простой пошаговый план: разбиваем большую цель на понятные еженедельные шаги («раз, два, три») без перегруза.',
-      'Недели 7–12 · Закрепление побед: фиксируем еженедельный прогресс (в курсе или со «вторым человеком») до устойчивого результата.'
-    ] : [
-      `Weeks 1–2 · True Priority: clear mental clutter and craft an inspiring target around “${goal90}”.`,
-      'Weeks 3–6 · Simple Roadmap: break the big goal into crisp weekly steps (“1, 2, 3”) without overwhelm.',
-      'Weeks 7–12 · Momentum & Support: track weekly wins (in the course or 1-on-1) until the new level feels natural.'
-    ]
-  };
-}
-
-function render(focus = false, pulseBadge = false) {
-  const L = d();
+function render(scrollTop = false, pulse = false) {
+  const txt = L();
   document.documentElement.lang = state.lang;
-  $('brand').textContent = L.brand;
-  $('sub').textContent = L.sub;
+  $('brand').textContent = txt.brand;
+  $('sub').textContent = txt.sub;
 
   $('lang').innerHTML = ['ru', 'en'].map(code =>
     `<button class="${state.lang === code ? 'on' : ''}" data-action="lang:${code}" aria-pressed="${state.lang === code}">${code.toUpperCase()}</button>`
   ).join('');
 
-  const pending = hotOpenCount();
-  $('nav').innerHTML = L.tabs.map((lbl, i) => {
-    const badge = i === 2 && pending ? `<span class="count ${pulseBadge ? 'pulse' : ''}" aria-label="${L.hotAria} ${pending}">${pending}</span>` : '';
-    return `<button class="${state.tab === i ? 'on' : ''}" data-action="tab:${i}" aria-pressed="${state.tab === i}">${lbl}${badge}</button>`;
+  const pCnt = pendingCount();
+  $('nav').innerHTML = txt.tabs.map(([base, ext], i) => {
+    const badge = i === 2 && pCnt ? `<span class="count ${pulse ? 'pulse' : ''}">${pCnt}</span>` : '';
+    const extHtml = ext ? `<span class="tab-ext">${ext}</span>` : '';
+    return `<button class="${state.tab === i ? 'on' : ''}" data-action="tab:${i}" aria-pressed="${state.tab === i}">${base}${extHtml}${badge}</button>`;
   }).join('');
 
-  $('main').innerHTML = [renderQuiz, renderCourse, renderOwner][state.tab]();
+  $('main').innerHTML = [renderVaidile, renderTatiana, renderCabinet][state.tab]();
 
-  if (focus) {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    const h = $('main').querySelector('h1');
-    if (h) { h.tabIndex = -1; h.focus({ preventScroll: true }); }
-  }
+  if (scrollTop) window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-/* ==================== TAB 1: AI QUIZ ==================== */
-function renderQuiz() {
-  const L = d();
-  const displayStep = state.analyzing ? 3 : state.step;
-  const heroHtml = state.step === 0 && !state.analyzing
-    ? `<section class="hero intro">
-         <div class="compass" aria-hidden="true"><i class="needle"></i></div>
-         <span class="tag">${L.heroChip}</span>
-         <h1>${L.heroTitle}</h1>
-         <p>${L.heroDesc}</p>
-       </section>`
-    : '';
+/* ==================== TAB 1: VAIDILE (INFOBUSINESS + DIRECT CONTACT) ==================== */
+function renderVaidile() {
+  const v = L().v;
+  const monthlyLeak = Math.round(state.vCoffee * 4.3 + state.vSubs);
+  const yearlyLeak = monthlyLeak * 12;
 
-  const stepBar = state.step < 3
-    ? `<div class="stepbar">
-         <div class="row">
-           <small><strong>${L.stepOf(Math.min(displayStep + 1, 4), 4)}</strong></small>
-           <small>${L.stepFlow}</small>
-         </div>
-         <div class="segments" aria-hidden="true">
-           ${[0, 1, 2, 3].map(i => `<i class="${i <= displayStep ? 'filled' : ''}"></i>`).join('')}
-         </div>
-       </div>`
-    : '';
+  let lessonFb = '';
+  if (state.vLessonResult === 'pass') {
+    lessonFb = `<div class="card green"><h3>${v.passH}</h3><p>${v.passP}</p></div>`;
+  } else if (state.vLessonResult === 'revise') {
+    lessonFb = `<div class="card yellow"><h3>${v.revH}</h3><p>${v.revP}</p></div>`;
+  } else if (state.vLessonResult === 'stuck') {
+    lessonFb = `
+      <div class="card peach">
+        <h3>${v.stuckH}</h3>
+        <p>${v.stuckP}</p>
+        <button class="primary coral-btn" data-action="scrollDirect">${v.stuckCta}</button>
+      </div>`;
+  }
+
+  return `
+    <div class="stack">
+      <!-- Hero -->
+      <section class="hero with-art">
+        <div class="compass" aria-hidden="true"><i class="needle"></i></div>
+        <span class="tag vaidile">${v.chip}</span>
+        <h1>${v.h1}</h1>
+        <p>${v.sub}</p>
+        <div class="hero-actions">
+          <button class="primary" data-action="scrollCalc">${v.ctaTracker}</button>
+          <button class="secondary" data-action="scrollDirect">${v.ctaDirect}</button>
+        </div>
+      </section>
+
+      <!-- 1. Inform: Articles + Expense Leak Calculator -->
+      <section class="sub-stack">
+        <div class="sec-head">
+          <div>
+            <h2>${v.infoH}</h2>
+            <p>${v.infoSub}</p>
+          </div>
+        </div>
+
+        <div class="grid columns">
+          <div class="sub-stack">
+            ${v.articles.map((a, i) => `
+              <details class="article-card" ${i === 0 ? 'open' : ''}>
+                <summary>
+                  <span><span class="tag" style="margin-bottom:6px;display:inline-flex">${a.tag}</span><br>${a.t}</span>
+                  <span class="plus" aria-hidden="true">+</span>
+                </summary>
+                <div class="article-body">
+                  <p>${a.p1}</p>
+                  <p>${a.p2}</p>
+                </div>
+              </details>`).join('')}
+          </div>
+
+          <section class="card soft-mint" id="vaidileCalc">
+            <span class="tag vaidile">${state.lang === 'ru' ? 'Бесплатный инструмент' : 'Free Tool'}</span>
+            <h3>${v.calcH}</h3>
+            <p>${v.calcSub}</p>
+            <label class="field">${v.calcCoffee}: <strong id="lblCoffee">$${state.vCoffee}</strong>
+              <input type="range" id="rngCoffee" min="0" max="150" step="5" value="${state.vCoffee}">
+            </label>
+            <label class="field">${v.calcSubs}: <strong id="lblSubs">$${state.vSubs}</strong>
+              <input type="range" id="rngSubs" min="0" max="250" step="5" value="${state.vSubs}">
+            </label>
+            <div class="calc-result" id="calcOut">${v.calcRes(monthlyLeak, yearlyLeak)}</div>
+            ${state.vTrackerSent
+              ? `<div class="card green" style="padding:13px 15px"><p><strong>${v.trackerSent}</strong></p></div>`
+              : `<button class="primary" data-action="vGetTracker">${v.trackerBtn}</button>`}
+          </section>
+        </div>
+      </section>
+
+      <!-- 2. Help: Self-Paced Text Course + 4 Packages -->
+      <section class="sub-stack">
+        <div class="sec-head">
+          <div>
+            <h2>${v.helpH}</h2>
+            <p>${v.helpSub}</p>
+          </div>
+        </div>
+
+        <div class="grid columns">
+          <section class="card">
+            <span class="tag">${v.lessonTag}</span>
+            <p style="color:var(--ink);font-weight:600">${v.lessonTask}</p>
+            <div class="demo-strip">
+              <small>${v.demoLbl}</small>
+              <div class="scen-grid">
+                <button class="scen-btn" data-action="vSample:0">${v.demoBtns[0]}</button>
+                <button class="scen-btn" data-action="vSample:1">${v.demoBtns[1]}</button>
+                <button class="scen-btn st" data-action="vSample:2">${v.demoBtns[2]}</button>
+              </div>
+            </div>
+            <form class="form" id="vLessonForm">
+              <textarea class="inp" id="vLessonInp" maxlength="1000" required placeholder="${v.ansPh}">${esc(state.vLessonText)}</textarea>
+              <button class="primary" type="submit">${v.checkBtn}</button>
+            </form>
+          </section>
+
+          <div class="sub-stack">
+            ${lessonFb || `<section class="card"><h3>${state.lang === 'ru' ? 'Результат проверки задания' : 'Assignment Feedback'}</h3><p>${state.lang === 'ru' ? 'Напишите свой расчёт слева (или нажмите один из быстрых примеров) — здесь сразу появится обратная связь и откроется следующий шаг.' : 'Submit your audit on the left (or tap a quick example) to see instant guidance and unlock the next step.'}</p></section>`}
+          </div>
+        </div>
+
+        <h3 style="margin-top:8px">${v.pkgsH}</h3>
+        <div class="grid four">
+          ${v.pkgs.map(pk => `
+            <div class="pkg-card ${pk.feat ? 'featured' : ''}">
+              <span class="tag ${pk.feat ? 'vaidile' : ''}">${pk.tag}</span>
+              <h3>${pk.title}</h3>
+              <div class="pkg-price">${pk.price}</div>
+              <p>${pk.desc}</p>
+              <button class="${pk.feat ? 'primary' : 'secondary'}" data-action="vPickPkg:${esc(pk.title)}">${pk.btn}</button>
+            </div>`).join('')}
+        </div>
+      </section>
+
+      <!-- 3. Direct Contact with Vaidile -->
+      <section class="card" id="vaidileDirect">
+        <span class="tag vaidile">${state.lang === 'ru' ? 'Прямая связь · Вайдиле' : 'Direct Contact · Vaidilė'}</span>
+        <h2>${v.directH}</h2>
+        <p>${v.directSub}</p>
+
+        <div class="chan-grid">
+          ${v.channels.map((ch, idx) => `<button type="button" class="chan-pill ${state.vChannel === idx ? 'on' : ''}" data-action="vChan:${idx}">${ch}</button>`).join('')}
+        </div>
+
+        ${state.vDirectSent
+          ? `<div class="card green">
+               <p><strong>${v.sentOk(esc(state.vDirectSent))}</strong></p>
+               <button class="secondary btn-sm" style="width:fit-content" data-action="openCab:vaidile">${state.lang === 'ru' ? 'Открыть «3. Кабинет» Вайдиле →' : 'Open Vaidilė’s Back-Office →'}</button>
+             </div>`
+          : `<form class="form" id="vDirectForm">
+               <div class="form-two">
+                 <label class="field">${v.nameLbl}<input class="inp" name="name" required maxlength="80"></label>
+                 <label class="field">${v.contactLbl}<input class="inp" name="contact" required maxlength="120" placeholder="${v.contactPh}"></label>
+               </div>
+               <label class="field">${v.msgLbl}
+                 <textarea class="inp" name="msg" style="min-height:82px" placeholder="${v.msgPh}">${esc(state.vSelectedPkg ? (state.lang === 'ru' ? `Интересует формат: ${state.vSelectedPkg}` : `Interested in: ${state.vSelectedPkg}`) : '')}</textarea>
+               </label>
+               <button class="primary" type="submit">${v.sendBtn}</button>
+             </form>`}
+      </section>
+
+      <div class="disclaimer">${v.disclaimer}</div>
+    </div>`;
+}
+
+/* ==================== TAB 2: TATIANA (GOAL / ADMIN SCALE PORTAL) ==================== */
+function renderTatiana() {
+  const t = L().t;
+  const sc = getScale();
+
+  const stepBar = `
+    <div class="stepbar">
+      <div class="row">
+        <small><strong>${t.stepsLbl[state.tStep]}</strong></small>
+        <small>${t.stepsLbl.join(' · ')}</small>
+      </div>
+      <div class="segments" aria-hidden="true">
+        ${[0, 1, 2, 3].map(i => `<i class="${i <= state.tStep ? 'filled' : ''}"></i>`).join('')}
+      </div>
+    </div>`;
 
   let body = '';
 
-  if (state.analyzing) {
+  if (state.tStep === 0) {
     body = `
-      <section class="card narrow analyzing">
-        <div class="spin"></div>
-        <h2>${L.anTitle}</h2>
-        <p>${L.anSub}</p>
-        <div class="an-steps">
-          <div id="an0">○ ${L.anSteps[0]}</div>
-          <div id="an1">○ ${L.anSteps[1]}</div>
-          <div id="an2">○ ${L.anSteps[2]}</div>
-        </div>
-      </section>`;
-  } else if (state.step === 0) {
-    body = `
-      <h2>${L.chooseArea}</h2>
+      <section class="hero warm-hero">
+        <span class="tag tatiana">${t.chip}</span>
+        <h1>${t.h1}</h1>
+        <p>${t.sub}</p>
+      </section>
+      ${stepBar}
+      <h2>${t.chooseH}</h2>
       <div class="grid two">
-        ${L.spheres.map(sp => `
-          <button class="choice ${sp.warm ? 'warm' : ''}" data-action="area:${sp.id}">
-            <span class="icon ${sp.color}" aria-hidden="true">${sp.icon}</span>
-            <span><strong>${sp.title}</strong><small>${sp.desc}</small></span>
+        ${t.scales.map(s => `
+          <button class="choice ${s.warm ? 'warm' : ''}" data-action="tScale:${s.id}">
+            <span class="icon ${s.color}" aria-hidden="true">${s.icon}</span>
+            <span>
+              <span class="tag ${s.warm ? 'tatiana' : ''}" style="margin-bottom:5px">${s.badge}</span>
+              <strong>${s.title}</strong>
+              <small>${s.desc}</small>
+            </span>
             <span class="arrow" aria-hidden="true">↗</span>
           </button>`).join('')}
       </div>`;
-  } else if (state.step === 1) {
-    const sp = getArea();
-    const visible = state.expanded ? sp.items : sp.items.filter(it => it.core);
-    const hiddenN = sp.items.length - sp.items.filter(it => it.core).length;
-    const totalPicked = state.selectedIds.length + (state.other.trim() ? 1 : 0);
-    const maxHit = totalPicked >= 3;
+  } else if (state.tStep === 1) {
+    const visible = state.tExpanded ? sc.items : sc.items.filter(it => it.core);
+    const hiddenN = sc.items.length - sc.items.filter(it => it.core).length;
+    const total = state.tSelectedIds.length + (state.tOther.trim() ? 1 : 0);
+    const maxHit = total >= 3;
     body = `
+      ${stepBar}
       <section class="card narrow">
-        <span class="tag">${sp.icon} ${sp.title}</span>
-        <h1>${L.step2Title}</h1>
-        <p id="pickedTxt">${L.picked(totalPicked)}</p>
+        <span class="tag tatiana">${sc.badge} · ${sc.title}</span>
+        <h2>${t.step2H}</h2>
+        <p id="tPickedTxt">${t.picked(total)}</p>
         <div class="grid">
           ${visible.map(it => {
-            const on = state.selectedIds.includes(it.id);
+            const on = state.tSelectedIds.includes(it.id);
             const dis = !on && maxHit;
             return `<label class="check-row ${on ? 'on' : ''} ${dis ? 'dis' : ''}">
-              <input type="checkbox" data-priority="${it.id}" ${on ? 'checked' : ''} ${dis ? 'disabled' : ''}>
+              <input type="checkbox" data-tprio="${it.id}" ${on ? 'checked' : ''} ${dis ? 'disabled' : ''}>
               <span>${it.text}</span>
             </label>`;
           }).join('')}
         </div>
-        ${hiddenN > 0 ? `<button class="secondary" data-action="expand" aria-expanded="${state.expanded}">${state.expanded ? L.showLess : L.showMore(hiddenN)}</button>` : ''}
-        <label class="field">${L.otherLbl}
-          <input class="inp" id="otherInp" maxlength="100" value="${esc(state.other)}" placeholder="${L.otherPh}" ${state.selectedIds.length >= 3 && !state.other.trim() ? 'disabled' : ''}>
+        ${hiddenN > 0 ? `<button class="secondary" data-action="tExpand">${state.tExpanded ? t.showLess : t.showMore(hiddenN)}</button>` : ''}
+        <label class="field">${t.otherLbl}
+          <input class="inp" id="tOtherInp" maxlength="100" value="${esc(state.tOther)}" placeholder="${t.otherPh}" ${state.tSelectedIds.length >= 3 && !state.tOther.trim() ? 'disabled' : ''}>
         </label>
         <div class="actions">
-          <button class="secondary" data-action="back">${L.back}</button>
-          <button class="primary" id="btnToQ" data-action="toQ" ${totalPicked === 0 ? 'disabled' : ''}>${L.cont}</button>
+          <button class="secondary" data-action="tBack">${t.back}</button>
+          <button class="primary" id="tToStep2" data-action="tGoQ" ${total === 0 ? 'disabled' : ''}>${t.next}</button>
         </div>
       </section>`;
-  } else if (state.step === 2) {
-    const qs = L.questionsByTrack[computeTrack()] || L.questionsByTrack.tatiana;
-    const q = qs[state.qIdx];
-    const cur = state.answers[state.qIdx] || '';
-    const customVal = q.choices.includes(cur) ? '' : cur;
+  } else if (state.tStep === 2) {
     body = `
+      ${stepBar}
       <section class="card narrow">
-        <div class="row">
-          <span class="icon" aria-hidden="true">✦</span>
-          <span class="tag">${L.qBadge(state.qIdx + 1)}</span>
-        </div>
-        <h1>${q.q}</h1>
-        <div class="grid two">
-          ${q.choices.map((ch, idx) => `
-            <button class="option ${cur === ch ? 'on' : ''}" data-action="ans:${idx}" aria-pressed="${cur === ch}">${ch}</button>
-          `).join('')}
-        </div>
-        <label class="field">${L.ownLbl}
-          <input class="inp" id="ownInp" maxlength="180" value="${esc(customVal)}" placeholder="${L.ownPh}">
-        </label>
-        <div class="actions">
-          <button class="secondary" data-action="back">${L.back}</button>
-          <button class="primary" id="btnNextQ" data-action="nextQ" ${!cur.trim() ? 'disabled' : ''}>${state.qIdx === 2 ? L.finishQ : L.nextQ}</button>
-        </div>
-      </section>`;
-  } else if (state.step === 3) {
-    const diag = buildDiagnosis();
-    const tags = selectedLabels();
-    body = `
-      <section class="hero">
-        <span class="tag">${L.resChip}</span>
-        <h1>${L.resTitle}</h1>
-        <p>${L.resDesc}</p>
-      </section>
-      <div class="tags">${tags.map(t => `<span class="tag">✓ ${esc(t)}</span>`).join('')}</div>
-      <div class="grid columns">
-        <section class="card">
-          <h2>${L.rootH}</h2>
-          <p>${esc(diag.root)}</p>
-        </section>
-        <section class="card green">
-          <h2>${L.step72H}</h2>
-          <p>${esc(diag.step72)}</p>
-        </section>
-      </div>
-      <div class="values">
-        ${L.pillars.map(([h, p]) => `<div><strong>${h}</strong><small>${p}</small></div>`).join('')}
-      </div>
-      <section class="card">
-        <span class="tag ${diag.expert}">${diag.expertBadge}</span>
-        <h2>${L.planH}</h2>
-        ${state.contact
-          ? `<p class="break"><strong>${esc(state.contact.name)}</strong>, ${state.lang === 'ru'
-                ? `ваш 90-дневный план открыт. Заявка передана эксперту (${expertName(diag.expert)}) и уже видна в пульте владельца (${esc(state.contact.channel)}).`
-                : `your 90-day roadmap is unlocked. Your request was routed to ${expertName(diag.expert)} and is live in the Owner Dashboard (${esc(state.contact.channel)}).`}</p>
-             <ol>${diag.plan.map(p => `<li>${esc(p)}</li>`).join('')}</ol>
-             <div class="actions">
-               <button class="primary" data-action="routed-course">${L.goCourseBtn}</button>
-               <button class="secondary" data-action="tab:2">${L.goOwnerBtn}</button>
-             </div>`
-          : `<div class="blur-wrap">
-               <ol class="blur" aria-hidden="true">${diag.plan.map(p => `<li>${esc(p)}</li>`).join('')}</ol>
-               <div class="blur-ov">${L.blurHint}</div>
-             </div>
-             <form class="form" id="contactForm">
-               <div class="form-two">
-                 <label class="field">${L.nameLbl}<input class="inp" name="name" autocomplete="name" required maxlength="80"></label>
-                 <label class="field">${L.contactLbl}<input class="inp" name="channel" autocomplete="off" required maxlength="120" placeholder="${L.contactPh}"></label>
-               </div>
-               <small>${L.demoNote}</small>
-               <button class="primary" type="submit">${L.unlockBtn}</button>
-             </form>`
-        }
-      </section>
-      <button class="secondary back" data-action="reset">${L.resetBtn}</button>`;
-  }
+        <span class="tag tatiana">${sc.badge} · ${sc.title}</span>
+        <h2>${t.step3H}</h2>
+        <p>${t.step3Sub}</p>
 
-  return `<div class="stack">${heroHtml}${stepBar}${body}</div>`;
-}
+        ${state.tNeedRefine ? `<div class="card yellow"><h3>${t.revBannerH}</h3><p>${t.revBannerP}</p></div>` : ''}
 
-/* ==================== TAB 2: AI COURSE SUPERVISOR ==================== */
-function renderCourse() {
-  const L = d();
-  const trKey = state.track;
-  const tr = L.tracks[trKey];
-  const cs = state.courseState[trKey];
-
-  let fbHtml = `<section class="card"><h2>${L.fbEmptyH}</h2><p>${L.fbEmptyP}</p></section>`;
-  if (state.checking) {
-    fbHtml = `<section class="card analyzing"><div class="spin"></div><p><strong>${L.checkingTxt}</strong></p></section>`;
-  } else if (cs.result === 'pass') {
-    fbHtml = `
-      <section class="card green">
-        <h2>${L.passH}</h2>
-        <ul>${tr.checksPass.map(c => `<li>${c}</li>`).join('')}</ul>
-        <p>${L.passP}</p>
-        <button class="secondary" data-action="tab:2">${L.seeProgBtn}</button>
-      </section>`;
-  } else if (cs.result === 'revise') {
-    fbHtml = `
-      <section class="card yellow">
-        <h2>${L.revH(cs.attempts)}</h2>
-        <p>${L.revP}</p>
-        <ul>${tr.checksMiss.map(c => `<li>${c}</li>`).join('')}</ul>
-      </section>`;
-  } else if (cs.result === 'vip') {
-    fbHtml = `
-      <section class="card peach">
-        <span class="tag hot-tag">${tr.vipBadge}</span>
-        <h2>${L.vipH}</h2>
-        <p>${L.vipP}</p>
-        <div class="stack" style="gap:9px">
-          <button class="primary coral-btn" data-action="book" ${cs.requested ? 'disabled' : ''}>${cs.requested ? L.bookedBtn : L.bookBtn(tr.ownerName)}</button>
-          <button class="secondary" data-action="signal">${L.seeSigBtn}</button>
-        </div>
-      </section>`;
-  }
-
-  return `
-    <div class="stack">
-      <section class="hero">
-        <span class="tag">${L.cChip}</span>
-        <h1>${L.cTitle}</h1>
-        <p>${L.cDesc}</p>
-      </section>
-
-      <div class="grid two">
-        ${['tatiana', 'vaidile'].map(k => {
-          const item = L.tracks[k];
-          return `<button class="option ${trKey === k ? 'on' : ''}" data-action="track:${k}" aria-pressed="${trKey === k}">
-            <small style="display:block;font-weight:750;color:${k === 'vaidile' ? '#116851' : '#755020'}">${item.projectLabel}</small>
-            <strong style="display:block;font-size:16px;margin:2px 0">${item.title}</strong>
-            <small>${item.sub}</small>
-          </button>`;
-        }).join('')}
-      </div>
-
-      <div class="track">
-        <span>${L.trLessons[0]}</span>
-        <span class="${cs.passed ? '' : 'active-step'}">${cs.passed ? '✓ ' + (state.lang === 'ru' ? 'Урок 2 · зачтён' : 'Lesson 2 · done') : L.trLessons[1]}</span>
-        <span class="${cs.passed ? 'unlocked' : 'locked'}">${cs.passed ? L.trLessons[3] : L.trLessons[2]}</span>
-      </div>
-
-      <div class="grid columns">
-        <section class="card">
-          <h2>${tr.lessonH}</h2>
-          <div class="scheme">
-            ${tr.scheme.map(([t1, t2], i) => `<div class="s-node"><b>${i + 1}</b><strong>${t1}</strong><small>${t2}</small></div>`).join('<span class="s-arr" aria-hidden="true">→</span>')}
-          </div>
-
-          <button class="secondary" data-action="staff" aria-pressed="${state.staff}">${state.staff ? L.staffHide : L.staffShow}</button>
-          ${state.staff ? `<div class="rubric-panel"><strong>${L.staffHint}</strong><ul>${tr.rubric.map(r => `<li>${r}</li>`).join('')}</ul></div>` : ''}
-
-          <p>${tr.task}</p>
-
-          <div>
-            <small style="display:block;font-weight:700;margin-bottom:7px">${L.scenLbl}</small>
-            <div class="scen-grid">
-              <button class="scen-btn" data-action="sample:0">${L.scenBtns[0]}</button>
-              <button class="scen-btn" data-action="sample:1">${L.scenBtns[1]}</button>
-              <button class="scen-btn st" data-action="sample:2">${L.scenBtns[2]}</button>
+        <form class="form" id="tQuestionsForm">
+          <div class="sub-stack">
+            <strong style="font-size:14.2px">${t.q1Lbl}</strong>
+            <div class="grid two">
+              ${t.q1Opts.map((opt, idx) => `<button type="button" class="option ${state.tQ1 === opt ? 'on' : ''}" data-action="tPickQ1:${idx}">${opt}</button>`).join('')}
             </div>
           </div>
 
-          <form class="form" id="lessonForm">
-            <label class="field">${L.ansLbl}
-              <textarea class="inp" id="lessonText" maxlength="1200" required>${esc(cs.text)}</textarea>
-            </label>
-            <button class="primary" type="submit">${L.checkBtn}</button>
-          </form>
-        </section>
+          <div class="demo-strip">
+            <small>${t.demoLbl}</small>
+            <div class="scen-grid">
+              <button type="button" class="scen-btn" data-action="tDemo:0">${t.demoBtns[0]}</button>
+              <button type="button" class="scen-btn" data-action="tDemo:1">${t.demoBtns[1]}</button>
+              <button type="button" class="scen-btn st" data-action="tDemo:2">${t.demoBtns[2]}</button>
+            </div>
+          </div>
 
-        <div class="stack">
-          ${fbHtml}
-          ${cs.passed ? `<section class="card green"><h2>${L.l3H}</h2><p>${tr.lesson3}</p></section>` : ''}
-        </div>
-      </div>
-    </div>`;
-}
+          <label class="field">${t.q2Lbl}
+            <textarea class="inp" id="tQ2Inp" required maxlength="1000" placeholder="${t.q2Ph}">${esc(state.tQ2)}</textarea>
+          </label>
 
-/* ==================== TAB 3: OWNER DASHBOARD ==================== */
-function renderOwner() {
-  const L = d();
-  const leadN = state.events.filter(e => e.type === 'lead').length;
-  const studN = state.events.filter(e => e.type === 'student').length;
-  const hotN = hotOpenCount();
-  const vipN = Math.max(1, vipOpenCount());
+          <div class="sub-stack">
+            <strong style="font-size:14.2px">${t.q3Lbl}</strong>
+            <div class="grid">
+              ${t.q3Opts.map(o => `<button type="button" class="option ${state.tQ3 === o.id ? 'on' : ''}" data-action="tPickQ3:${o.id}">${o.label}</button>`).join('')}
+            </div>
+          </div>
 
-  const funnelRows = [
-    [1240, L.kpis[0], '#5f9fb6'],
-    [184 + leadN, L.kpis[1], '#3c957c'],
-    [72 + studN, L.kpis[2], '#2c7e65'],
-    [vipN, L.kpis[3], '#d57967']
-  ];
+          <div class="actions">
+            <button type="button" class="secondary" data-action="tBack">${t.back}</button>
+            <button type="submit" class="primary">${t.submitScaleBtn}</button>
+          </div>
+        </form>
+      </section>`;
+  } else {
+    const needsT = state.tNeedsTatiana;
+    const chosen = tChosenLabels().join(' · ');
+    const nextPhase = needsT
+      ? (state.lang === 'ru' ? 'Личная 90-мин сессия с Татьяной → сборка полной шкалы без хаоса и запуск плана на 90 дней.' : '1-on-1 90-min session with Tatiana → assemble your complete Goal Scale clearly and launch your 90-day roadmap.')
+      : (state.lang === 'ru' ? 'Урок 1 онлайн-курса открыт сразу → еженедельная сверка шагов без необходимости личных созвонов.' : 'Online Course Lesson 1 unlocked immediately → weekly self-paced checkpoints with no live call required.');
 
-  const visible = state.events.filter(e =>
-    (state.filterType === 'all' || e.type === state.filterType) &&
-    (state.filterExpert === 'all' || e.expert === state.filterExpert)
-  );
-
-  const selectHtml = (id, lbl, opts, cur) =>
-    `<label class="field">${lbl}<select class="inp" id="${id}">${opts.map(([v, t]) => `<option value="${v}" ${v === cur ? 'selected' : ''}>${t}</option>`).join('')}</select></label>`;
-
-  const loc = state.lang === 'ru' ? 'ru-RU' : 'en-US';
-
-  return `
-    <div class="stack">
-      <section class="hero">
-        <span class="tag">${L.oChip}</span>
-        <h1>${L.oTitle}</h1>
-        <p>${L.oDesc}</p>
+    body = `
+      ${stepBar}
+      <section class="hero ${needsT ? 'warm-hero' : ''}">
+        <span class="tag ${needsT ? 'hot-tag' : 'self-tag'}">${needsT ? t.resPersTag : t.resSelfTag}</span>
+        <h1>${needsT ? t.resPersH : t.resSelfH}</h1>
+        <p>${needsT ? t.resPersP : t.resSelfP}</p>
       </section>
-
-      <div class="grid kpis">
-        <section class="card"><small>${L.kpis[0]}</small><strong>${(1240).toLocaleString(loc)}</strong></section>
-        <section class="card kpi-green"><small>${L.kpis[1]}</small><strong>${184 + leadN}</strong></section>
-        <section class="card"><small>${L.kpis[2]}</small><strong>${72 + studN}</strong></section>
-        <section class="card kpi-hot"><small>${L.kpis[3]}</small><strong>${hotN}</strong></section>
-      </div>
 
       <div class="grid columns">
         <section class="card">
-          <h2>${L.funnelH}</h2>
-          <span class="tag vaidile">${L.revBadge(vipN)}</span>
-          <small style="display:block">${L.revSub}</small>
-          <div class="funnel">
-            ${funnelRows.map(([n, lbl, col], i) => {
-              const base = i === 0 ? n : funnelRows[i - 1][0];
-              const pct = Math.min(100, (n / base) * 100);
-              const pctFmt = new Intl.NumberFormat(loc, { maximumFractionDigits: 1 }).format(pct);
-              return `<div>
-                <div class="row"><small>${lbl}</small><strong>${n.toLocaleString(loc)} (${pctFmt}%)</strong></div>
-                <div class="meter" aria-hidden="true"><i style="width:${Math.max(4, pct)}%;background:${col}"></i></div>
-              </div>`;
-            }).join('')}
+          <h2>${state.lang === 'ru' ? 'Черновик вашей Шкалы целей' : 'Your Goal Scale Blueprint'}</h2>
+          <div class="scale-map">
+            <div class="scale-row"><div class="scale-num">1</div><div><strong>${t.mapRows[0]}</strong><span>${esc(sc.title)} — ${esc(chosen)}</span></div></div>
+            <div class="scale-row"><div class="scale-num">2</div><div><strong>${t.mapRows[1]}</strong><span>${esc(state.tQ1 || t.q1Opts[0])}</span></div></div>
+            <div class="scale-row"><div class="scale-num">3</div><div><strong>${t.mapRows[2]}</strong><span>${esc(state.tQ2)}</span></div></div>
+            <div class="scale-row"><div class="scale-num">4</div><div><strong>${t.mapRows[3]}</strong><span>${nextPhase}</span></div></div>
           </div>
         </section>
 
-        <section class="stack">
-          <h2>${L.feedH}</h2>
-          <div class="filters">
-            ${selectHtml('fltType', L.fltTypeLbl, L.fltTypes, state.filterType)}
-            ${selectHtml('fltExp', L.fltExpLbl, L.fltExps, state.filterExpert)}
-          </div>
-
-          ${visible.length ? visible.map(e => {
-            const cardCls = e.hot ? 'hot' : (e.fresh ? 'fresh-card' : '');
-            const expTag = `<span class="tag ${e.expert}">${expertName(e.expert)}</span>`;
-            const statusTag = e.hot
-              ? `<span class="tag ${e.contacted ? 'vaidile' : 'hot-tag'}">${e.contacted ? L.tagsLbl.contacted : L.tagsLbl.vip}</span>`
-              : (e.type === 'student'
-                ? `<span class="tag course-tag">${L.tagsLbl.course}</span>`
-                : `<span class="tag new-tag">${L.tagsLbl.newLead}</span>`);
-
-            return `<article class="card ${cardCls}" id="ev-${e.id}">
-              <div class="tags">${statusTag}${expTag}${e.requested ? `<span class="tag hot-tag">${L.tagsLbl.requested}</span>` : ''}</div>
-              <h3 class="break">${esc(e.name)}</h3>
-              <small style="display:block;margin-top:4px">${esc(e.channel)} · ${esc(e.time)} · [${e.lang}]</small>
-              ${e.type === 'student'
-                ? `<div class="row"><small>${esc(e.courseLabel || L.progLbl)}</small><small><strong>${e.progress}%</strong></small></div>
-                   <div class="meter" aria-hidden="true"><i style="width:${e.progress}%;background:${e.hot ? '#d57967' : '#319779'}"></i></div>
-                   <blockquote>${esc(e.quote)}</blockquote>`
-                : `<div class="tags">${(e.tags || []).map(tg => `<span class="tag">${esc(tg)}</span>`).join('')}</div>
-                   <details><summary>${L.dossierOpen}</summary><p class="break">${esc(e.detail)}</p></details>`
-              }
-              <button class="secondary" data-action="contacted:${e.id}" ${e.contacted ? 'disabled' : ''}>${e.contacted ? L.markedBtn : L.markBtn}</button>
-            </article>`;
-          }).join('') : `<section class="card"><p>${L.emptyFeed}</p></section>`}
+        <section class="card ${needsT ? 'peach' : 'green'}">
+          <h2>${t.saveLeadH}</h2>
+          <p>${needsT ? t.saveLeadSubPers : t.saveLeadSubSelf}</p>
+          ${state.tSavedName
+            ? `<div class="card" style="padding:14px 16px">
+                 <p style="color:var(--ink);font-weight:700">${needsT ? t.savedOkPers(esc(state.tSavedName)) : t.savedOkSelf(esc(state.tSavedName))}</p>
+                 <div class="actions" style="margin-top:12px">
+                   <button class="primary" data-action="openCab:tatiana">${t.toCabBtn}</button>
+                   <button class="secondary" data-action="tReset">${t.restartBtn}</button>
+                 </div>
+               </div>`
+            : `<form class="form" id="tSaveForm">
+                 <label class="field">${L().v.nameLbl}<input class="inp" name="name" required maxlength="80"></label>
+                 <label class="field">${L().v.contactLbl}<input class="inp" name="contact" required maxlength="120" placeholder="${L().v.contactPh}"></label>
+                 <button class="primary ${needsT ? 'coral-btn' : ''}" type="submit">${needsT ? t.saveBtnPers : t.saveBtnSelf}</button>
+               </form>`}
         </section>
       </div>
+      <button class="secondary" style="width:fit-content" data-action="tReset">${t.restartBtn}</button>`;
+  }
 
-      <div class="foot">${L.foot}</div>
+  return `<div class="stack">${body}</div>`;
+}
+
+/* ==================== TAB 3: INTERNAL BACK-OFFICE CABINET ==================== */
+function renderCabinet() {
+  const c = L().c;
+  const scoped = state.cabExpert === 'all' ? state.records : state.records.filter(r => r.expert === state.cabExpert);
+  const cntNew = scoped.filter(r => r.status === 'need_expert').length;
+  const cntActive = scoped.filter(r => r.progress > 0).length;
+  const cntNeed = scoped.filter(r => r.status === 'need_expert').length;
+  const cntSelf = scoped.filter(r => r.status === 'self').length;
+
+  const q = state.cabSearch.trim().toLowerCase();
+  const visible = scoped.filter(r => {
+    const okSt = state.cabStatus === 'all' || r.status === state.cabStatus;
+    const okQ = !q || [r.name, r.program, r.summary, ...(r.answers || [])].join(' ').toLowerCase().includes(q);
+    return okSt && okQ;
+  });
+
+  const expName = k => k === 'vaidile' ? (state.lang === 'ru' ? 'Вайдиле' : 'Vaidilė') : (state.lang === 'ru' ? 'Татьяна' : 'Tatiana');
+
+  return `
+    <div class="stack">
+      <section class="hero cabinet-hero">
+        <span class="tag">${c.chip}</span>
+        <h1>${c.h1}</h1>
+        <p>${c.sub}</p>
+      </section>
+
+      <div class="cab-switch">
+        ${c.views.map(([k, lbl]) => `<button class="option ${state.cabExpert === k ? 'on' : ''}" data-action="cabExp:${k}" aria-pressed="${state.cabExpert === k}"><strong>${lbl}</strong></button>`).join('')}
+      </div>
+
+      <div class="grid kpis">
+        <section class="card"><small>${c.kpis[0]}</small><strong>${scoped.length}</strong></section>
+        <section class="card"><small>${c.kpis[1]}</small><strong>${cntActive}</strong></section>
+        <section class="card kpi-hot"><small>${c.kpis[2]}</small><strong>${cntNeed}</strong></section>
+        <section class="card kpi-green"><small>${c.kpis[3]}</small><strong>${cntSelf}</strong></section>
+      </div>
+
+      <section class="card">
+        <div class="filters">
+          <label class="field">${c.fltStatusLbl}
+            <select class="inp" id="cabStSel">
+              ${c.fltStatuses.map(([v, l]) => `<option value="${v}" ${state.cabStatus === v ? 'selected' : ''}>${l}</option>`).join('')}
+            </select>
+          </label>
+          <label class="field">${c.fltSearchLbl}
+            <input class="inp" id="cabSearchInp" value="${esc(state.cabSearch)}" placeholder="${c.fltSearchPh}">
+          </label>
+        </div>
+      </section>
+
+      <div class="grid two">
+        ${visible.length ? visible.map(r => {
+          const isNeed = r.status === 'need_expert';
+          const isSelf = r.status === 'self';
+          const statusTag = isNeed
+            ? `<span class="tag hot-tag">${c.stNeed}</span>`
+            : (isSelf ? `<span class="tag self-tag">${c.stSelf}</span>` : `<span class="tag replied-tag">${c.stReplied}</span>`);
+          const qrs = c.quickReplies[r.expert] || [];
+          const draft = state.replyDrafts[r.id] || '';
+
+          return `
+            <article class="card ${isNeed ? 'hot' : (r.fresh ? 'fresh-card' : '')}" id="rec-${r.id}">
+              <div class="tags">
+                ${statusTag}
+                <span class="tag ${r.expert}">${expName(r.expert)}</span>
+              </div>
+              <div>
+                <h3 class="break">${esc(r.name)}</h3>
+                <small style="display:block;margin-top:3px">${esc(r.contact)} · ${esc(r.time)} · [${r.lang}]</small>
+              </div>
+              <div class="row">
+                <small><strong>${esc(r.program)}</strong></small>
+                <small><strong>${r.progress}%</strong></small>
+              </div>
+              <div class="meter" aria-hidden="true"><i style="width:${Math.max(10, r.progress)}%;background:${isNeed ? '#d57967' : '#319779'}"></i></div>
+              <blockquote>${esc(r.summary)}</blockquote>
+
+              <details>
+                <summary>${c.openAnswers}</summary>
+                <ul style="margin-top:8px;font-size:13.4px;color:var(--muted)">
+                  ${(r.answers || []).map(a => `<li>${esc(a)}</li>`).join('')}
+                </ul>
+              </details>
+
+              ${(r.replies || []).map(rp => `
+                <div class="reply-history">
+                  <small>${c.sentBy(expName(r.expert), rp.time)}</small>
+                  <div>${esc(rp.text)}</div>
+                </div>`).join('')}
+
+              <form class="reply-box" data-reply-id="${r.id}">
+                <small style="font-weight:700;color:var(--ink)">${c.replyLbl}</small>
+                <div class="quick-replies">
+                  ${qrs.map((qtxt, qi) => `<button type="button" class="qr-btn" data-action="qr:${r.id}:${qi}">${state.lang === 'ru' ? `Шаблон ${qi + 1}` : `Quick reply ${qi + 1}`}</button>`).join('')}
+                </div>
+                <textarea class="inp" data-draft="${r.id}" style="min-height:68px" required placeholder="${c.replyPh}">${esc(draft)}</textarea>
+                <button class="primary btn-sm" type="submit">${c.sendReply}</button>
+              </form>
+            </article>`;
+        }).join('') : `<section class="card"><p>${c.empty}</p></section>`}
+      </div>
+
+      <div class="foot">${c.foot}</div>
     </div>`;
 }
 
-/* ==================== EVENT HANDLERS ==================== */
-function runAnalysis() {
-  state.analyzing = true;
-  render(true);
-  const L = d();
-  setTimeout(() => { const e = $('an0'); if (e) { e.className = 'done'; e.textContent = '✓ ' + L.anSteps[0]; } }, 300);
-  setTimeout(() => { const e = $('an1'); if (e) { e.className = 'done'; e.textContent = '✓ ' + L.anSteps[1]; } }, 680);
-  setTimeout(() => { const e = $('an2'); if (e) { e.className = 'done'; e.textContent = '✓ ' + L.anSteps[2]; } }, 1040);
-  setTimeout(() => { state.analyzing = false; state.step = 3; render(true); }, 1320);
-}
-
-function logStudentEvent(trKey, isHot, quote, requested = false) {
-  const tr = d().tracks[trKey];
-  const existing = state.events.find(e => e.id === 'live-stud-' + trKey);
-  const name = state.contact ? state.contact.name : (state.lang === 'ru' ? 'Ученик демо-курса (Вы)' : 'Demo Course Student (You)');
-  const channel = state.contact ? state.contact.channel : (state.lang === 'ru' ? 'Прямо сейчас в AI-курсе' : 'Live inside AI Course');
-  const label = isHot
-    ? `${tr.title} · ${state.lang === 'ru' ? 'Застрял на Уроке 2' : 'Stuck at Lesson 2'}`
-    : `${tr.title} · ${state.lang === 'ru' ? 'Урок 3 открыт' : 'Lesson 3 unlocked'}`;
-  if (existing) {
-    existing.hot = isHot;
-    existing.fresh = true;
-    existing.progress = isHot ? 65 : 95;
-    existing.courseLabel = label;
-    existing.quote = `«${quote.slice(0, 150)}${quote.length > 150 ? '…' : ''}»`;
-    existing.requested = requested || existing.requested;
-    existing.contacted = !isHot;
-    existing.time = (state.lang === 'ru' ? 'Только что, ' : 'Just now, ') + nowTime();
-  } else {
-    state.events.unshift({
-      id: 'live-stud-' + trKey,
-      type: 'student',
-      expert: trKey,
-      hot: isHot,
-      fresh: true,
-      name,
-      channel,
-      lang: state.lang.toUpperCase(),
-      progress: isHot ? 65 : 95,
-      courseLabel: label,
-      quote: `«${quote.slice(0, 150)}${quote.length > 150 ? '…' : ''}»`,
-      requested,
-      contacted: !isHot,
-      time: (state.lang === 'ru' ? 'Только что, ' : 'Just now, ') + nowTime()
-    });
-  }
-  saveEvents();
+/* ==================== INTERACTIONS ==================== */
+function pushRecord(rec) {
+  state.records.unshift(rec);
+  saveRecords();
 }
 
 document.addEventListener('click', ev => {
-  const target = ev.target.closest('[data-action]');
-  if (!target) return;
-  const [act, arg] = target.dataset.action.split(':');
+  const btn = ev.target.closest('[data-action]');
+  if (!btn) return;
+  const parts = btn.dataset.action.split(':');
+  const act = parts[0], arg = parts[1], arg2 = parts[2];
 
-  if (act === 'home') { state.tab = 0; render(true); return; }
   if (act === 'lang') {
     state.lang = arg;
-    if (state.tab === 1 && !state.courseState[state.track].result) {
-      state.track = arg === 'en' ? 'vaidile' : 'tatiana';
-    }
     render();
     return;
   }
-  if (act === 'tab') { state.tab = Number(arg); render(true); return; }
-  if (act === 'area') {
-    if (state.areaId !== arg) { state.selectedIds = []; state.other = ''; state.answers = ['', '', '']; state.expanded = false; }
-    state.areaId = arg;
-    state.contact = null;
-    state.qIdx = 0;
-    state.step = arg === 'unsure' ? 2 : 1;
+  if (act === 'tab') {
+    state.tab = Number(arg);
     render(true);
     return;
   }
-  if (act === 'expand') { state.expanded = !state.expanded; render(); return; }
-  if (act === 'toQ') { state.step = 2; state.qIdx = 0; render(true); return; }
-  if (act === 'back') {
-    if (state.step === 2 && state.qIdx > 0) state.qIdx--;
-    else if (state.step === 2 && state.areaId === 'unsure') state.step = 0;
-    else state.step = Math.max(0, state.step - 1);
+  if (act === 'openCab') {
+    state.cabExpert = arg || 'all';
+    state.cabStatus = 'all';
+    state.tab = 2;
     render(true);
     return;
   }
-  if (act === 'ans') {
-    const qs = d().questionsByTrack[computeTrack()] || d().questionsByTrack.tatiana;
-    state.answers[state.qIdx] = qs[state.qIdx].choices[Number(arg)];
-    render();
-    return;
-  }
-  if (act === 'nextQ') {
-    if (state.qIdx < 2) { state.qIdx++; render(true); }
-    else runAnalysis();
-    return;
-  }
-  if (act === 'reset') {
-    state.step = 0; state.selectedIds = []; state.other = ''; state.expanded = false;
-    state.answers = ['', '', '']; state.qIdx = 0; state.contact = null;
-    render(true);
-    return;
-  }
-  if (act === 'routed-course') { state.track = expertKey(); state.tab = 1; render(true); return; }
-  if (act === 'track') { state.track = arg; state.staff = false; render(); return; }
-  if (act === 'staff') { state.staff = !state.staff; render(); return; }
-  if (act === 'sample') {
-    const sampleTxt = d().tracks[state.track].samples[Number(arg)];
-    state.courseState[state.track].text = sampleTxt;
-    const ta = $('lessonText');
-    if (ta) { ta.value = sampleTxt; ta.focus(); }
-    return;
-  }
-  if (act === 'book') {
-    const cs = state.courseState[state.track];
-    cs.requested = true;
-    logStudentEvent(state.track, true, cs.text, true);
+
+  /* Vaidile interactions */
+  if (act === 'scrollCalc') { $('vaidileCalc')?.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+  if (act === 'scrollDirect') { $('vaidileDirect')?.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+  if (act === 'vGetTracker') {
+    const monthly = Math.round(state.vCoffee * 4.3 + state.vSubs);
+    state.vTrackerSent = true;
+    pushRecord({
+      id: 'v-trk-' + Date.now(),
+      expert: 'vaidile',
+      status: 'self',
+      fresh: true,
+      name: state.lang === 'ru' ? 'Посетитель портала (Трекер)' : 'Portal Visitor (Tracker)',
+      contact: state.lang === 'ru' ? 'Скачан бесплатный трекер' : 'Downloaded free tracker',
+      lang: state.lang.toUpperCase(),
+      program: state.lang === 'ru' ? 'Трекер расходов на 30 дней' : '30-Day Expense Tracker',
+      progress: 25,
+      summary: state.lang === 'ru'
+        ? `Посчитал утечки на калькуляторе (~$${monthly}/мес) и забрал бесплатный трекер.`
+        : `Calculated monthly leaks (~$${monthly}/mo) and unlocked the free tracker.`,
+      answers: [
+        state.lang === 'ru' ? `Кофе/перекусы: $${state.vCoffee}/нед · Подписки: $${state.vSubs}/мес` : `Coffee/snacks: $${state.vCoffee}/wk · Subscriptions: $${state.vSubs}/mo`
+      ],
+      replies: [],
+      time: nowTime()
+    });
     render(false, true);
     return;
   }
-  if (act === 'signal') {
-    state.filterType = 'all';
-    state.filterExpert = 'all';
-    state.tab = 2;
-    render(true);
-    const el = $('ev-live-stud-' + state.track);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  if (act === 'vSample') {
+    state.vLessonText = L().v.samples[Number(arg)];
+    const ta = $('vLessonInp');
+    if (ta) { ta.value = state.vLessonText; ta.focus(); }
     return;
   }
-  if (act === 'contacted') {
-    const item = state.events.find(e => e.id === arg);
-    if (item) { item.contacted = true; item.fresh = false; saveEvents(); render(); }
-    $('status').textContent = state.lang === 'ru' ? 'Связь отмечена' : 'Marked as contacted';
+  if (act === 'vPickPkg') {
+    state.vSelectedPkg = parts.slice(1).join(':');
+    state.vDirectSent = '';
+    render();
+    $('vaidileDirect')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
   }
-});
+  if (act === 'vChan') { state.vChannel = Number(arg); render(); return; }
 
-document.addEventListener('change', ev => {
-  const el = ev.target;
-  if (el.hasAttribute('data-priority')) {
-    const id = el.dataset.priority;
-    if (el.checked) {
-      if (state.selectedIds.length + (state.other.trim() ? 1 : 0) < 3) state.selectedIds.push(id);
-    } else {
-      state.selectedIds = state.selectedIds.filter(x => x !== id);
-    }
+  /* Tatiana Scale interactions */
+  if (act === 'tScale') {
+    if (state.tScaleId !== arg) { state.tSelectedIds = []; state.tOther = ''; state.tExpanded = false; }
+    state.tScaleId = arg;
+    state.tNeedRefine = false;
+    state.tSavedName = '';
+    state.tStep = arg === 'unsure' ? 2 : 1;
+    render(true);
+    return;
+  }
+  if (act === 'tExpand') { state.tExpanded = !state.tExpanded; render(); return; }
+  if (act === 'tBack') {
+    if (state.tStep === 2 && state.tScaleId === 'unsure') state.tStep = 0;
+    else state.tStep = Math.max(0, state.tStep - 1);
+    render(true);
+    return;
+  }
+  if (act === 'tGoQ') { state.tStep = 2; state.tNeedRefine = false; render(true); return; }
+  if (act === 'tPickQ1') { state.tQ1 = L().t.q1Opts[Number(arg)]; render(); return; }
+  if (act === 'tPickQ3') { state.tQ3 = arg; render(); return; }
+  if (act === 'tDemo') {
+    const idx = Number(arg);
+    state.tQ1 = L().t.q1Opts[idx === 2 ? 3 : 0];
+    state.tQ2 = L().t.demoSamples[idx];
+    state.tQ3 = idx === 2 ? 'personal' : 'self';
+    state.tNeedRefine = false;
     render();
     return;
   }
-  if (el.id === 'fltType') { state.filterType = el.value; render(); return; }
-  if (el.id === 'fltExp') { state.filterExpert = el.value; render(); return; }
+  if (act === 'tReset') {
+    state.tStep = 0; state.tSelectedIds = []; state.tOther = ''; state.tQ1 = ''; state.tQ2 = '';
+    state.tQ3 = 'self'; state.tNeedRefine = false; state.tSavedName = '';
+    render(true);
+    return;
+  }
+
+  /* Cabinet interactions */
+  if (act === 'cabExp') { state.cabExpert = arg; render(); return; }
+  if (act === 'qr') {
+    const rec = state.records.find(r => r.id === arg);
+    if (rec) {
+      const qtxt = (L().c.quickReplies[rec.expert] || [])[Number(arg2)] || '';
+      state.replyDrafts[rec.id] = qtxt;
+      const ta = document.querySelector(`[data-draft="${rec.id}"]`);
+      if (ta) { ta.value = qtxt; ta.focus(); }
+    }
+  }
 });
 
 document.addEventListener('input', ev => {
   const el = ev.target;
-  if (el.id === 'otherInp') {
-    state.other = el.value;
-    const n = state.selectedIds.length + (state.other.trim() ? 1 : 0);
-    if ($('pickedTxt')) $('pickedTxt').textContent = d().picked(n);
-    if ($('btnToQ')) $('btnToQ').disabled = n === 0;
+  if (el.id === 'rngCoffee' || el.id === 'rngSubs') {
+    if (el.id === 'rngCoffee') { state.vCoffee = Number(el.value); if ($('lblCoffee')) $('lblCoffee').textContent = '$' + state.vCoffee; }
+    else { state.vSubs = Number(el.value); if ($('lblSubs')) $('lblSubs').textContent = '$' + state.vSubs; }
+    const m = Math.round(state.vCoffee * 4.3 + state.vSubs);
+    if ($('calcOut')) $('calcOut').innerHTML = L().v.calcRes(m, m * 12);
     return;
   }
-  if (el.id === 'ownInp') {
-    state.answers[state.qIdx] = el.value;
-    if ($('btnNextQ')) $('btnNextQ').disabled = !el.value.trim();
-    document.querySelectorAll('[data-action^="ans:"]').forEach(b => { b.classList.remove('on'); b.setAttribute('aria-pressed', 'false'); });
+  if (el.id === 'vLessonInp') { state.vLessonText = el.value; return; }
+  if (el.id === 'tOtherInp') {
+    state.tOther = el.value;
+    const total = state.tSelectedIds.length + (state.tOther.trim() ? 1 : 0);
+    if ($('tPickedTxt')) $('tPickedTxt').textContent = L().t.picked(total);
+    if ($('tToStep2')) $('tToStep2').disabled = total === 0;
     return;
   }
-  if (el.id === 'lessonText') {
-    state.courseState[state.track].text = el.value;
+  if (el.id === 'tQ2Inp') { state.tQ2 = el.value; return; }
+  if (el.id === 'cabSearchInp') { state.cabSearch = el.value; render(); $('cabSearchInp')?.focus(); return; }
+  if (el.hasAttribute('data-draft')) { state.replyDrafts[el.dataset.draft] = el.value; }
+});
+
+document.addEventListener('change', ev => {
+  const el = ev.target;
+  if (el.hasAttribute('data-tprio')) {
+    const id = el.dataset.tprio;
+    if (el.checked) {
+      if (state.tSelectedIds.length + (state.tOther.trim() ? 1 : 0) < 3) state.tSelectedIds.push(id);
+    } else {
+      state.tSelectedIds = state.tSelectedIds.filter(x => x !== id);
+    }
+    render();
     return;
   }
-  if (el.form && el.form.id === 'contactForm') el.setCustomValidity('');
+  if (el.id === 'cabStSel') { state.cabStatus = el.value; render(); }
 });
 
 document.addEventListener('submit', ev => {
   ev.preventDefault();
-  if (ev.target.id === 'contactForm') {
-    const L = d();
-    const fd = new FormData(ev.target);
-    const name = String(fd.get('name') || '').trim();
-    const channel = String(fd.get('channel') || '').trim();
-    const okCh = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(channel) || (/^\+?[\d ()-]+$/.test(channel) && channel.replace(/\D/g, '').length >= 6);
-    if (!name || !okCh) {
-      const fld = !name ? ev.target.elements.name : ev.target.elements.channel;
-      fld.setCustomValidity(!name ? L.fillNameErr : L.fillContactErr);
-      fld.reportValidity();
-      return;
+  const form = ev.target;
+
+  /* Vaidile Lesson Check */
+  if (form.id === 'vLessonForm') {
+    const txt = state.vLessonText.trim();
+    if (!txt) return;
+    const low = txt.toLowerCase();
+    const stuck = /страшн|долг|хаос|застрял|не понимаю|тяжело|anxious|debt|chaos|stuck|heavy|don.t know/.test(low);
+    const hasNum = /\d/.test(txt);
+    const hits = ['кофе','подписк','подушк','резерв','корзин','рост','мес','coffee','subscription','cushion','bucket','growth','month','mo'].filter(w => low.includes(w)).length;
+
+    if (!stuck && txt.length >= 42 && hasNum && hits >= 2) {
+      state.vLessonResult = 'pass';
+      pushRecord({
+        id: 'v-pass-' + Date.now(),
+        expert: 'vaidile',
+        status: 'self',
+        fresh: true,
+        name: state.lang === 'ru' ? 'Ученик курса Вайдиле' : 'Vaidilė Course Student',
+        contact: state.lang === 'ru' ? 'Онлайн-курс · Урок 1' : 'Text Course · Lesson 1',
+        lang: state.lang.toUpperCase(),
+        program: state.lang === 'ru' ? 'Заочный курс · Урок 2 открыт' : 'Text Course · Lesson 2 Unlocked',
+        progress: 65,
+        summary: state.lang === 'ru' ? 'Успешно прошёл практику Урока 1 — идёт самостоятельно.' : 'Passed Lesson 1 audit — progressing independently.',
+        answers: [txt],
+        replies: [],
+        time: nowTime()
+      });
+      render(false, true);
+    } else if (stuck || state.vLessonAttempts >= 1) {
+      state.vLessonAttempts++;
+      state.vLessonResult = 'stuck';
+      pushRecord({
+        id: 'v-stuck-' + Date.now(),
+        expert: 'vaidile',
+        status: 'need_expert',
+        fresh: true,
+        name: state.lang === 'ru' ? 'Ученик заочного курса (запрос помощи)' : 'Text Course Student (Needs Help)',
+        contact: state.lang === 'ru' ? 'Урок 1 · Предложена 15-мин встреча' : 'Lesson 1 · Offered 15-min call',
+        lang: state.lang.toUpperCase(),
+        program: state.lang === 'ru' ? 'Заочный курс · Застрял на Уроке 1' : 'Text Course · Stuck on Lesson 1',
+        progress: 35,
+        summary: state.lang === 'ru' ? 'Ученику сложно разобраться в счетах одному — рекомендована личная встреча с Вайдиле.' : 'Student feels overwhelmed by statements — recommended 1-on-1 intro call with Vaidilė.',
+        answers: [txt],
+        replies: [],
+        time: nowTime()
+      });
+      render(false, true);
+    } else {
+      state.vLessonAttempts++;
+      state.vLessonResult = 'revise';
+      render();
     }
-    state.contact = { name, channel };
-    state.events.unshift({
-      id: 'lead-' + Date.now(),
-      type: 'lead',
-      expert: expertKey(),
-      hot: false,
+    return;
+  }
+
+  /* Vaidile Direct Contact Form */
+  if (form.id === 'vDirectForm') {
+    const fd = new FormData(form);
+    const name = String(fd.get('name') || '').trim();
+    const contact = String(fd.get('contact') || '').trim();
+    const msg = String(fd.get('msg') || '').trim();
+    if (!name || !contact) return;
+    const chLabel = L().v.channels[state.vChannel];
+    pushRecord({
+      id: 'v-dir-' + Date.now(),
+      expert: 'vaidile',
+      status: 'need_expert',
       fresh: true,
       name,
-      channel,
+      contact,
       lang: state.lang.toUpperCase(),
-      tags: selectedLabels(),
-      detail: state.answers.filter(Boolean).join(' · '),
-      contacted: false,
-      time: (state.lang === 'ru' ? 'Только что, ' : 'Just now, ') + nowTime()
+      program: `${state.lang === 'ru' ? 'Прямая связь' : 'Direct Inquiry'} · ${chLabel}`,
+      progress: 20,
+      summary: msg || (state.lang === 'ru' ? `Запросил(а) связь с Вайдиле (${chLabel}).` : `Requested direct contact with Vaidilė (${chLabel}).`),
+      answers: [
+        `${state.lang === 'ru' ? 'Канал' : 'Channel'}: ${chLabel}`,
+        msg ? `${state.lang === 'ru' ? 'Сообщение' : 'Message'}: ${msg}` : ''
+      ].filter(Boolean),
+      replies: [],
+      time: nowTime()
     });
-    saveEvents();
+    state.vDirectSent = name;
     render(false, true);
     return;
   }
 
-  if (ev.target.id === 'lessonForm') {
-    const trKey = state.track;
-    const cs = state.courseState[trKey];
-    const txt = cs.text.trim();
+  /* Tatiana Scale Questions Evaluation */
+  if (form.id === 'tQuestionsForm') {
+    const txt = state.tQ2.trim();
     if (!txt) return;
-    state.checking = true;
+    const low = txt.toLowerCase();
+    const stuck = /застрял|не понимаю|не знаю|каша|тяжело|ступор|stuck|cluttered|heavy|don.t know/.test(low);
+    const hasConcrete = /\d/.test(txt) && txt.length >= 42;
+
+    if (state.tQ3 === 'personal' || stuck || state.tScaleId === 'business') {
+      state.tNeedRefine = false;
+      state.tNeedsTatiana = true;
+      state.tStep = 3;
+      render(true);
+    } else if (!hasConcrete && !state.tNeedRefine) {
+      state.tNeedRefine = true;
+      render();
+    } else {
+      state.tNeedRefine = false;
+      state.tNeedsTatiana = !hasConcrete;
+      state.tStep = 3;
+      render(true);
+    }
+    return;
+  }
+
+  /* Tatiana Save Scale & Push to Cabinet */
+  if (form.id === 'tSaveForm') {
+    const fd = new FormData(form);
+    const name = String(fd.get('name') || '').trim();
+    const contact = String(fd.get('contact') || '').trim();
+    if (!name || !contact) return;
+    const sc = getScale();
+    const needsT = state.tNeedsTatiana;
+    pushRecord({
+      id: 't-scale-' + Date.now(),
+      expert: 'tatiana',
+      status: needsT ? 'need_expert' : 'self',
+      fresh: true,
+      name,
+      contact,
+      lang: state.lang.toUpperCase(),
+      program: `${sc.title} · ${needsT ? (state.lang === 'ru' ? 'Нужно подключить Татьяну' : 'Needs Tatiana 1-on-1') : (state.lang === 'ru' ? 'Урок 1 открыт (сам)' : 'Lesson 1 open (self-paced)')}`,
+      progress: needsT ? 45 : 60,
+      summary: needsT
+        ? (state.lang === 'ru' ? 'Прошёл диагностику Шкалы — рекомендуется личное подключение Татьяны.' : 'Completed Scale intake — 1-on-1 connection with Tatiana recommended.')
+        : (state.lang === 'ru' ? 'Собрал чёткую Шкалу целей — идёт самостоятельно по Уроку 1.' : 'Built a clear Goal Scale — moving independently into Lesson 1.'),
+      answers: [
+        `${state.lang === 'ru' ? 'Шкала' : 'Scale'}: ${sc.badge} (${sc.title})`,
+        `${state.lang === 'ru' ? 'Приоритеты' : 'Priorities'}: ${tChosenLabels().join(', ')}`,
+        `${state.lang === 'ru' ? 'Что тормозит' : 'Bottleneck'}: ${state.tQ1 || L().t.q1Opts[0]}`,
+        `${state.lang === 'ru' ? 'Цель и первый шаг' : 'Goal & first step'}: ${state.tQ2}`
+      ],
+      replies: [],
+      time: nowTime()
+    });
+    state.tSavedName = name;
+    render(false, true);
+    return;
+  }
+
+  /* Cabinet Direct Reply Form */
+  if (form.hasAttribute('data-reply-id')) {
+    const recId = form.dataset.replyId;
+    const rec = state.records.find(r => r.id === recId);
+    const msg = (state.replyDrafts[recId] || '').trim();
+    if (!rec || !msg) return;
+    rec.replies = rec.replies || [];
+    rec.replies.push({ text: msg, time: nowTime() });
+    rec.status = 'replied';
+    rec.fresh = false;
+    state.replyDrafts[recId] = '';
+    saveRecords();
+    $('status').textContent = state.lang === 'ru' ? 'Ответ отправлен клиенту' : 'Reply sent to client';
     render();
-
-    setTimeout(() => {
-      state.checking = false;
-      const low = txt.toLowerCase();
-      const stuckRe = /застрял|не понимаю|не знаю|тяжело|страшно|каша|долг|хаос|помоги|stuck|overwhelmed|anxious|confused|chaos|debt|don.t know|help/;
-      const hasStuck = stuckRe.test(low);
-      const hasNum = /\d/.test(txt);
-      const concreteWords = ['недел', 'пятниц', 'понедельник', 'март', 'дн', 'мес', 'резерв', 'подушк', 'корзин', 'шаг', 'ваканси', 'подписк', 'кофе', 'цель', 'срок', 'доход', 'расход', 'week', 'friday', 'monday', 'march', 'day', 'month', 'bucket', 'cushion', 'step', 'subscription', 'coffee', 'goal', 'deadline', 'income', 'expense'];
-      const hits = concreteWords.filter(w => low.includes(w)).length;
-      const isStrong = !hasStuck && txt.length >= 45 && hasNum && hits >= 2;
-
-      if (isStrong) {
-        cs.result = 'pass';
-        cs.passed = true;
-        logStudentEvent(trKey, false, txt, false);
-        render(false, true);
-      } else if (hasStuck || cs.attempts >= 1) {
-        cs.attempts++;
-        cs.result = 'vip';
-        logStudentEvent(trKey, true, txt, cs.requested);
-        render(false, true);
-      } else {
-        cs.attempts++;
-        cs.result = 'revise';
-        render();
-      }
-    }, 600);
   }
 });
 
-loadEvents();
+loadRecords();
 render();
 </script>
 </body>
